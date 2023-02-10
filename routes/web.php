@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CursoController;
+use App\Http\Controllers\ModuloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +23,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
+    Route::get('cursos/{curso}', [CursoController::class, 'show'])->name('cursos.show');
+
+    Route::get('modulos/{modulo}', [ModuloController::class, 'show'])->name('modulos.show');
+});
