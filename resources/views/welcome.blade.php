@@ -75,7 +75,7 @@
         <div class="container">
             <div class="masthead-subheading"> {{ __('Welcom to the course') }} </div>
             <div class="masthead-heading text-uppercase"> Prevenci&oacute;n de la violencia </div>
-            <a class="btn btn-primary btn-xl text-uppercase" href="#services"> {{ __('Info') }} </a>
+            <a class="btn btn-primary btn-lg text-uppercase" href="#services"> {{ __('Info') }} </a>
             <br><br><br>
         </div>
     </header>
@@ -213,12 +213,11 @@
     <br><br>
     <!-- Footer-->
     <footer class="footer bg-dark">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col text-light">Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}</div>
+            <div class="container py-4 d-flex justify-content-center">
+                <span class="text-light px-1">Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.</span> <hr>
+                <span class="text-light">Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.</span>
             </div>
-        </div>
-    </footer>
+        </footer>
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-8">
                 @forelse ($cursos as $curso)
                     <div class="card">
