@@ -76,7 +76,7 @@ header.masthead {
     padding-bottom: 9rem;
     text-align: center;
     color: #fff;
-    background-image: url("../assets/img/header-bg.jpg");
+    background-image: linear-gradient(to bottom, rgba(129, 0, 65, 0.5) 0%, rgba(129, 0, 65, 0.2) 100%), url("../assets/img/header-bg.jpg");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -92,7 +92,7 @@ header.masthead .masthead-subheading {
 }
 
 header.masthead .masthead-heading {
-    font-size: 3.25rem;
+    font-size: 2.5rem;
     font-weight: 700;
     line-height: 3.25rem;
     margin-bottom: 2rem;
@@ -101,7 +101,8 @@ header.masthead .masthead-heading {
 
 @media (min-width: 768px) {
     header.masthead {
-        padding-top: 17rem;
+        height: 100vh;
+        padding-top: 19rem;
         padding-bottom: 12.5rem;
     }
 
@@ -119,6 +120,12 @@ header.masthead .masthead-heading {
         margin-bottom: 4rem;
     }
 }
+
+@media (min-width: 1200px) {
+    header.masthead h1, header.masthead .h1 {
+      font-size: 3.5rem;
+    }
+  }
 
 .modulo {
     position: relative;
