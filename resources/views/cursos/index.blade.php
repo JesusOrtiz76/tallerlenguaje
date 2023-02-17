@@ -16,11 +16,11 @@
                     <h5 class="card-title">{{ __('Description') }}</h5>
                     <p class="card-text">{{ $curso->descripcion }}</p>
                     @if(Auth::user()->InscritoEnCurso($curso))
-                    <a href="{{ route('cursos.show', $curso->id) }}" class="btn btn-primary">Continuar</a>
+                    <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary">Continuar</a>
                     @else
                     <form method="POST" action="{{ route('cursos.inscribirse', $curso->id) }}">
                         @csrf
-                        <button type="submit" class="btn btn-primary">Matricularse</button>
+                        <button type="submit" class="btn btn-primary">Inscribirse</button>
                     </form>
                     @endif
                 </div>
