@@ -9,11 +9,7 @@
                 <div class="card-header">{{ __('Introduction') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
+                    @include('partials.messages')
 
                     <p>{{ __('Welcom to the course') }}</p>
                     <a href="{{ route('cursos.index') }}" class="btn btn-primary">{{ __('Go to course') }}</a>

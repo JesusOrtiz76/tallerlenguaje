@@ -14,4 +14,11 @@ class Curso extends Model
     {
         return $this->hasMany(Modulo::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'inscripciones')
+            ->withPivot('modulo_id')
+            ->withTimestamps();
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Inscripcion;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function InscritoEnCurso($curso)
+    {
+        $inscripcion = Inscripcion::where('user_id', $this->id)
+            ->where('curso_id', $curso->id)
+            ->first();
+        return $inscripcion !== null;
+    }
+
+    public function cursos()
+    {
+        return $this->hasMany(Curso::class);
+    }
 }

@@ -9,7 +9,7 @@
             <div class="card border-0 shadow-lg" style="border-radius: 0.5rem;">
                 <div class="row g-0">
                     <div class="col-md-6 col-lg-6 d-none d-md-block">
-                        <img src="assets/img/portfolio/5.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0.5rem 0rem 0rem 0.5rem;" />
+                        <img src="assets/img/edu/2.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0.5rem 0rem 0rem 0.5rem;" />
                     </div>
                     <div class="col-md-6 col-lg-6 d-flex align-items-center">
                         <div class="card-body p-4 p-lg-5 text-black">

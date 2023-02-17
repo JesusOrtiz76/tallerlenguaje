@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 d-none d-md-block">
-                        <img src="assets/img/portfolio/1.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0 0.5rem 0.5rem 0;" />
+                        <img src="assets/img/edu/1.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0 0.5rem 0.5rem 0;" />
                     </div>
                 </div>
             </div>

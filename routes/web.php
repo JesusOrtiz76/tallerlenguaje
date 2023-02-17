@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
     Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
     Route::get('cursos/{curso}', [CursoController::class, 'show'])->name('cursos.show');
+    Route::post('courses/{course}/inscribirse', [CursoController::class, 'inscribirse'])->name('cursos.inscribirse');
 
     Route::get('modulos/{modulo}', [ModuloController::class, 'show'])->name('modulos.show');
 });

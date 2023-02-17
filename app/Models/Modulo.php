@@ -14,9 +14,4 @@ class Modulo extends Model
     {
         return $this->belongsTo(Curso::class);
     }
-
-    public function bloques()
-    {
-        return $this->hasMany(Bloque::class);
-    }
 }
