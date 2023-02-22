@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EvaluacionController;
+use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
@@ -31,16 +33,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])->name('cursos.inscribirse');
 
     //Modulos
-  
     Route::get('modulo/{modulo}', [ModuloController::class, 'show'])->name('modulos.show');
 
-    //Temas
-    Route::get('modulo/{modulo}/tema', [TemaController::class, 'index'])->name('temas.index');
+    //Temas de estudio
+    Route::get('tema/{tema}', [TemaController::class, 'show'])->name('temas.show');
 
     //Evaluaciones
-    Route::get('modulo/{modulo}/evaluacion', [TemaController::class, 'store'])->name('evaluaciones.store');
-
-    //Temas de estudio
-    Route::get('modulos/{modulo}/tema', [ModuloController::class, 'index'])->name('temas.index');
-    Route::get('tema/{tema}', [ModuloController::class, 'show'])->name('temas.show');
+    Route::post('/evaluacion', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
 });

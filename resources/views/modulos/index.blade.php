@@ -1,37 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Módulos del curso "{{ $curso->nombre }}"</h1>
-            <table class="table">
-                <thead>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-8">
+                <h1>Módulos del curso "{{ $curso->nombre }}"</h1>
+                <table class="table">
+                    <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @forelse($modulos as $modulo)
-                    <tr>
-                        <td>{{ $modulo->nombre }}</td>
-                        <td>{{ $modulo->descripcion }}</td>
-                        <td>
-                            <a href="{{ route('modulos.show', $modulo) }}" class="btn btn-primary">Ver Módulo</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $modulo->nombre }}</td>
+                            <td>{{ $modulo->descripcion }}</td>
+                            <td>
+                                <a href="{{ route('modulos.show', $modulo) }}" class="btn btn-primary">Ver módulo</a>
+                            </td>
+                        </tr>
                     @empty
-                    <div class="card">
-                        <div class="card-body">
-                            {{ __('No Data') }}
+                        <div class="card">
+                            <div class="card-body">
+                                {{ __('No Data') }}
+                            </div>
                         </div>
-                    </div>
                     @endforelse
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 @endsection

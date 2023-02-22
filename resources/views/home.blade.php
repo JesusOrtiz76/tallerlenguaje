@@ -6,7 +6,7 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Introduction') }}</div>
+                <div class="card-header">Introducción</div>
 
                 <div class="card-body">
                     @include('partials.messages')

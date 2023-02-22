@@ -13,9 +13,9 @@
                 </div>
                 <div class="card-body">
                     @include('partials.messages')
-                    <h5 class="card-title">{{ __('Descripcion') }}</h5>
+                    <h5 class="card-title">Descripción</h5>
                     <p class="card-text">{{ $modulo->descripcion }}</p>
-                    <a href="{{ route('modulos.index', $modulo->id) }}" class="btn btn-primary">{{ __('Show') }}</a>
+                    <a href="{{ route('modulos.index', $modulo->id) }}" class="btn btn-primary">Ver</a>
                 </div>
                 <div class="card-footer text-muted">
                     {{ $modulo->created_at->diffForHumans() }}

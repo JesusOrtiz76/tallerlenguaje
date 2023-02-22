@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
                     @include('partials.messages')
-                    <h5 class="card-title">{{ __('Description') }}</h5>
+                    <h5 class="card-title">Descripción</h5>
                     <p class="card-text">{{ $curso->descripcion }}</p>
                     @if(Auth::user()->InscritoEnCurso($curso))
                     <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary">Continuar</a>
