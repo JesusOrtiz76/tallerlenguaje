@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Modulo extends Model
 {
     protected $fillable = [
-        'nombre', 'descripcion', 'curso_id', 'created_at'
+        'titulo',
+        'descripcion',
+        'curso_id'
     ];
 
     public function curso()
@@ -18,5 +20,10 @@ class Modulo extends Model
     public function temas()
     {
         return $this->hasMany(Tema::class);
+    }
+
+    public function evaluaciones()
+    {
+        return $this->hasMany(Evaluacion::class);
     }
 }

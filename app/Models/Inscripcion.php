@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Inscripcion extends Model
 {
     protected $table = 'inscripciones';
-    protected $fillable = ['user_id', 'curso_id', 'progreso'];
+
+    protected $fillable = [
+        'user_id',
+        'curso_id',
+        'progreso'
+    ];
 
     public function users()
     {

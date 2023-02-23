@@ -6,9 +6,10 @@ use App\Models\Tema;
 
 class TemaController extends Controller
 {
-    public function show(Tema $tema)
+    public function show($temaId)
     {
-        return $tema;
+        $tema = Tema::findOrFail($temaId);
+        return view('temas.show', compact('tema'));
     }
 
 }

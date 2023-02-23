@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Curso;
 use App\Models\Modulo;
 use Illuminate\Support\Facades\View;
@@ -15,30 +14,16 @@ class ModuloController extends Controller
         View::share('cursos', $cursos);
     }
 
-    public function index($curso_id)
+    public function index(Curso $curso)
     {
-        $curso = Curso::find($curso_id);
-        $modulos = Modulo::where('curso_id', $curso_id)->get();
+        $modulos = $curso->modulos;
         return view('modulos.index', compact('curso', 'modulos'));
     }
 
-    public function show(Modulo $modulo)
+    public function show(Curso $curso, Modulo $modulo)
     {
-        $curso = $modulo->curso;
-
-        $user = Auth::user();
-
         $temas = $modulo->temas;
-        $evaluacion = $modulo->evaluacion;
-
-        if ($evaluacion) {
-            $evaluado = $evaluacion->users->contains($user);
-
-            if (!$evaluado) {
-                return redirect()->route('evaluaciones.show', $evaluacion);
-            }
-        }
-
-        return view('modulos.show', compact('curso', 'modulo', 'temas', 'evaluacion'));
+        $evaluaciones = $modulo->evaluaciones;
+        return view('modulos.show', compact('curso', 'modulo', 'temas', 'evaluaciones'));
     }
 }

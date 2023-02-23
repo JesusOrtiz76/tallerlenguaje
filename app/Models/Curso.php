@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Curso extends Model
 {
     protected $fillable = [
-        'nombre', 'descripcion', 'duracion'
+        'titulo',
+        'descripcion',
     ];
 
     public function modulos()
@@ -20,5 +21,10 @@ class Curso extends Model
         return $this->belongsToMany(User::class, 'inscripciones')
             ->withPivot('modulo_id')
             ->withTimestamps();
+    }
+
+    public function evaluaciones()
+    {
+        return $this->hasMany(Evaluacion::class);
     }
 }
