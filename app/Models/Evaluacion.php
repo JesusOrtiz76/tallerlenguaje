@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Evaluacion extends Model
 {
-    use HasFactory;
+    protected $table = 'evaluaciones';
 
     protected $fillable = [
         'titulo',
@@ -16,7 +15,6 @@ class Evaluacion extends Model
         'modulo_id',
     ];
 
-    protected $table = 'evaluaciones';
     public function modulo()
     {
         return $this->belongsTo(Modulo::class);

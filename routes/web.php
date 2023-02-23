@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EvaluacionController;
+use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,5 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('tema/{tema}', [TemaController::class, 'show'])->name('temas.show');
 
     //Evaluaciones
-    Route::post('/evaluacion', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
+    Route::post('/evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
+
+    //Preguntas
+    Route::get('/evaluaciones/{evaluacion}/preguntas', [PreguntaController::class, 'index'])->name('preguntas.index');
 });
