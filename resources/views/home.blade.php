@@ -9,8 +9,6 @@
                 <div class="card-header">Introducción</div>
 
                 <div class="card-body">
-                    @include('partials.messages')
-
                     <p>{{ __('Welcom to the course') }}</p>
                     <a href="{{ route('cursos.index') }}" class="btn btn-primary">{{ __('Go to course') }}</a>
                 </div>

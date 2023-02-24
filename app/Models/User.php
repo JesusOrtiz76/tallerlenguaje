@@ -56,8 +56,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Curso::class);
     }
 
+    public function evaluacion()
+    {
+        return $this->hasOne(Evaluacion::class);
+    }
+
     public function evaluaciones()
     {
-        return $this->hasMany(Evaluacion::class);
+        return $this->belongsToMany(Evaluacion::class)
+            ->withPivot('id', 'intentos', 'resultados')
+            ->withTimestamps();
     }
 }

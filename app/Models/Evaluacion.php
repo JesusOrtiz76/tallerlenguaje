@@ -15,9 +15,21 @@ class Evaluacion extends Model
         'modulo_id',
     ];
 
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
     public function modulo()
     {
         return $this->belongsTo(Modulo::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+            ->withPivot('id', 'intentos', 'resultados')
+            ->withTimestamps();
     }
 
     public function preguntas()

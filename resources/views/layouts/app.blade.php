@@ -15,23 +15,24 @@
 </head>
 
 <body>
-    <div id="app" class="d-flex flex-column h-screen justify-content-between">
-        <header>
-            @include('partials.nav')
-        </header>
+@include('partials.messages')
+<div id="app" class="d-flex flex-column h-screen justify-content-between">
+    <header>
+        @include('partials.nav')
+    </header>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <main class="py-4">
+        @yield('content')
+    </main>
 
-        <footer class="bg-dark shadow-lg py-1">
-            <div class="container py-2 d-flex justify-content-center">
-                <span class="text-light px-1">Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.</span>
-                <hr>
-                <span class="text-light">Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.</span>
-            </div>
-        </footer>
-    </div>
+    <footer class="bg-dark shadow-lg py-1">
+        <div class="container py-2 d-flex justify-content-center">
+            <span class="text-light px-1">Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.</span>
+            <hr>
+            <span class="text-light">Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.</span>
+        </div>
+    </footer>
+</div>
 
 </body>
 

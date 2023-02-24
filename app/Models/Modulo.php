@@ -22,7 +22,7 @@ class Modulo extends Model
         return $this->hasMany(Tema::class);
     }
 
-    public function evaluaciones()
+    public function evaluacion()
     {
         return $this->hasMany(Evaluacion::class);
     }
