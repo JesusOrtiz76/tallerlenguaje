@@ -40,9 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('tema/{tema}', [TemaController::class, 'show'])->name('temas.show');
 
     //Evaluaciones
-    Route::post('/evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
-    Route::get('/evaluaciones/{evaluacion}', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
+    //Route::post('/evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
+    Route::post('/evaluaciones', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
+    Route::post('evaluaciones/{id_modulo}/{id_evaluacion}/submit', [EvaluacionController::class, 'submit'])->name('evaluaciones.submit');
 
-    //Preguntas
-    Route::get('/evaluaciones/{evaluacion}/preguntas', [PreguntaController::class, 'index'])->name('preguntas.index');
+    //Resultados
+    Route::get('evaluaciones/{id_modulo}/{id_evaluacion}/resultado', [EvaluacionController::class, 'resultado'])->name('evaluaciones.resultado');
+
 });

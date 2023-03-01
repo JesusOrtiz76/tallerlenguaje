@@ -28,7 +28,7 @@
                 <p>
                     Completa la evaluación para pasar al siguiente módulo.
                 </p>
-                <form action="{{ route('evaluaciones.store') }}" method="POST">
+                <form action="{{ route('evaluaciones.show') }}" method="POST">
                     @csrf
                     <input type="hidden" name="modulo_id" value="{{ $modulo->id }}">
                     <button type="submit" class="btn btn-primary">
