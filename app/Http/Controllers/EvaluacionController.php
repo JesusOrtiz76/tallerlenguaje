@@ -17,34 +17,33 @@ class EvaluacionController extends Controller
         $modulo = Modulo::find($request->modulo_id);
         $evaluacion = $modulo->evaluacion()->where('activo', 1)->first();
 
-
-
         if (!$evaluacion) {
             return redirect()->back()->with('error', 'No hay evaluación disponible en este módulo');
         }
 
+        // Obtener datos de tabla intermedia
         $pivot = $user->evaluaciones()->find($evaluacion->id);
 
-
-
-        if (!$pivot) {
-            return redirect()->back()->with('warning', 'No ha completado la evaluación.');
-        }
-
-
+        // Validar si existen mas intentos disponibles
         if ($pivot && $pivot->pivot->intentos >= $evaluacion->intentos_max) {
             return redirect()->route('evaluaciones.resultado', [$request->modulo_id, $evaluacion->id])->with('warning', 'Ya has agotado tus intentos para esta evaluación');
         }
 
+        // Si no existe registro en tabla intermedia, se crea el registro y comienza el primer intento de la evaluacion
         if (!$pivot) {
-
             $user->evaluaciones()->attach($evaluacion->id, ['intentos' => 1, 'resultados' => 0]);
         } else {
             $pivot->pivot->increment('intentos');
         }
 
+        /*
+        if (!$pivot) {
+            return redirect()->back()->with('warning', 'No ha completado la evaluación.');
+        }
+        */
+
         // Obtener las preguntas de la evaluación en orden aleatorio
-        $preguntas = $evaluacion->preguntas()->inRandomOrder()->get();
+        $preguntas = $evaluacion->preguntas()->with('opciones')->get();;
 
         //return $preguntas;
 

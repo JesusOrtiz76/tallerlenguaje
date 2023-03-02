@@ -9,21 +9,32 @@
 
                     <div class="card-body">
 
-                        @if ($pivot->pivot->intentos <= 0)
+                        @if (($pivot ?? null) && $pivot->pivot->intentos <= 0)
                             <div class="alert alert-danger" role="alert">
                                 {{ __('No tiene más intentos para esta evaluación.') }}
                             </div>
                         @else
                             <p>{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.', ['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>
-                            <p>{{ __('Usted tiene :intentos intentos restantes para esta evaluación.', ['intentos' => $evaluacion->intentos_max - $pivot->pivot->intentos]) }}</p>
+                            @if ($pivot ?? null)
+                                <p>{{ __('Usted tiene :intentos intentos restantes para esta evaluación.', ['intentos' => $evaluacion->intentos_max - $pivot->pivot->intentos]) }}</p>
+                            @else
+                                <p>{{ __('Usted tiene :intentos intentos restantes para esta evaluación.', ['intentos' => $evaluacion->intentos_max - 1]) }}</p>
+                            @endif
                             <form method="POST" action="{{ route('evaluaciones.submit', ['id_modulo' => $modulo->id, 'id_evaluacion' => $evaluacion->id]) }}">
 
-                            @csrf
+                                @csrf
 
-                                @foreach ($evaluacion->preguntas as $pregunta)
+                                @foreach ($evaluacion->preguntas->shuffle() as $pregunta)
                                     <div class="form-group">
                                         <p>{{ $pregunta->enunciado }}</p>
-                                        <p>Aquí van las opciones</p>
+                                        @foreach ($pregunta->opciones->shuffle() as $opcion)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="respuestas[{{ $pregunta->id }}]" id="respuesta_{{ $opcion->id }}" value="{{ $opcion->id }}">
+                                                <label class="form-check-label" for="respuesta_{{ $opcion->id }}">
+                                                    {{ $opcion->texto }}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endforeach
 

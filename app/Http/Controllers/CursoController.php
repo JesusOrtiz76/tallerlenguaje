@@ -21,7 +21,7 @@ class CursoController extends Controller
         $cursos = Curso::all();
         return view('cursos.index', compact('cursos'));
     }
-    
+
     public function inscribirse($curso_id)
     {
 
