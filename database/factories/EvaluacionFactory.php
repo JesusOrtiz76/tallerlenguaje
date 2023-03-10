@@ -19,8 +19,7 @@ class EvaluacionFactory extends Factory
     {
         return [
             'nombre' => $this->faker->sentence(3),
-            'descripcion' => $this->faker->paragraph(2),
-            'activo' => 1,
+            'descripcion' => $this->faker->paragraph(3),
             'modulo_id' => Modulo::factory(),
         ];
     }

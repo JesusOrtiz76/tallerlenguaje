@@ -15,24 +15,38 @@
 </head>
 
 <body>
-@include('partials.messages')
-<div id="app" class="d-flex flex-column h-screen justify-content-between">
-    <header>
+<div class="wrapper d-flex align-items-stretch">
+    @if (!in_array(request()->path(), ['login', 'register']))
+        @include('partials.sidebar')
+    @endif
+    <!-- Page Content  -->
+    <div id="content" class="d-flex flex-column h-screen justify-content-between">
         @include('partials.nav')
-    </header>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+        <main class="d-flex flex-column min-vh-0">
+            @yield('content')
+        </main>
 
-    <footer class="bg-dark shadow-lg py-1">
-        <div class="container py-2 d-flex justify-content-center">
-            <span class="text-light px-1">Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.</span>
+        <footer class="py-1 mt-5">
             <hr>
-            <span class="text-light">Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.</span>
-        </div>
-    </footer>
+            <div class="container py-2 d-flex justify-content-center">
+
+                <span class="text-muted px-1">
+                    Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.
+                </span>
+                <hr>
+                <span class="text-muted">
+                    Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.
+                </span>
+            </div>
+        </footer>
+    </div>
 </div>
+
+<script
+    src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+    crossorigin="anonymous"></script>
 
 </body>
 

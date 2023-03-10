@@ -18,8 +18,8 @@ class ModuloFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->sentence(2),
-            'descripcion' => $this->faker->paragraph(1),
+            'nombre' => $this->faker->sentence(5),
+            'descripcion' => $this->faker->paragraph(2),
             'curso_id' => Curso::factory(),
         ];
     }

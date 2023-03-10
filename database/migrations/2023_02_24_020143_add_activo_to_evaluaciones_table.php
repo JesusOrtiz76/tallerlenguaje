@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('evaluaciones', function (Blueprint $table) {
-            $table->boolean('activo')->default(0);
+            $table->boolean('activo')->after('intentos_max')->default(1);
         });
     }
 

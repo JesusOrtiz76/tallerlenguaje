@@ -10,8 +10,8 @@ class ModuloController extends Controller
 {
     public function __construct()
     {
-        $cursos = Curso::all();
-        View::share('cursos', $cursos);
+        $modulos = Modulo::all();
+        View::share('modulos', $modulos);
     }
 
     public function index(Curso $curso)

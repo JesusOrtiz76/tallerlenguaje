@@ -19,8 +19,8 @@ class TemaFactory extends Factory
     {
         return [
             'titulo' => $this->faker->sentence(3),
-            'descripcion' => $this->faker->paragraph(1),
-            'contenido' => $this->faker->paragraph(1),
+            'descripcion' => $this->faker->paragraph(2),
+            'contenido' => $this->faker->paragraph(2),
             'img_path' => $this->faker->imageUrl(),
             'modulo_id' => Modulo::factory(),
         ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Modulo;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Curso;
 use App\Models\Inscripcion;
@@ -12,8 +13,8 @@ class CursoController extends Controller
 
     public function __construct()
     {
-        $cursos = Curso::all();
-        View::share('cursos', $cursos);
+        $modulos = Modulo::all();
+        View::share('modulos', $modulos);
     }
 
     public function index()
@@ -33,15 +34,18 @@ class CursoController extends Controller
 
             // Verificar que el usuario no esté ya inscrito en el curso
             if (Inscripcion::where('curso_id', $curso_id)->where('user_id', Auth::id())->first()) {
-                return redirect()->route('cursos.index', $curso_id)->with('warning', 'Ya estás inscrito en este curso');
+                return redirect()->route('cursos.index', $curso_id)
+                    ->with('warning', 'Ya estás inscrito en este curso');
             } else {
                 // Matricular al usuario en el curso
                 $curso->users()->attach(Auth::user()->id);
-                return redirect()->route('cursos.index', $curso_id)->with('success', 'Te has inscrito en este curso');
+                return redirect()->route('cursos.index', $curso_id)
+                    ->with('success', 'Te has inscrito en este curso');
             }
         } else {
             // Redirigir al usuario a la página de inicio con un mensaje de error
-            return redirect()->route('home')->with('error', 'No se pudo encontrar el curso que deseas matricularte');
+            return redirect()->route('home')
+                ->with('error', 'No se pudo encontrar el curso que deseas matricularte');
         }
     }
 }

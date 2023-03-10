@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curso;
 use App\Models\Evaluacion;
 use App\Models\Modulo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class EvaluacionController extends Controller
 {
+
+    public function __construct()
+    {
+        $modulos = Modulo::all();
+        View::share('modulos', $modulos);
+    }
     public function show(Request $request)
     {
         // Obtener la evaluación del usuario logueado
@@ -26,7 +34,8 @@ class EvaluacionController extends Controller
 
         // Validar si existen mas intentos disponibles
         if ($pivot && $pivot->pivot->intentos >= $evaluacion->intentos_max) {
-            return redirect()->route('evaluaciones.resultado', [$request->modulo_id, $evaluacion->id])->with('warning', 'Ya has agotado tus intentos para esta evaluación');
+            return redirect()->route('evaluaciones.resultado', [$request->modulo_id, $evaluacion->id])
+                ->with('warning', 'Ya has agotado tus intentos para esta evaluación');
         }
 
         // Si no existe registro en tabla intermedia, se crea el registro y comienza el primer intento de la evaluacion

@@ -30,9 +30,7 @@ class CursoSeeder extends Seeder
 
             // Crear una evaluación para el módulo
             $evaluacion = Evaluacion::factory()->create([
-                'modulo_id' => $modulo->id,
-                'tiempo_lim' => 15, // duración de la evaluación en minutos
-                'intentos_max' => 3, // máximo de intentos permitidos
+                'modulo_id' => $modulo->id
             ]);
 
             // Crear 12 preguntas para la evaluación, con 5 opciones cada una
