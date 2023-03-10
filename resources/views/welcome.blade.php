@@ -22,10 +22,16 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#page-top">SEIEM</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars ms-1"></i>
+            <a class="navbar-brand" href="#page-top"></a>
+            <button class="btn btn-white d-inline-block d-lg-none ml-auto"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fa fa-ellipsis-v ms-1"></i>
+                <span class="sr-only">Toggle Menu</span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
@@ -50,7 +56,13 @@
                         <a class="nav-link" href="{{ route('home') }}">{{ __('Go to course') }}</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle  text-uppercase" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle  text-uppercase"
+                           href="#"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
@@ -93,7 +105,10 @@
                         <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Objetivo</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima ómaxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Minima ómaxime quam architecto quo inventore harum ex magni, dicta impedit.
+                    </p>
                 </div>
                 <div class="col-md-6 mb-3">
                     <span class="fa-stack fa-4x">
@@ -101,7 +116,9 @@
                         <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Instrucciones</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                    </p>
                 </div>
                 <div class="col-md-6 mb-3">
                     <span class="fa-stack fa-4x">
@@ -109,7 +126,9 @@
                         <i class="fa fa-file-contract fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Acreditaci&oacute;n</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                    </p>
                 </div>
                 <div class="col-md-6 mb-3">
                     <span class="fa-stack fa-4x">
@@ -117,7 +136,9 @@
                         <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Duraci&oacute;n</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                    </p>
                 </div>
             </div>
         </div>
@@ -131,68 +152,98 @@
             </div>
             <ul class="modulo">
                 <li>
-                    <div class="modulo-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." />
+                    </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
                             <h4>M&Oacute;DULO I</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
+                                recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
+                            </p>
                         </div>
                     </div>
                 </li>
                 <li class="modulo-inverted">
-                    <div class="modulo-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." /></div>
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." />
+                    </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
                             <h4>M&Oacute;DULO II</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
+                                recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
+                            </p>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <div class="modulo-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." />
+                    </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
                             <h4>M&Oacute;DULO III</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
+                                recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
+                            </p>
                         </div>
                     </div>
                 </li>
                 <li class="modulo-inverted">
-                    <div class="modulo-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." />
+                    </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
                             <h4>M&Oacute;DULO IV</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
+                                recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
+                            </p>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <div class="modulo-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." />
+                    </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
                             <h4>M&Oacute;DULO V</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
+                                recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
+                            </p>
                         </div>
                     </div>
                 </li>
                 <li class="modulo-inverted">
-                    <div class="modulo-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." />
+                    </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
                             <h4>M&Oacute;DULO VI</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
+                                recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
+                            </p>
                         </div>
                     </div>
                 </li>
@@ -214,8 +265,13 @@
     <!-- Footer-->
     <footer class="footer bg-dark">
             <div class="container py-4 d-flex justify-content-center">
-                <span class="text-light px-1">Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.</span> <hr>
-                <span class="text-light">Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.</span>
+                <span class="text-light px-1">
+                    Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.
+                </span>
+                <hr>
+                <span class="text-light">
+                    Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.
+                </span>
             </div>
         </footer>
 </body>

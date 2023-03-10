@@ -8,7 +8,7 @@
             </button>
         @endif
 
-        <a class="navbar-brand" href="{{ url('/') }}">SEIEM</a>
+        <a class="navbar-brand" href="{{ url('/') }}"></a>
 
         <button class="btn btn-white d-inline-block d-lg-none ml-auto"
                 type="button"
