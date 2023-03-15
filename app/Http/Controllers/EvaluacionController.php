@@ -86,34 +86,32 @@ class EvaluacionController extends Controller
         if (count($respuestas) !== $evaluacion->preguntas->count()) {
             return redirect()->back()->with('warning', 'Completa las preguntas.');
         }
-
-        $data = [$user, $evaluacion, $modulo, $request->input('respuestas', [])];
-        return $data;
-
-        return "Has contestado todas";
-
+        /*
+                $data = [$user, $evaluacion, $modulo, $request->input('respuestas', [])];
+                return $data;
+        */
         // Calcular el puntaje del usuario
         $score = 0;
-        foreach ($evaluation->questions as $question) {
-            $user_answer = $answers[$question->id];
-            if ($user_answer == $question->correct_answer) {
-                $score += $question->points;
+        foreach ($evaluacion->preguntas as $pregunta) {
+            $user_respuesta = $respuestas[$pregunta->id];
+
+            // Obtener la opción correcta de la pregunta actual
+            $opcion_correcta = $pregunta->opciones()->where('es_correcta', true)->first();
+
+            // Verificar si la respuesta del usuario es correcta
+            if ($user_respuesta == $opcion_correcta->id) {
+                $score += 1;
             }
+
         }
 
-        // Si no existe registro en tabla intermedia, se crea el registro y comienza el primer intento de la evaluacion
-        if (!$evaluacion) {
-            $user->evaluaciones()->attach($evaluacion->id, ['intentos' => 1, 'resultados' => 0]);
-        } else {
-            $evaluacion->pivot->increment('intentos');
-            $user_evaluation->score = $score;
-            $user_evaluation->completed = true;
-            $user_evaluation->completed_at = now();
-            $user_evaluation->save();
-        }
+        $evaluacion->pivot->resultados = $score;
+        $evaluacion->pivot->completado = true;
+
+        $evaluacion->pivot->save();
 
         // Redirigir al usuario a la página de resultados
-        return redirect()->route('evaluations.show', $evaluation->id)->with('success', 'Evaluación completada.');
+        return redirect()->route('evaluaciones.show', $evaluacion->id)->with('success', 'Evaluación completada.');
     }
     public function resultado() {
         return 'Resultados';
