@@ -22,13 +22,9 @@
                 <p>
                     Completa la evaluación para pasar al siguiente módulo.
                 </p>
-                <form action="{{ route('evaluaciones.show') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="modulo_id" value="{{ $modulo->id }}">
-                    <button type="submit" class="btn btn-primary">
-                        Comenzar evaluación
-                    </button>
-                </form>
+                @foreach ($modulo->evaluaciones as $evaluacion)
+                    <a href="{{ route('evaluaciones.show', $evaluacion->id) }}" class="btn btn-primary">{{ $evaluacion->nombre }}</a>
+                @endforeach
             </div>
         </div>
     </div>

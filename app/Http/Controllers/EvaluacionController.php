@@ -18,52 +18,49 @@ class EvaluacionController extends Controller
         $modulos = Modulo::all();
         View::share('modulos', $modulos);
     }
-    public function show(Request $request)
+    public function show($id)
     {
-        // Obtener la evaluación del usuario logueado
+        // Obtener el usuario autenticado
         $user = Auth::user();
-        $modulo = Modulo::find($request->modulo_id);
-        $evaluacion = $modulo->evaluaciones()->where('activo', 1)->first();
 
-        if (!$evaluacion) {
+        try {
+            // Obtener la evaluación con el módulo correspondiente
+            $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
+
+            // Verificar si el usuario ha accedido previamente a la evaluación
+            if (!$user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->exists()) {
+                // Si el usuario no ha accedido previamente, agregar un registro a la tabla intermedia de evaluaciones y usuarios con un intento
+                $pivotData = ['intentos' => 1];
+                $user->evaluaciones()->syncWithoutDetaching([$evaluacion->id => $pivotData]);
+            } else {
+                // Si el usuario ya ha accedido previamente, agregar un intento adicional a la tabla intermedia de evaluaciones y usuarios
+                $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->increment('intentos');
+            }
+
+            $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->firstOrFail();
+
+            // Verificar si se han agotado los intentos
+            if ($pivot->intentos >= $evaluacion->intentos_max) {
+                return redirect()->route('evaluaciones.resultado', [$evaluacion->modulo_id, $evaluacion->id])
+                    ->with('warning', 'Ya has agotado tus intentos para esta evaluación');
+            }
+
+            // Obtener las preguntas de la evaluación, con opciones cargadas y ordenadas aleatoriamente
+            $preguntas = $evaluacion->preguntas()->with('opciones')->inRandomOrder()->get();
+
+            // Cargar la vista con las preguntas y la evaluación
+            return view('evaluaciones.show', [
+                'modulo' => $evaluacion->modulo,
+                'evaluacion' => $evaluacion,
+                'preguntas' => $preguntas,
+                'pivot' => $pivot
+            ]);
+        } catch (ModelNotFoundException $e) {
+            // Manejar la excepción si la evaluación no existe
             return redirect()->back()->with('error', 'No hay evaluación disponible en este módulo');
         }
-
-        // Obtener datos de tabla intermedia
-        $pivot = $user->evaluaciones()->find($evaluacion->id);
-
-        // Validar si existen mas intentos disponibles
-        if ($pivot && $pivot->pivot->intentos >= $evaluacion->intentos_max) {
-            return redirect()->route('evaluaciones.resultado', [$request->modulo_id, $evaluacion->id])
-                ->with('warning', 'Ya has agotado tus intentos para esta evaluación');
-        }
-
-        // Si no existe registro en tabla intermedia, se crea el registro y comienza el primer intento de la evaluacion
-        if (!$pivot) {
-            $user->evaluaciones()->attach($evaluacion->id, ['intentos' => 1, 'resultados' => 0]);
-        } else {
-            $pivot->pivot->increment('intentos');
-        }
-
-        /*
-        if (!$pivot) {
-            return redirect()->back()->with('warning', 'No ha completado la evaluación.');
-        }
-        */
-
-        // Obtener las preguntas de la evaluación en orden aleatorio
-        $preguntas = $evaluacion->preguntas()->with('opciones')->get();;
-
-        //return $preguntas;
-
-        // Cargar la vista con las preguntas y la evaluación
-        return view('evaluaciones.show', [
-            'preguntas' => $preguntas,
-            'evaluacion' => $evaluacion,
-            'pivot' => $pivot,
-            'modulo' => $modulo,
-        ]);
     }
+
 
     public function submit(Request $request, $evaluacion_id)
     {

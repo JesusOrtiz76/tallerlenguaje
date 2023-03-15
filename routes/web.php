@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Evaluaciones
     //Route::post('/evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
-    Route::post('/evaluaciones', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
+    Route::get('evaluaciones/{id_evaluacion}', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
     Route::post('evaluaciones/{id_modulo}/{id_evaluacion}/submit', [EvaluacionController::class, 'submit'])->name('evaluaciones.submit');
 
     //Resultados
