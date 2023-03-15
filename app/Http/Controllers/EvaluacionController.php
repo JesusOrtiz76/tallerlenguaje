@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Curso;
 use App\Models\Evaluacion;
 use App\Models\Modulo;
+use App\Models\Resultado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,7 @@ class EvaluacionController extends Controller
                 $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->increment('intentos');
             }
 
+            // Obtener datos de la tabla evaluacion_user
             $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->firstOrFail();
 
             // Verificar si se han agotado los intentos
@@ -67,7 +69,6 @@ class EvaluacionController extends Controller
         $user = Auth::user();
         $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
         $modulo = Modulo::find($evaluacion->modulo_id);
-
 
         // Verificar si el usuario ya ha completado la evaluación la cantidad máxima de veces permitida
         if ($evaluacion && $evaluacion->pivot->intentos >= $evaluacion->intentos_max) {
@@ -105,13 +106,38 @@ class EvaluacionController extends Controller
 
         }
 
+        // Asignar puntuación a la tabla evaluacion_user
         $evaluacion->pivot->resultados = $score;
-        $evaluacion->pivot->completado = true;
 
-        $evaluacion->pivot->save();
+        // Cerrar la evaluacion si ha alcanzado el limite de intentos
+        if ($evaluacion->pivot->intentos >= $evaluacion->intentos_max){
+            $evaluacion->pivot->completado = true;
+        }
 
-        // Redirigir al usuario a la página de resultados
-        return redirect()->route('evaluaciones.show', $evaluacion->id)->with('success', 'Evaluación completada.');
+        $resultado = Resultado::where('user_id', auth()->id())
+            ->where('evaluacion_id', $evaluacion->id)
+            ->first();
+
+        if ($resultado) {
+            $resultado->respuestas = json_encode($respuestas);
+            $resultado->save();
+        } else {
+            // Si no se encuentra ningún resultado, se podría crear uno nuevo
+            $resultado = new Resultado([
+                'user_id' => auth()->id(),
+                'evaluacion_id' => $evaluacion->id,
+                'respuestas' => json_encode($respuestas),
+            ]);
+            $resultado->save();
+        }
+
+        // Si el guardado es exitoso guardamos la puntuación
+        if ($evaluacion->pivot->save()) {
+            // Redirigir al usuario a la página de resultados
+            return redirect()->route('modulos.show', $modulo->id)->with('success', 'Evaluación completada.');
+        } else {
+            return redirect()->route('modulos.show', $modulo->id)->with('error', 'Ocurrió un error al enviar las respuestas.');
+        }
     }
     public function resultado() {
         return 'Resultados';
