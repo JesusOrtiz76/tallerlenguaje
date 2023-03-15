@@ -23,7 +23,7 @@ class EvaluacionController extends Controller
         // Obtener la evaluación del usuario logueado
         $user = Auth::user();
         $modulo = Modulo::find($request->modulo_id);
-        $evaluacion = $modulo->evaluacion()->where('activo', 1)->first();
+        $evaluacion = $modulo->evaluaciones()->where('activo', 1)->first();
 
         if (!$evaluacion) {
             return redirect()->back()->with('error', 'No hay evaluación disponible en este módulo');
@@ -65,10 +65,59 @@ class EvaluacionController extends Controller
         ]);
     }
 
-    public function submit(Request $request){
-        return $request;
-    }
+    public function submit(Request $request, $evaluacion_id)
+    {
+        $user = Auth::user();
+        $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
+        $modulo = Modulo::find($evaluacion->modulo_id);
 
+
+        // Verificar si el usuario ya ha completado la evaluación la cantidad máxima de veces permitida
+        if ($evaluacion && $evaluacion->pivot->intentos >= $evaluacion->intentos_max) {
+            return redirect()->back()->with('warning', 'Has alcanzado la cantidad máxima de intentos para esta evaluación.');
+        }
+
+        // Verificar si el usuario ya ha completado la evaluación previamente
+        if ($evaluacion->users()->where('user_id', $user->id)->where('completado', true)->exists()) {
+            return redirect()->back()->with('warning', 'Ya has completado esta evaluación previamente.');
+        }
+
+        // Obtener las respuestas del usuario
+        $respuestas = $request->input('respuestas', []);
+
+        // Verificar que se hayan contestado todas las preguntas
+        if (count($respuestas) !== $evaluacion->preguntas->count()) {
+            return redirect()->back()->with('warning', 'Completa las preguntas.');
+        }
+
+        $data = [$user, $evaluacion, $modulo, $request->input('respuestas', [])];
+        return $data;
+
+        return "Has contestado todas";
+
+        // Calcular el puntaje del usuario
+        $score = 0;
+        foreach ($evaluation->questions as $question) {
+            $user_answer = $answers[$question->id];
+            if ($user_answer == $question->correct_answer) {
+                $score += $question->points;
+            }
+        }
+
+        // Si no existe registro en tabla intermedia, se crea el registro y comienza el primer intento de la evaluacion
+        if (!$evaluacion) {
+            $user->evaluaciones()->attach($evaluacion->id, ['intentos' => 1, 'resultados' => 0]);
+        } else {
+            $evaluacion->pivot->increment('intentos');
+            $user_evaluation->score = $score;
+            $user_evaluation->completed = true;
+            $user_evaluation->completed_at = now();
+            $user_evaluation->save();
+        }
+
+        // Redirigir al usuario a la página de resultados
+        return redirect()->route('evaluations.show', $evaluation->id)->with('success', 'Evaluación completada.');
+    }
     public function resultado() {
         return 'Resultados';
     }

@@ -15,7 +15,8 @@
 </head>
 
 <body>
-<div class="wrapper d-flex align-items-stretch">
+@include('partials.messages')
+<div class="wrapper d-flex align-items-stretch dashboard-bg">
     @if (!in_array(request()->path(), ['login', 'register']))
         @include('partials.sidebar')
     @endif
@@ -27,10 +28,8 @@
             @yield('content')
         </main>
 
-        <footer class="py-1 mt-5">
-            <hr>
-            <div class="container py-2 d-flex justify-content-center">
-
+        <footer class="py-lg-2 mt-5 blur-bg border-top">
+            <div class="container py-1 d-flex justify-content-center">
                 <span class="text-muted px-1">
                     Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.
                 </span>
@@ -46,7 +45,8 @@
 <script
     src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous">
+</script>
 
 </body>
 

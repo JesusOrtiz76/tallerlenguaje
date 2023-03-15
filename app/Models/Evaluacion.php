@@ -18,11 +18,6 @@ class Evaluacion extends Model
         'modulo_id',
     ];
 
-    public function user()
-    {
-        return $this->hasOne(User::class);
-    }
-
     public function modulo()
     {
         return $this->belongsTo(Modulo::class);
@@ -30,8 +25,8 @@ class Evaluacion extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)
-            ->withPivot('id', 'intentos', 'resultados')
+        return $this->belongsToMany(User::class, 'evaluacion_user')
+            ->withPivot('intentos', 'resultados', 'completado')
             ->withTimestamps();
     }
 

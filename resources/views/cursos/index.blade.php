@@ -7,14 +7,11 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
                 @forelse ($cursos as $curso)
-                    <div class="card">
-                        <div class="card-header text-center text-uppercase">
-                            <h5>{{ $curso->nombre }}</h5>
-                        </div>
+                    <div class="card blur-bg shadow-lg border-0">
                         <div class="card-body">
-                            <h5 class="card-title">Descripción</h5>
-                            <p class="card-text">{{ $curso->descripcion }}</p>
-                            @if(Auth::user()->InscritoEnCurso($curso))
+                            <h5>{{ $curso->nombre }}</h5>
+                            <p class="card-text text-muted">{{ $curso->descripcion }}</p>
+                            @if(Auth::user()->cursos->contains($curso))
                                 <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary">Continuar</a>
                             @else
                                 <form method="POST" action="{{ route('cursos.inscribirse', $curso->id) }}">
@@ -23,7 +20,7 @@
                                 </form>
                             @endif
                         </div>
-                        <div class="card-footer text-muted">
+                        <div class="card-footer bg-white text-muted">
                             {{ $curso->created_at->diffForHumans() }}
                         </div>
                     </div>

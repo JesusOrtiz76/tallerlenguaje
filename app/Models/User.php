@@ -44,28 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function InscritoEnCurso($curso)
-    {
-        $inscripcion = Inscripcion::where('user_id', $this->id)
-            ->where('curso_id', $curso->id)
-            ->first();
-        return $inscripcion !== null;
-    }
-
     public function cursos()
     {
-        return $this->belongsToMany(Curso::class);
-    }
-
-    public function evaluacion()
-    {
-        return $this->hasOne(Evaluacion::class);
+        return $this->belongsToMany(Curso::class, 'inscripciones')
+            ->withPivot('progreso')
+            ->withTimestamps();
     }
 
     public function evaluaciones()
     {
-        return $this->belongsToMany(Evaluacion::class)
-            ->withPivot('id', 'intentos', 'resultados')
+        return $this->belongsToMany(Evaluacion::class, 'evaluacion_user')
+            ->withPivot('intentos', 'resultados', 'completado')
             ->withTimestamps();
     }
+
 }

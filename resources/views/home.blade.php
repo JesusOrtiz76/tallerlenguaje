@@ -2,19 +2,18 @@
 
 @section('content')
 
-<div class="container">
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Introducción</div>
-
-                <div class="card-body">
-                    <p>{{ __('Welcom to the course') }}</p>
-                    <a href="{{ route('cursos.index') }}" class="btn btn-primary">{{ __('Go to course') }}</a>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-10 col-lg-6 p-5">
+                <p class="text-uppercase">{{ __('Welcom to the course') }}:</p>
+                <h2 class="text-primary">{{ $cursos[0]->nombre }}</h2>
+                <p class="text-muted">{{ $cursos[0]->descripcion }}</p>
+                <a href="{{ route('cursos.index') }}" class="btn btn-lg btn-primary mt-5">{{ __('Go to course') }}</a>
             </div>
+            <div class="col-10 col-lg-6 p-5">
+                <img class="img-fluid mt-4" src="/assets/img/test.svg" alt="Image Brand">
+            </div>
+
         </div>
-    </div>
-</div>
 
 @endsection

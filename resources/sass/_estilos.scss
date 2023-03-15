@@ -72,7 +72,7 @@ header.masthead {
     padding-bottom: 9rem;
     text-align: center;
     color: #fff;
-    background-image: linear-gradient(to bottom, rgba(129, 0, 65, 0.5) 0%, rgba(129, 0, 65, 0.2) 100%), url("../assets/img/header-bg.jpg");
+    background-image: linear-gradient(to bottom, rgba($primary, 0.8) 0%, rgba($primary_, 0.1) 100%), url("../assets/img/header-bg.jpg");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -416,7 +416,10 @@ button:hover, button:focus {
     color: $text-muted;
 }
 #sidebar ul li a:hover {
-    color: $primary; }
+    color: $primary;
+    padding-left: 0.3rem;
+    transition: all 0.2s;
+}
 #sidebar ul li.active > a {
     background: transparent;
     color: $primary; }
@@ -449,7 +452,6 @@ a[data-bs-toggle="dropdown"] {
 
 #content {
     width: 100%;
-    min-width: 280px;
     padding: 0;
     min-height: 100vh;
     -webkit-transition: all 0.3s;
@@ -457,4 +459,18 @@ a[data-bs-toggle="dropdown"] {
     transition: all 0.3s;
     max-height: calc(100vh - 70px);
     overflow-y: auto;
+}
+
+.blur-bg{
+    background: rgba(255, 255, 255, 0.49);
+    backdrop-filter: blur(8.3px);
+    -webkit-backdrop-filter: blur(8.3px);
+}
+
+.dashboard-bg {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.45) 100%), url("../assets/img/dashboard-bg.svg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
 }
