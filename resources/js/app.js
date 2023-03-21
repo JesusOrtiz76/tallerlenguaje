@@ -7,6 +7,9 @@
 import './bootstrap';
 import './scripts';
 import { createApp } from 'vue';
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

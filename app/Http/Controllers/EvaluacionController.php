@@ -42,7 +42,7 @@ class EvaluacionController extends Controller
             $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->firstOrFail();
 
             // Verificar si se han agotado los intentos
-            if ($pivot->intentos >= $evaluacion->intentos_max) {
+            if ($pivot->pivot->intentos >= $evaluacion->intentos_max) {
                 return redirect()->route('evaluaciones.resultado', [$evaluacion->modulo_id, $evaluacion->id])
                     ->with('warning', 'Ya has agotado tus intentos para esta evaluación');
             }

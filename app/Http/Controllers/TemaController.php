@@ -16,7 +16,8 @@ class TemaController extends Controller
     public function show($temaId)
     {
         $tema = Tema::findOrFail($temaId);
-        return view('temas.show', compact('tema'));
+        $modulo = Modulo::find($tema->modulo_id);
+        return view('temas.show', compact('tema', 'modulo'));
     }
 
 }

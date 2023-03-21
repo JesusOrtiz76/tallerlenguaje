@@ -15,7 +15,6 @@
 </head>
 
 <body>
-@include('partials.messages')
 <div class="wrapper d-flex align-items-stretch dashboard-bg">
     @if (!in_array(request()->path(), ['login', 'register']))
         @include('partials.sidebar')
@@ -41,6 +40,8 @@
         </footer>
     </div>
 </div>
+
+@include('partials.messages')
 
 <script
     src="https://code.jquery.com/jquery-3.6.4.min.js"

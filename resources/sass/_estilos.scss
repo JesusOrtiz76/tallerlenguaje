@@ -346,30 +346,6 @@ header.masthead .masthead-heading {
     }
 }
 
-a {
-    -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease;
-    color: $primary;
-}
-a:hover, a:focus {
-    text-decoration: none !important;
-    outline: none !important;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-button {
-    -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease; }
-button:hover, button:focus {
-    text-decoration: none !important;
-    outline: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
 .line {
     width: 100%;
     height: 1px;
@@ -398,52 +374,50 @@ button:hover, button:focus {
     margin: 0 auto; }
 #sidebar .logo span {
     display: block; }
-#sidebar ul.components {
-    padding: 0; }
-#sidebar ul li {
-    font-size: 16px; }
-#sidebar ul li > ul {
-    margin-left: 10px; }
-#sidebar ul li > ul li {
-    font-size: 14px;
-    text-decoration: none;
-}
-#sidebar ul li a {
-    padding: 10px 0;
-    display: block;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    text-decoration: none;
-    color: $text-muted;
-}
-#sidebar ul li a:hover {
-    color: $primary;
-    padding-left: 0.3rem;
-    transition: all 0.2s;
-}
-#sidebar ul li.active > a {
-    background: transparent;
-    color: $primary; }
 @media (max-width: 991.98px) {
     #sidebar {
         margin-left: -300px; }
     #sidebar.show {
         margin-left: 0; } }
 
-.sidebar-content{
-    padding: 5rem 3rem 0rem 3rem;
+.btn-text-left {
+    text-align: left;
 }
 
-a[data-bs-toggle="dropdown"] {
-    position: relative; }
+.btn-sidebar {
+    color: $text-muted;
+    text-decoration: none;
+}
 
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+a {
+    text-decoration: none;
+}
+
+.btn-sidebar:hover {
+    font-weight: bold;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.sidebar-content{
+    padding: 5rem 1rem 0rem 1rem; //up left down right
+    width: 100%;
+}
+
+
+@media (min-width: 200px) {
+    .animate {
+        animation-duration: 0.3s;
+        -webkit-animation-duration: 0.3s;
+        animation-fill-mode: both;
+        -webkit-animation-fill-mode: both;
+    }
+}
+
+.swal-menu {
+    -webkit-animation-name: swal2-show;
+    animation-name: swal2-show;
 }
 
 @media (max-width: 991.98px) {
