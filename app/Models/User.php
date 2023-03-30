@@ -54,7 +54,8 @@ class User extends Authenticatable
     public function evaluaciones()
     {
         return $this->belongsToMany(Evaluacion::class)
-            ->withPivot('intentos', 'resultados', 'completado');
+            ->withPivot('intentos', 'resultados', 'completado')
+            ->withTimestamps();
     }
 
 }

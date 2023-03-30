@@ -7,33 +7,42 @@
             <a class="btn-sidebar" href="/cursos/1/modulo"><h4 class="text-uppercase text-muted mb-4">M&oacute;dulos del curso</h4></a>
         </div>
 
-        <!--<a href="#" class="img logo rounded-circle mb-5"></a>-->
-
         @foreach ($modulos as $modulo)
-            <!-- Split dropup button -->
-            <div class="btn-group dropdown w-100 mb-2">
-
-                <a type="button" class="btn btn-link btn-sidebar btn-text-left" href="{{ route('modulos.show', $modulo->id) }}">
-                    <i class="fa-regular fa-folder-closed"></i> {{ Str::limit($modulo->nombre, 25, '...') }}
+            @php
+                $activo = false;
+                $temas_ids = collect($modulo->temas)->pluck('id');
+                if (Request::is('tema/*') && $temas_ids->contains(Request::segment(2))) {
+                    $activo = true;
+                }
+            @endphp
+            <div class="btn-group d-flex justify-content-between my-2">
+                <a class="btn btn-outline-primary btn-sidebar btn-text-left w-100
+                {{ Request::is('modulo/'.$modulo->id) ? ' active' : '' }}"
+                   href="{{ route('modulos.show', $modulo->id) }}">
+                    <i class="fa-regular fa-folder-closed"></i>
+                    {{ Str::limit($modulo->nombre, 25, '...') }}
                 </a>
-                <button type="button"
-                        class="btn btn-link dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                <button class="btn btn-outline-primary dropdown-toggle"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse-{{ $modulo->id }}"
+                        aria-expanded="{{ $activo ? 'true' : 'false' }}"
+                        aria-controls="collapse-{{ $modulo->id }}">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
+            </div>
+
+            <div class="collapse{{ $activo ? ' show' : '' }}" id="collapse-{{ $modulo->id }}">
                 @if (count($modulo->temas))
-                    <ul class="dropdown-menu animate swal-menu w-100">
+                    <div class="btn-group-vertical w-100">
                         @foreach ($modulo->temas as $tema)
-                            <li>
-                                <a class="dropdown-item"
-                                   href="{{ route('temas.show', $tema->id) }}">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    {{ Str::limit($tema->titulo, 30, '...') }}
-                                </a>
-                            </li>
+                            <a class="btn btn-outline-secondary btn-sidebar btn-text-left
+                            {{ Request::is('tema/'.$tema->id) ? ' active' : '' }}"
+                               href="{{ route('temas.show', $tema->id) }}">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                                {{ Str::limit($tema->titulo, 30, '...') }}
+                            </a>
                         @endforeach
-                    </ul>
+                    </div>
                 @endif
             </div>
         @endforeach

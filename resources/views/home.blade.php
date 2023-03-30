@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-center align-items-center">
             <div class="col-10 col-lg-6 p-5">
                 <p class="text-uppercase">{{ __('Welcom to the course') }}:</p>
                 <h2 class="text-primary">{{ $cursos[0]->nombre }}</h2>

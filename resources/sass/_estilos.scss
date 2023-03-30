@@ -385,7 +385,6 @@ header.masthead .masthead-heading {
 }
 
 .btn-sidebar {
-    color: $text-muted;
     text-decoration: none;
 }
 
@@ -401,7 +400,7 @@ a {
 }
 
 .sidebar-content{
-    padding: 5rem 1rem 0rem 1rem; //up left down right
+    padding: 5rem 1rem 3rem 1rem; //up left down right
     width: 100%;
 }
 
@@ -415,17 +414,13 @@ a {
     }
 }
 
-.swal-menu {
-    -webkit-animation-name: swal2-show;
-    animation-name: swal2-show;
-}
-
 @media (max-width: 991.98px) {
     #sidebarCollapse span {
         display: none; } }
 
 #content {
     width: 100%;
+    min-width: 375px;
     padding: 0;
     min-height: 100vh;
     -webkit-transition: all 0.3s;
