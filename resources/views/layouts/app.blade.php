@@ -15,6 +15,14 @@
 </head>
 
 <body>
+
+<!-- Pantalla de carga -->
+<div class="loader-container" id="loader-container">
+    <div class="loader-content">
+        <div class="spinner"></div>
+    </div>
+</div>
+
 <div class="wrapper d-flex align-items-stretch dashboard-bg">
     @if (!in_array(request()->path(), ['login', 'register']))
         @include('partials.sidebar')

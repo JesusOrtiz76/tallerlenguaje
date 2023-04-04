@@ -17,3 +17,15 @@
     });
 
 })(jQuery);
+
+$(document).ready(function() {
+    // Mostrar la pantalla de carga al inicio
+    $('#loader-container').fadeIn();
+});
+
+// Ocultar la pantalla de carga cuando el contenido esté listo
+$(window).on('load', function() {
+    setTimeout(function() {
+        $('#loader-container').fadeOut();
+    }); // Desvanecerse después de medio segundo (500 ms)
+});
