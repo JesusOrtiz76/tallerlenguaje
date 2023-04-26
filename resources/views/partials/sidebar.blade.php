@@ -1,4 +1,3 @@
-
 <!-- Sidebar chill -->
 
 <nav id="sidebar" class="vh-100 shadow blur-bg">

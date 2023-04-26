@@ -139,7 +139,16 @@ class EvaluacionController extends Controller
             return redirect()->route('modulos.show', $modulo->id)->with('error', 'Ocurrió un error al enviar las respuestas.');
         }
     }
-    public function resultado() {
-        return 'Resultados';
+    public function resultado($evaluacion_id)
+    {
+        $user = Auth::user();
+        $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
+        $resultado = Resultado::where('user_id', $user->id)
+            ->where('evaluacion_id', $evaluacion_id)
+            ->firstOrFail();
+        $respuestas = json_decode($resultado->respuestas, true);
+
+        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas'));
     }
+
 }

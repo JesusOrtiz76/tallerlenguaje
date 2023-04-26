@@ -19,7 +19,7 @@
                     <form method="POST" action="{{ route('evaluaciones.submit', ['id_modulo' => $modulo->id, 'id_evaluacion' => $evaluacion->id]) }}">
                         @csrf
                         @foreach ($preguntas as $pregunta)
-                            <div class="card mb-4 border-0 shadow-lg">
+                            <div class="card mb-4 border-0 shadow-sm">
                                 <div class="card-body">
                                     <h5 class="mb-3">{{ $pregunta->enunciado }}</h5>
                                     <div class="w-100 d-flex justify-content-center row ps-4">

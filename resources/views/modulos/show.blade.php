@@ -23,7 +23,7 @@
                     Completa la evaluación para pasar al siguiente módulo.
                 </p>
                 @foreach ($modulo->evaluaciones as $evaluacion)
-                    <a href="{{ route('evaluaciones.show', $evaluacion->id) }}" class="btn btn-primary">{{ $evaluacion->nombre }}</a>
+                    <a href="{{ route('evaluaciones.show', $evaluacion->id) }}" class="btn btn-primary">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</a>
                 @endforeach
             </div>
         </div>

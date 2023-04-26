@@ -37,7 +37,7 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item">
+                        <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                     </li>
                     <li class="nav-item">
