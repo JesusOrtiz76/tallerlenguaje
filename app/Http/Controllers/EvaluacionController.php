@@ -142,13 +142,18 @@ class EvaluacionController extends Controller
     public function resultado($evaluacion_id)
     {
         $user = Auth::user();
+
         $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
+
         $resultado = Resultado::where('user_id', $user->id)
             ->where('evaluacion_id', $evaluacion_id)
             ->firstOrFail();
         $respuestas = json_decode($resultado->respuestas, true);
 
-        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas'));
+        // Obtener el módulo al que pertenece la evaluación
+        $modulo = $evaluacion->modulo;
+
+        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas', 'modulo'));
     }
 
 }

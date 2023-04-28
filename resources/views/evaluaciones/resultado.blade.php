@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
-                <h1>Resultados de la {{ $evaluacion->nombre }}</h1>
+                <h1>Resultados de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
                 <p>Tu puntaje es: {{ $resultado->resultados }}/{{ $evaluacion->preguntas->count() }}</p>
                 <table class="table">
                     <thead>

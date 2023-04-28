@@ -34,4 +34,9 @@ class Evaluacion extends Model
     {
         return $this->hasMany(Pregunta::class);
     }
+
+    public function resultado()
+    {
+        return $this->hasOne(Resultado::class);
+    }
 }

@@ -58,4 +58,8 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function resultados()
+    {
+        return $this->hasMany(Resultado::class);
+    }
 }
