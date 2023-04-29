@@ -24,7 +24,7 @@
 </div>
 
 <div class="wrapper d-flex align-items-stretch dashboard-bg">
-    @if (!in_array(request()->path(), ['login', 'register']))
+    @if (!in_array(request()->path(), ['login', 'register', 'password/reset', 'password/email', 'password/reset/*']))
         @include('partials.sidebar')
     @endif
     <!-- Page Content  -->

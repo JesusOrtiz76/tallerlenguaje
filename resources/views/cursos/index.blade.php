@@ -7,9 +7,9 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
                 @forelse ($cursos as $curso)
-                    <div class="card blur-bg shadow-lg border-0">
-                        <div class="card-body">
-                            <h5>{{ $curso->nombre }}</h5>
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-lg-5">
+                            <h1 class="mb-4">{{ $curso->nombre }}</h1>
                             <p class="card-text text-muted">{{ $curso->descripcion }}</p>
                             @if(Auth::user()->cursos->contains($curso))
                                 <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary">Continuar</a>
@@ -26,7 +26,7 @@
                     </div>
                 @empty
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body p-lg-5">
                             {{ __('No Data') }}
                         </div>
                     </div>

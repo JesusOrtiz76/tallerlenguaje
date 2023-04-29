@@ -1,12 +1,21 @@
 <!-- Navigation-->
+@php
+    $classContainer = 'container';
+    $buttonHtml = '';
+
+    if (!in_array(request()->path(), ['login', 'register', 'password/reset', 'password/email', 'password/reset/*'])) {
+        $buttonHtml = '<button type="button" id="sidebarCollapse" class="btn btn-white">
+                            <i class="fa fa-bars me-1"></i>
+                            <span class="sr-only">Toggle Sidebar</span>
+                        </button>';
+        $classContainer = 'container-fluid';
+    }
+@endphp
+
 <nav class="navbar navbar-expand-lg shadow-sm" id="mainNav">
-    <div class="container-fluid">
-        @if (!in_array(request()->path(), ['login', 'register']))
-            <button type="button" id="sidebarCollapse" class="btn btn-white">
-                <i class="fa fa-bars me-1"></i>
-                <span class="sr-only">Toggle Sidebar</span>
-            </button>
-        @endif
+    <div class="{{ $classContainer }}">
+
+        {!! $buttonHtml !!}
 
         <a class="navbar-brand" href="{{ url('/') }}"></a>
 
@@ -25,6 +34,9 @@
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <!-- Authentication Links -->
                 @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                    </li>
                     @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link  text-uppercase" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -37,7 +49,7 @@
                         </li>
                     @endif
                 @else
-                        <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                     </li>
                     <li class="nav-item">

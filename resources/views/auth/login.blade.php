@@ -22,7 +22,7 @@
                                 <h5 class="fw-normal mb-4 pb-3" style="letter-spacing: 1px;"> {{ __('Sign into your account') }} </h5>
 
                                 <div class="form-outline mb-4">
-                                    <label for="email">{{ __('E-Mail Address') }}</label>
+                                    <label for="email">{{ __('Email Address') }}</label>
                                     <input id="email" type="email" class="form-control form-control-lg bg-white @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">

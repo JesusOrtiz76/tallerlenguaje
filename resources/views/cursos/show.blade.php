@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 @forelse ($curso->modulos as $modulo)
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body p-lg-5">
                             <h5 class="card-title">{{ $modulo->nombre }}</h5>
                             <h5 class="card-title">Descripción</h5>
                             <p class="card-text">{{ $modulo->descripcion }}</p>
@@ -20,7 +20,7 @@
                     </div>
                 @empty
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body p-lg-5">
                             {{ __('No Data') }}
                         </div>
                     </div>
