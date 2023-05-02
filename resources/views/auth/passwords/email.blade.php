@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
+@section('title',__('Reset Password'))
+
 @section('content')
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-7">
-                <div class="card shadow-lg border-0">
+                <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5 text-black">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="fas fa-rotate-left fa-2x me-3 text-primary"></i>
-                            <span class="h1 fw-bold mb-0">{{ __('Reset Password') }}</span>
+                            <span class="h1">{{ __('Reset Password') }}</span>
                         </div>
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">

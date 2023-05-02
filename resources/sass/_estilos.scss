@@ -3,6 +3,10 @@
     height: 100vh;
 }
 
+// Estilos para tabla
+.table-hover tbody tr:hover {
+    background-color: var(--color-hover, $hover_color);
+}
 
 // Estilos de la pantalla principal
 .page-section {
@@ -107,7 +111,6 @@ header.masthead .masthead-heading {
     font-weight: 700;
     line-height: 3.25rem;
     margin-bottom: 2rem;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 @media (min-width: 768px) {
     header.masthead {
@@ -441,7 +444,7 @@ a {
 }
 
 .blur-bg{
-    background: rgba(255, 255, 255, 0.49);
+    background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(8.3px);
     -webkit-backdrop-filter: blur(8.3px);
 }

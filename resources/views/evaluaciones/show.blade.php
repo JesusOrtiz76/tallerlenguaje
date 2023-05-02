@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
+@section('title',"$evaluacion->nombre del $modulo->nombre")
+
 @section('content')
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
-                <h1>{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
+                <h1 class="text-primary mb-4">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
 
                 <p>{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>
                 @if ($pivot ?? null)
@@ -20,7 +22,7 @@
                 <form method="POST" action="{{ route('evaluaciones.submit', ['id_modulo' => $modulo->id, 'id_evaluacion' => $evaluacion->id]) }}">
                     @csrf
                     @foreach ($preguntas as $pregunta)
-                        <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card mb-4 shadow-sm border-0 blur-bg">
                             <div class="card-body px-lg-3">
                                 <h5 class="mb-3">{{ $pregunta->enunciado }}</h5>
                                 <div class="w-100 d-flex justify-content-center row ps-4">

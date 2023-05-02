@@ -1,7 +1,6 @@
-$body-bg: #f8fafc;
-
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: 'Albert Sans', sans-serif;
+
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 $enable-responsive-font-sizes: true;
@@ -10,6 +9,8 @@ $enable-gradients: false;
 // Colors
 $primary: #79277E;
 $primary_: #511856;
+$hover_color: rgba(239, 70, 255, 0.1);
+
 $danger: #c90000;
 $success: #32CA8E;
 $warning: #F9C64E;

@@ -11,14 +11,19 @@ class ModuloController extends Controller
 {
     public function __construct()
     {
-        $modulos = Modulo::all();
-        View::share('modulos', $modulos);
+        $cursos = Curso::with('modulos')->get();
+        View::share('cursos', $cursos);
     }
 
     public function index(Curso $curso)
     {
         $modulos = $curso->modulos;
-        return view('modulos.index', compact('curso', 'modulos'));
+
+        if ($modulos->isEmpty()) {
+            return redirect()->back()->with('warning', 'No hay módulos registrados en este curso.');
+        } else {
+            return view('modulos.index', compact('curso', 'modulos'));
+        }
     }
 
     public function show(Curso $curso, Modulo $modulo)

@@ -16,9 +16,10 @@ class EvaluacionController extends Controller
 
     public function __construct()
     {
-        $modulos = Modulo::all();
-        View::share('modulos', $modulos);
+        $cursos = Curso::with('modulos')->get();
+        View::share('cursos', $cursos);
     }
+
     public function show($id)
     {
         // Obtener el usuario autenticado

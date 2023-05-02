@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9 mx-auto">
-            <div class="card border-0 shadow-lg" style="border-radius: 0.5rem;">
+            <div class="card shadow-sm border-0 blur-bg" style="border-radius: 0.5rem;">
                 <div class="row g-0">
                     <div class="col-md-6 col-lg-6 d-flex align-items-center">
                         <div class="card-body p-4 p-lg-5 text-black">
@@ -16,10 +16,8 @@
 
                                 <div class="d-flex align-items-center mb-3 pb-1">
                                     <i class="fas fa-key fa-2x me-3 text-primary"></i>
-                                    <span class="h1 fw-bold mb-0"> {{ __('Login') }} </span>
+                                    <span class="h1"> {{ __('Login') }} </span>
                                 </div>
-
-                                <h5 class="fw-normal mb-4 pb-3" style="letter-spacing: 1px;"> {{ __('Sign into your account') }} </h5>
 
                                 <div class="form-outline mb-4">
                                     <label for="email">{{ __('Email Address') }}</label>

@@ -16,11 +16,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $cursos = Curso::all();
+        $cursos = Curso::with('modulos')->get();
         View::share('cursos', $cursos);
-
-        $modulos = Modulo::all();
-        View::share('modulos', $modulos);
     }
 
     /**

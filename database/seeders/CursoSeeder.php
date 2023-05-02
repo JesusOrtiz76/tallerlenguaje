@@ -24,9 +24,19 @@ class CursoSeeder extends Seeder
         // Crear 6 módulos para el curso
         $modulos = Modulo::factory(6)->create(['curso_id' => $curso->id]);
 
-        foreach ($modulos as $modulo) {
+        foreach ($modulos as $index => $modulo) {
+            $modulo->update([
+                'nombre' => $modulo->nombre.($index+1)
+            ]);
+
             // Crear 3 temas para el módulo
             $temas = Tema::factory(3)->create(['modulo_id' => $modulo->id]);
+
+            foreach ($modulo->temas as $temaIndex => $tema) {
+                $tema->update([
+                    'titulo' => 'Tema '.($temaIndex+1)
+                ]);
+            }
 
             // Crear una evaluación para el módulo
             $evaluacion = Evaluacion::factory()->create([
@@ -48,4 +58,3 @@ class CursoSeeder extends Seeder
         }
     }
 }
-

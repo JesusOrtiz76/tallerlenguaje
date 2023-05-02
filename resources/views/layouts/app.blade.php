@@ -35,7 +35,7 @@
             @yield('content')
         </main>
 
-        <footer class="py-lg-2 mt-5 blur-bg border-top">
+        <footer class="py-lg-2 mt-5 blur-bg shadow-sm border-0-top">
             <div class="container py-1 d-flex justify-content-center">
                 <span class="text-muted px-1">
                     Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.

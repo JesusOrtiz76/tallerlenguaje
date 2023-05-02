@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9 mx-auto">
-            <div class="card border-0 shadow-lg" style="border-radius: 0.5rem;">
+            <div class="card shadow-sm border-0 blur-bg" style="border-radius: 0.5rem;">
                 <div class="row g-0">
                     <div class="col-md-6 col-lg-6 d-none d-md-block">
                         <img src="assets/img/edu/2.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0.5rem 0rem 0rem 0.5rem;" />
@@ -19,7 +19,7 @@
 
                                 <div class="d-flex align-items-center mb-3 pb-1">
                                     <i class="fas fa-address-card fa-2x me-3 text-primary"></i>
-                                    <span class="h1 fw-bold mb-0"> {{ __('Register') }} </span>
+                                    <span class="h1"> {{ __('Register') }} </span>
                                 </div>
 
                                 <div class="form-outline mb-4">

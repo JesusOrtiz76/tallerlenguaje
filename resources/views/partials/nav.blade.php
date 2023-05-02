@@ -12,7 +12,7 @@
     }
 @endphp
 
-<nav class="navbar navbar-expand-lg shadow-sm" id="mainNav">
+<nav class="navbar navbar-expand-lg" id="mainNav">
     <div class="{{ $classContainer }}">
 
         {!! $buttonHtml !!}

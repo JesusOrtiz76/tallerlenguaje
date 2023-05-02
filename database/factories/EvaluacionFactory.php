@@ -18,7 +18,7 @@ class EvaluacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->sentence(3),
+            'nombre' => 'Evaluación',
             'descripcion' => $this->faker->paragraph(3),
             'modulo_id' => Modulo::factory(),
         ];

@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
+@section('title',"Resultado de la $evaluacion->nombre del $modulo->nombre")
+
 @section('content')
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-10">
-                <div class="card shadow-lg border-0">
+                <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
-                        <h1 class="mb-4">Resultados de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
+                        <h1 class="text-primary mb-4">Resultado de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
                         <p>Tu puntaje es: {{ $resultado->resultados }}/{{ $evaluacion->preguntas->count() }}</p>
                         <table class="table table-hover">
                             <thead>
