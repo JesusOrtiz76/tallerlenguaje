@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('evaluacion_user', function (Blueprint $table) {
-            $table->boolean('completado')->after('resultados')->default(false);
+            $table->dropColumn('resultados');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('evaluacion_user', function (Blueprint $table) {
-            $table->dropColumn('completado');
+            $table->boolean('resultados')->default(false);
         });
     }
 };

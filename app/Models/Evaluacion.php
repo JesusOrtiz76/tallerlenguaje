@@ -26,7 +26,7 @@ class Evaluacion extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'evaluacion_user')
-            ->withPivot('intentos', 'resultados', 'completado')
+            ->withPivot('intentos')
             ->withTimestamps();
     }
 

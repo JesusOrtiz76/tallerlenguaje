@@ -74,11 +74,6 @@ class EvaluacionController extends Controller
             return redirect()->back()->with('warning', 'Has alcanzado la cantidad máxima de intentos para esta evaluación.');
         }
 
-        // Verificar si el usuario ya ha completado la evaluación previamente
-        if ($evaluacion->users()->where('user_id', $user->id)->where('completado', true)->exists()) {
-            return redirect()->back()->with('warning', 'Ya has completado esta evaluación previamente.');
-        }
-
         // Obtener las respuestas del usuario
         $respuestas = $request->input('respuestas', []);
 
@@ -88,28 +83,6 @@ class EvaluacionController extends Controller
         } else {
             // Si el usuario ya ha accedido previamente, agregar un intento adicional a la tabla intermedia de evaluaciones y usuarios
             $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->increment('intentos');
-        }
-        // Calcular el puntaje del usuario
-        $score = 0;
-        foreach ($evaluacion->preguntas as $pregunta) {
-            $user_respuesta = $respuestas[$pregunta->id];
-
-            // Obtener la opción correcta de la pregunta actual
-            $opcion_correcta = $pregunta->opciones()->where('es_correcta', true)->first();
-
-            // Verificar si la respuesta del usuario es correcta
-            if ($user_respuesta == $opcion_correcta->id) {
-                $score += 1;
-            }
-
-        }
-
-        // Asignar puntuación a la tabla evaluacion_user
-        $evaluacion->pivot->resultados = $score;
-
-        // Cerrar la evaluacion si ha alcanzado el limite de intentos
-        if ($evaluacion->pivot->intentos >= $evaluacion->intentos_max){
-            $evaluacion->pivot->completado = true;
         }
 
         $resultado = Resultado::where('user_id', auth()->id())
@@ -129,7 +102,7 @@ class EvaluacionController extends Controller
             $resultado->save();
         }
 
-        // Si el guardado es exitoso guardamos la puntuación
+        // Si el guardado es exitoso redireccionamos a modulos.show
         if ($evaluacion->pivot->save()) {
             // Redirigir al usuario a la página de resultados
             return redirect()->route('modulos.show', $modulo->id)->with('success', 'Evaluación completada.');
@@ -152,6 +125,15 @@ class EvaluacionController extends Controller
         // Obtener el módulo al que pertenece la evaluación
         $modulo = $evaluacion->modulo;
 
-        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas', 'modulo'));
+        // Verificar las respuestas y calcular el puntaje
+        $puntaje = 0;
+        foreach ($evaluacion->preguntas as $pregunta) {
+            $respuesta = $pregunta->opciones()->find($respuestas[strval($pregunta->id)]);
+            if ($respuesta->es_correcta) {
+                $puntaje++;
+            }
+        }
+
+        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas', 'modulo', 'puntaje'));
     }
 }

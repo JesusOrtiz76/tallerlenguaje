@@ -9,7 +9,7 @@
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
                         <h1 class="text-primary mb-4">Resultado de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
-                        <p>Tu puntaje es: {{ $resultado->resultados }}/{{ $evaluacion->preguntas->count() }}</p>
+                        <p>Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->preguntas->count() }}</p>
                         <table class="table table-hover">
                             <thead>
                             <tr>
