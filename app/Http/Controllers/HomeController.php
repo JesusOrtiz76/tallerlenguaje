@@ -10,17 +10,6 @@ use Illuminate\Support\Facades\View;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $cursos = Curso::with('modulos')->get();
-        View::share('cursos', $cursos);
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable

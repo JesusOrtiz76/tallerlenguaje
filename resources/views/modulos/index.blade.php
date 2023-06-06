@@ -20,7 +20,7 @@
                             <tbody>
                             @foreach($modulos as $modulo)
                                 <tr>
-                                    <td>{{ $modulo->nombre }}</td>
+                                    <td class="text-nowrap">{{ $modulo->nombre }}</td>
                                     <td>{{ $modulo->descripcion }}</td>
                                     <td>
                                         <a href="{{ route('modulos.show', $modulo) }}" class="btn btn-primary">Ver módulo</a>

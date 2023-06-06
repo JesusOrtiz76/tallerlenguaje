@@ -22,7 +22,7 @@
                                 </form>
                             @endif
                         </div>
-                        <div class="card-footer bg-white text-muted">
+                        <div class="card-footer text-muted">
                             {{ $curso->created_at->diffForHumans() }}
                         </div>
                     </div>

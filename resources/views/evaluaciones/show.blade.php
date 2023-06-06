@@ -19,8 +19,8 @@
                     <p>{{ __('Intento 1/:intentosTotales', ['intentosTotales' => $evaluacion->intentos_max]) }}</p>
                 @endif
 
-                <form method="POST" action="{{ route('evaluaciones.submit', ['id_modulo' => $modulo->id, 'id_evaluacion' => $evaluacion->id]) }}">
-                    @csrf
+                <form method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
+                @csrf
                     @foreach ($preguntas as $pregunta)
                         <div class="card mb-4 shadow-sm border-0 blur-bg">
                             <div class="card-body px-lg-3">
@@ -45,7 +45,7 @@
                         </div>
                     @endforeach
                     <div class="w-100 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-lg btn-primary">{{ __('Enviar') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
                     </div>
                 </form>
             </div>

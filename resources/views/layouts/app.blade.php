@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title')</title>
+    <title>SEIEM | @yield('title')</title>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -24,7 +24,7 @@
 </div>
 
 <div class="wrapper d-flex align-items-stretch dashboard-bg">
-    @if (!in_array(request()->path(), ['login', 'register', 'password/reset', 'password/email', 'password/reset/*']))
+    @if (!in_array(request()->path(), ['login', 'register', 'password/reset', 'password/email', 'password/reset/*', 'email/verify']))
         @include('partials.sidebar')
     @endif
     <!-- Page Content  -->
@@ -35,14 +35,15 @@
             @yield('content')
         </main>
 
-        <footer class="py-lg-2 mt-5 blur-bg shadow-sm border-0-top">
+        <footer class="py-lg-2 mt-5 blur-bg border-top">
             <div class="container py-1 d-flex justify-content-center">
-                <span class="text-muted px-1">
-                    Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.
+                <span class="text-muted px-1 me-2 text-end" style="font-size: 9pt">
+                    Servicios Educativos Integrados al Estado de M&eacute;xico.<br>
+                    Copyright &copy; {{ now()->year }}.
                 </span>
-                <hr>
-                <span class="text-muted">
-                    Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.
+                <span class="text-muted px-1 ps-2 separador-footer" style="font-size: 9pt">
+                    Unidad de Asuntos Jurídicos e Igualdad de Género.<br>
+                    Dirección de Informática y Telecomunicaciones.
                 </span>
             </div>
         </footer>

@@ -10,19 +10,14 @@ use Illuminate\Support\Facades\View;
 
 class CursoController extends Controller
 {
-
-    public function __construct()
-    {
-        $cursos = Curso::with('modulos')->get();
-        View::share('cursos', $cursos);
-    }
-
+    // Obtener cursos
     public function index()
     {
         $cursos = Curso::all();
         return view('cursos.index', compact('cursos'));
     }
 
+    // Inscribirse al curso
     public function inscribirse($curso_id)
     {
 

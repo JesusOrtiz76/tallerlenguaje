@@ -9,9 +9,8 @@
                 <h1 class="text-primary mb-4">{{ $tema->titulo }} del {{ $modulo->nombre }}</h1>
                 <p class="mb-4">{{ $tema->descripcion }}</p>
                 <div class="mb3">
-                {!! htmlspecialchars_decode($tema->contenido) !!}
+                    {!! $tema->contenido_html !!}
                 </div>
-
             </div>
         </div>
     </div>

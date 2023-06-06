@@ -9,11 +9,15 @@ $enable-gradients: false;
 // Colors
 $primary: #79277E;
 $primary_: #511856;
-$hover_color: rgba(239, 70, 255, 0.1);
 
-$danger: #c90000;
-$success: #32CA8E;
-$warning: #F9C64E;
+$bg_dark: #222529;
+$hover_color: rgba($primary, 0.1);
+
+$danger: #f27474;
+$success: #a5dc86;
+$warning: #f8bb86;
+$info: #3fc3ee;
+
 $blue: #3490dc;
 $indigo: #6574cd;
 $purple: #9561e2;

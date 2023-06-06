@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\View;
 
 class ModuloController extends Controller
 {
-    public function __construct()
-    {
-        $cursos = Curso::with('modulos')->get();
-        View::share('cursos', $cursos);
-    }
-
+    // Obtener módulos
     public function index(Curso $curso)
     {
         $modulos = $curso->modulos;
@@ -26,6 +21,7 @@ class ModuloController extends Controller
         }
     }
 
+    // Obtener detalles del módulo
     public function show(Curso $curso, Modulo $modulo)
     {
         // Obtener el usuario autenticado

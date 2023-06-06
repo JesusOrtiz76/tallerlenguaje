@@ -13,13 +13,7 @@ use Illuminate\Support\Facades\View;
 
 class EvaluacionController extends Controller
 {
-
-    public function __construct()
-    {
-        $cursos = Curso::with('modulos')->get();
-        View::share('cursos', $cursos);
-    }
-
+    // Obtener contenido de la evaluación (Preguntas y respuestas)
     public function show($id)
     {
         // Obtener el usuario autenticado
@@ -60,13 +54,16 @@ class EvaluacionController extends Controller
         ]);
     }
 
-
+    // Guardar respuestas
     public function submit(Request $request, $evaluacion_id)
     {
+        // Obtener usuario
         $user = Auth::user();
 
+        // Obtener evaluaciones
         $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
 
+        // Obtener modulos
         $modulo = Modulo::find($evaluacion->modulo_id);
 
         // Verificar si el usuario ya ha completado la evaluación la cantidad máxima de veces permitida
@@ -111,6 +108,7 @@ class EvaluacionController extends Controller
         }
     }
 
+    // Ver resultados
     public function resultado($evaluacion_id)
     {
         $user = Auth::user();

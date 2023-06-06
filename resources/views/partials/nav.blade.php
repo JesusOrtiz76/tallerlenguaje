@@ -3,7 +3,7 @@
     $classContainer = 'container';
     $buttonHtml = '';
 
-    if (!in_array(request()->path(), ['login', 'register', 'password/reset', 'password/email', 'password/reset/*'])) {
+    if (!in_array(request()->path(), ['login', 'register', 'password/reset', 'password/email', 'password/reset/*', 'email/verify'])) {
         $buttonHtml = '<button type="button" id="sidebarCollapse" class="btn btn-white">
                             <i class="fa fa-bars me-1"></i>
                             <span class="sr-only">Toggle Sidebar</span>

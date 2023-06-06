@@ -13,6 +13,7 @@ class Tema extends Model
         'titulo',
         'descripcion',
         'modulo_id',
+        'archivo',
     ];
 
     public function modulo()

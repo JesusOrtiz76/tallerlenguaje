@@ -29,15 +29,6 @@ class CursoSeeder extends Seeder
                 'nombre' => $modulo->nombre.($index+1)
             ]);
 
-            // Crear 3 temas para el módulo
-            $temas = Tema::factory(3)->create(['modulo_id' => $modulo->id]);
-
-            foreach ($modulo->temas as $temaIndex => $tema) {
-                $tema->update([
-                    'titulo' => 'Tema '.($temaIndex+1)
-                ]);
-            }
-
             // Crear una evaluación para el módulo
             $evaluacion = Evaluacion::factory()->create([
                 'modulo_id' => $modulo->id

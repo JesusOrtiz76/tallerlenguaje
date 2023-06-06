@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\View;
 
 class TemaController extends Controller
 {
-    public function __construct()
-    {
-        $cursos = Curso::with('modulos')->get();
-        View::share('cursos', $cursos);
-    }
-
+    // Obtener contenido del tema
     public function show($temaId)
     {
         $tema = Tema::findOrFail($temaId);

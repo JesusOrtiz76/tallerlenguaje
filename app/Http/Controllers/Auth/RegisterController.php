@@ -6,68 +6,80 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'rfc' => ['required', 'string', 'max:13', 'min:13'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+
+        $user = User::where('rfc', $data['rfc'])->first();
+
+        if (!$user) {
+            $rules['rfc'][] = 'unique:users';
+        }
+
+        return Validator::make($data, $rules, [
+            'rfc.required' => 'El RFC es requerido.',
+            'rfc.string' => 'El RFC debe ser una cadena de texto.',
+            'rfc.max' => 'El RFC debe tener exactamente 13 caracteres.',
+            'rfc.min' => 'El RFC debe tener exactamente 13 caracteres.',
+            'rfc.unique' => 'El RFC ya ha sido registrado.',
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
+    public function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $this->validator($request->all())->validate();
+
+        $userWithRfc = User::where('rfc', $request->rfc)->first();
+        $userWithEmail = User::where('email', $request->email)->first();
+
+        if ($userWithEmail && (!$userWithRfc || $userWithEmail->id != $userWithRfc->id)) {
+            return redirect()->back()->withInput($request->all())->withErrors([
+                'email' => "El correo electrónico ya está en uso."
+            ]);
+        }
+
+        if ($userWithRfc && !$userWithRfc->hasVerifiedEmail()) {
+            $userWithRfc->email = $request->email;
+            $userWithRfc->save();
+
+            $userWithRfc->sendEmailVerificationNotification();
+
+            return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu dirección de correo electrónico.');
+        } else if (!$userWithRfc) {
+            $newUser = User::create([
+                'name' => $request->name,
+                'rfc' => $request->rfc,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $newUser->sendEmailVerificationNotification();
+
+            return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu dirección de correo electrónico.');
+        } else {
+            return redirect()->back()->withInput($request->all())->withErrors([
+                'rfc' => "El usuario con el RFC ya existe y su correo ha sido verificado."
+            ]);
+        }
     }
 }

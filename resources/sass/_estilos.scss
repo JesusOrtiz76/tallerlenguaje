@@ -35,6 +35,28 @@
     }
 }
 
+[data-bs-theme="dark"] #mainNav {
+    padding: 15px 10px;
+    background: rgba($bg_dark, 0.80);
+    backdrop-filter: blur(8.3px);
+    -webkit-backdrop-filter: blur(8.3px);
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(0.25turn,
+        rgba(121,46,137,1) 0%, rgba(121,46,137,1) 10%,
+        rgba(190,95,164,1) 10%, rgba(190,95,164,1) 22%,
+        rgba(237,82,147,1) 22%, rgba(237,82,147,1) 30%,
+        rgba(22,164,221,1) 30%, rgba(22,164,221,1) 34%,
+        rgba(150,201,67,1) 34%, rgba(150,201,67,1) 58%,
+        rgba(251,205,39,1) 58%, rgba(251,205,39,1) 66%,
+        rgba(249,158,37,1) 66%, rgba(249,158,37,1) 78%,
+        rgba(232,37,75,1) 78%, rgba(232,37,75,1) 94%,
+        rgba(240,99,120,1) 94%, rgba(240,99,120,1) 100%);
+    border-image-slice: 1;
+    width: 100%;
+    margin-bottom: 40px;
+    z-index: 1;
+}
+
 #mainNav {
     padding: 15px 10px;
     background: rgba(255, 255, 255, 0.91);
@@ -54,6 +76,7 @@
     border-image-slice: 1;
     width:100%;
     margin-bottom: 40px;
+    z-index: 1;
 }
 
 .navbar-btn {
@@ -67,6 +90,15 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     font-weight: 700;
+}
+
+[data-bs-theme="dark"] #mainNav .navbar-brand {
+    width: 228.81px;
+    height: 45px;
+    background-image: url('../assets/img/dark-navbar-logo-veda.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
 }
 
 #mainNav .navbar-brand {
@@ -200,7 +232,7 @@ header.masthead .masthead-heading {
 
 .modulo>li .modulo-image {
     position: absolute;
-    z-index: 100;
+    z-index: 0;
     left: 0;
     width: 80px;
     height: 80px;
@@ -378,27 +410,37 @@ header.masthead .masthead-heading {
 #sidebar {
     min-width: 300px;
     max-width: 300px;
-    color: #fff;
     -webkit-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
     overflow-y: auto;
-    z-index: 1;
+    z-index: 2;
 }
+
 #sidebar.show {
-    margin-left: -300px; }
+    margin-left: -300px;
+}
+
 #sidebar .logo {
     display: block;
     width: 120px;
     height: 120px;
-    margin: 0 auto; }
+    margin: 0 auto;
+}
+
 #sidebar .logo span {
-    display: block; }
+    display: block;
+}
+
 @media (max-width: 991.98px) {
     #sidebar {
-        margin-left: -300px; }
+        margin-left: -300px;
+    }
+
     #sidebar.show {
-        margin-left: 0; } }
+        margin-left: 0;
+    }
+}
 
 .btn-text-left {
     text-align: left;
@@ -412,7 +454,7 @@ a {
     text-decoration: none;
 }
 
-.sidebar-content{
+.sidebar-content {
     padding: 5rem 1rem 3rem 1rem; //up left down right
     width: 100%;
 }
@@ -429,7 +471,9 @@ a {
 
 @media (max-width: 991.98px) {
     #sidebarCollapse span {
-        display: none; } }
+        display: none;
+    }
+}
 
 #content {
     width: 100%;
@@ -443,14 +487,20 @@ a {
     overflow-y: auto;
 }
 
-.blur-bg{
+[data-bs-theme="dark"] .blur-bg {
+    background: rgba($bg_dark, 0.80);
+    backdrop-filter: blur(8.3px);
+    -webkit-backdrop-filter: blur(8.3px);
+}
+
+.blur-bg {
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(8.3px);
     -webkit-backdrop-filter: blur(8.3px);
 }
 
-.dashboard-bg {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.45) 100%), url("../assets/img/dashboard-bg.svg");
+[data-bs-theme="dark"] .dashboard-bg {
+    background-image: linear-gradient(to bottom, rgba($bg_dark, 0.60) 0%, rgba($bg_dark, 0.20) 100%), url("../assets/img/dark-background-img.svg");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -458,15 +508,23 @@ a {
 }
 
 
+.dashboard-bg {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.45) 100%), url("../assets/img/background-img.svg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
 
-/* PRELOADER CSS */
-.page-loader{
+/* "fusion"ER CSS */
+.page-loader {
     width: 100%;
     height: 100vh;
     position: absolute;
     background: #272727;
     z-index: 1000;
-    .txt{
+
+    .txt {
         color: #666;
         text-align: center;
         top: 40%;
@@ -499,7 +557,7 @@ a {
 }
 
 .spinner {
-    border: 8px solid rgba(255, 255, 255, 0.5);
+    border: 8px solid rgba(255, 255, 255, 0.32);
     border-left-color: #ffffff;
     border-radius: 50%;
     width: 50px;
@@ -511,4 +569,89 @@ a {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.separador-footer {
+    border-left: 1px solid #a1a1a1;
+    height: 100%;
+    display: inline-block;
+}
+
+.border-left-primary {
+    border-left: .25rem solid $primary !important
+}
+
+.border-bottom-primary {
+    border-bottom: .25rem solid $primary !important
+}
+
+.border-left-secondary {
+    border-left: .25rem solid #858796 !important
+}
+
+.border-bottom-secondary {
+    border-bottom: .25rem solid #858796 !important
+}
+
+.border-left-success {
+    border-left: .25rem solid $success !important
+}
+
+.border-bottom-success {
+    border-bottom: .25rem solid $success !important
+}
+
+.border-left-info {
+    border-left: .25rem solid $info !important
+}
+
+.border-bottom-info {
+    border-bottom: .25rem solid $info !important
+}
+
+.border-left-warning {
+    border-left: .25rem solid $warning !important
+}
+
+.border-bottom-warning {
+    border-bottom: .25rem solid $warning !important
+}
+
+.border-left-danger {
+    border-left: .25rem solid $danger !important
+}
+
+.border-bottom-danger {
+    border-bottom: .25rem solid $danger !important
+}
+
+.grafica-responsive {
+    position: relative;
+    text-align: left;
+    line-height: normal;
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+    font-weight: normal;
+    font-variant: normal;
+    font-style: normal;
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    direction: ltr;
+    transform: none;
+}
+
+.table td {
+    background-color: transparent;
+}
+
+.table th {
+    background-color: transparent;
+}
+
+.table.custom-table td,
+th {
+    background-color: transparent;
 }

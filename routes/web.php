@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\EvaluacionController;
-use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\ModuloController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,28 +23,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     //Cursos
     Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
-    Route::get('cursos/{curso}/modulo', [ModuloController::class, 'index'])->name('modulos.index');
+    Route::get('cursos/{curso}/modulos', [ModuloController::class, 'index'])->name('modulos.index');
     Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])->name('cursos.inscribirse');
 
     //Modulos
-    Route::get('modulo/{modulo}', [ModuloController::class, 'show'])->name('modulos.show');
+    Route::get('modulos/{modulo}', [ModuloController::class, 'show'])->name('modulos.show');
 
     //Temas de estudio
-    Route::get('tema/{tema}', [TemaController::class, 'show'])->name('temas.show');
+    Route::get('temas/{tema}', [TemaController::class, 'show'])->name('temas.show');
 
     //Evaluaciones
     //Route::post('/evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
-    Route::get('evaluaciones/{id_evaluacion}', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
-    Route::post('evaluaciones/{id_modulo}/{id_evaluacion}/submit', [EvaluacionController::class, 'submit'])->name('evaluaciones.submit');
+    Route::get('evaluaciones/{evaluacion}', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
+    Route::post('modulos/{modulo}/evaluaciones/{evaluacion}/submit', [EvaluacionController::class, 'submit'])->name('evaluaciones.submit');
 
     //Resultados
-    Route::get('evaluaciones/{id_modulo}/{id_evaluacion}/resultado', [EvaluacionController::class, 'resultado'])->name('evaluaciones.resultado');
+    Route::get('modulos/{modulo}/evaluaciones/{evaluacion}/resultado', [EvaluacionController::class, 'resultado'])->name('evaluaciones.resultado');
 
 });

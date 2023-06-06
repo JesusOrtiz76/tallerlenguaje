@@ -11,13 +11,13 @@
                     @php
                         $activo = false;
                         $temas_ids = collect($modulo->temas)->pluck('id');
-                        if (Request::is('tema/*') && $temas_ids->contains(Request::segment(2))) {
+                        if (Request::is('temas/*') && $temas_ids->contains(Request::segment(2))) {
                             $activo = true;
                         }
                     @endphp
                     <div class="btn-group d-flex justify-content-between my-2">
                         <a class="btn btn-outline-primary btn-sidebar btn-text-left w-100
-                        {{ Request::is('modulo/'.$modulo->id) ? ' active' : '' }}"
+                        {{ Request::is('modulos/'.$modulo->id) ? ' active' : '' }}"
                            href="{{ route('modulos.show', $modulo->id) }}">
                             <i class="fa-regular fa-folder-closed"></i>
                             {{ Str::limit($modulo->nombre, 25, '...') }}
@@ -36,7 +36,7 @@
                             <div class="btn-group-vertical w-100">
                                 @foreach ($modulo->temas as $tema)
                                     <a class="btn btn-outline-secondary btn-sidebar btn-text-left
-                                    {{ Request::is('tema/'.$tema->id) ? ' active' : '' }}"
+                                    {{ Request::is('temas/'.$tema->id) ? ' active' : '' }}"
                                        href="{{ route('temas.show', $tema->id) }}">
                                         <i class="fa-solid fa-chalkboard-user"></i>
                                         {{ Str::limit($tema->titulo, 30, '...') }}

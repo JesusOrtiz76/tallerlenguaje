@@ -95,7 +95,7 @@
     <div class="container">
         <div class="masthead-subheading"> {{ __('Welcom to the course') }} </div>
         <div class="masthead-heading text-uppercase"> Prevenci&oacute;n de la violencia </div>
-        <a class="btn btn-primary btn-lg text-uppercase" href="#services"> {{ __('Info') }} </a>
+        <a class="btn btn-primary text-uppercase" href="#services"> {{ __('Info') }} </a>
         <br><br><br>
     </div>
 </header>
@@ -272,13 +272,14 @@
 <br><br>
 <!-- Footer-->
 <footer class="footer bg-dark">
-    <div class="container py-4 d-flex justify-content-center">
-        <span class="text-light px-1">
-            Copyright &copy; Servicios Integrados al Estado de M&eacute;xico {{ now()->year }}.
+    <div class="container py-lg-3 d-flex justify-content-center">
+        <span class="text-light px-1 me-2 text-end" style="font-size: 9pt">
+            Servicios Educativos Integrados al Estado de M&eacute;xico.<br>
+            Copyright &copy; {{ now()->year }}.
         </span>
-        <hr>
-        <span class="text-light">
-            Direcci&oacute;n de Inform&aacute;tica y Telecomunicaciones.
+        <span class="text-light px-1 ps-2 separador-footer" style="font-size: 9pt">
+            Unidad de Asuntos Jurídicos e Igualdad de Género.<br>
+            Dirección de Informática y Telecomunicaciones.
         </span>
     </div>
 </footer>
