@@ -90,16 +90,18 @@
         </div>
     </div>
 </nav>
+
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
         <div class="masthead-subheading"> {{ __('Welcom to the course') }} </div>
-        <div class="masthead-heading text-uppercase"> Prevenci&oacute;n de la violencia </div>
+        <div class="masthead-heading text-uppercase"> {{ $cursos[0]->nombre }} </div>
         <a class="btn btn-primary text-uppercase" href="#services"> {{ __('Info') }} </a>
         <br><br><br>
     </div>
 </header>
-<!-- Services-->
+
+<!-- Objetivos -->
 <section class="page-section" id="services">
     <div class="container">
         <div class="text-center">
@@ -151,110 +153,32 @@
         </div>
     </div>
 </section>
-<!-- About-->
-<section class="page-section" id="about">
+
+<!-- Modulos -->
+<section class="page-section mb-6" id="about">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">M&oacute;dulos</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h3 class="section-subheading text-muted">Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} módulos, que se describen a continuación.</h3>
         </div>
         <ul class="modulo">
-            <li>
-                <div class="modulo-image">
-                    <img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." />
-                </div>
-                <div class="modulo-panel">
-                    <div class="modulo-heading">
-                        <h4>M&Oacute;DULO I</h4>
+            @foreach($cursos[0]->modulos as $modulo)
+                <li class="{{ $loop->iteration % 2 == 0 ? 'modulo-inverted' : '' }}">
+                    <div class="modulo-image">
+                        <img class="rounded-circle img-fluid"
+                             src="{{ asset('storage/' . $modulo->img_path) }}"
+                             alt="Imagen del {{ $modulo->nombre }}" />
                     </div>
-                    <div class="modulo-body">
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                            recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-                        </p>
+                    <div class="modulo-panel">
+                        <div class="modulo-heading">
+                            <h4>{{ $modulo->nombre }}</h4>
+                        </div>
+                        <div class="modulo-body">
+                            <p class="text-muted">{{ $modulo->descripcion }}</p>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="modulo-inverted">
-                <div class="modulo-image">
-                    <img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." />
-                </div>
-                <div class="modulo-panel">
-                    <div class="modulo-heading">
-                        <h4>M&Oacute;DULO II</h4>
-                    </div>
-                    <div class="modulo-body">
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                            recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="modulo-image">
-                    <img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." />
-                </div>
-                <div class="modulo-panel">
-                    <div class="modulo-heading">
-                        <h4>M&Oacute;DULO III</h4>
-                    </div>
-                    <div class="modulo-body">
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                            recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li class="modulo-inverted">
-                <div class="modulo-image">
-                    <img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." />
-                </div>
-                <div class="modulo-panel">
-                    <div class="modulo-heading">
-                        <h4>M&Oacute;DULO IV</h4>
-                    </div>
-                    <div class="modulo-body">
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                            recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="modulo-image">
-                    <img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." />
-                </div>
-                <div class="modulo-panel">
-                    <div class="modulo-heading">
-                        <h4>M&Oacute;DULO V</h4>
-                    </div>
-                    <div class="modulo-body">
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                            recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li class="modulo-inverted">
-                <div class="modulo-image">
-                    <img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." />
-                </div>
-                <div class="modulo-panel">
-                    <div class="modulo-heading">
-                        <h4>M&Oacute;DULO VI</h4>
-                    </div>
-                    <div class="modulo-body">
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                            recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-                        </p>
-                    </div>
-                </div>
-            </li>
+                </li>
+            @endforeach
             <li class="modulo-inverted">
                 <div class="modulo-image">
                     <h4>
@@ -269,7 +193,7 @@
         </ul>
     </div>
 </section>
-<br><br>
+
 <!-- Footer-->
 <footer class="footer bg-dark">
     <div class="container py-lg-3 d-flex justify-content-center">

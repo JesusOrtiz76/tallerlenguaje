@@ -15,6 +15,7 @@ class Evaluacion extends Model
         'titulo',
         'descripcion',
         'tiempo_lim',
+        'numero_preguntas',
         'modulo_id',
     ];
 

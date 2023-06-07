@@ -8,8 +8,10 @@
             <div class="col-md-10">
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
-                        <h1 class="text-primary mb-4">Resultado de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
-                        <p>Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->preguntas->count() }}</p>
+                        <h1 class="text-primary mb-4">
+                            Resultado de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}
+                        </h1>
+                        <p>Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->numero_preguntas }}</p>
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -19,12 +21,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($evaluacion->preguntas as $pregunta)
+                            @foreach ($preguntas as $pregunta)
                                 <tr>
-                                    <td>{{ $pregunta->enunciado }}</td>
-                                    <td>{{ $pregunta->opciones()->find($respuestas[strval($pregunta->id)])->texto }}</td>
+                                    <td>{{ $pregunta['enunciado'] }}</td>
+                                    <td>{{ $pregunta['opcion'] }}</td>
                                     <td>
-                                        @if ($pregunta->opciones()->find($respuestas[strval($pregunta->id)])->es_correcta)
+                                        @if ($pregunta['es_correcta'])
                                             <span class="badge bg-success">Correcta</span>
                                         @else
                                             <span class="badge bg-warning text-dark">Incorrecta</span>

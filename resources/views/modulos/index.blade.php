@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
-                <div class="card blur-bg shadow-sm border-0">
+                <div class="card blur-bg shadow-sm border-0 overflow-auto">
                     <div class="card-body p-lg-5">
                         <h1 class="text-primary mb-4">Módulos del curso "{{ $curso->nombre }}"</h1>
                         <table class="table table-hover">

@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 <h1 class="text-primary mb-4">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
 
-                <p>{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>
+                <!--<p>{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>-->
                 @if ($pivot ?? null)
                     @php
                         $intentosRestantes = $evaluacion->intentos_max - $pivot->pivot->intentos;
@@ -26,7 +26,7 @@
                             <div class="card-body px-lg-3">
                                 <h5 class="mb-3">{{ $pregunta->enunciado }}</h5>
                                 <div class="w-100 d-flex justify-content-center row ps-4">
-                                    @foreach ($pregunta->opciones as $opcion)
+                                    @foreach ($pregunta->opciones->shuffle() as $opcion)
                                         <input type="radio"
                                                class="btn-check"
                                                name="respuestas[{{ $pregunta->id }}]"

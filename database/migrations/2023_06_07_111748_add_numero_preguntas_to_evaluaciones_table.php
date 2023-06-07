@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preguntas', function (Blueprint $table) {
-            $table->id();
-            $table->text('enunciado');
-            $table->foreignId('evaluacion_id')->constrained('evaluaciones');
-            $table->timestamps();
+        Schema::table('evaluaciones', function (Blueprint $table) {
+            $table->integer('numero_preguntas')->default('10')->nullable()->after('intentos_max');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('preguntas');
+        Schema::table('evaluaciones', function (Blueprint $table) {
+            $table->dropColumn('numero_preguntas');
+        });
     }
 };

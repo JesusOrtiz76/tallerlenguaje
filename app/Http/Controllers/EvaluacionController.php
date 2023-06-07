@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Curso;
 use App\Models\Evaluacion;
 use App\Models\Modulo;
+use App\Models\Opcion;
+use App\Models\Pregunta;
 use App\Models\Resultado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -22,13 +24,19 @@ class EvaluacionController extends Controller
         // Obtener la evaluación con el módulo correspondiente
         $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
 
-        // Obtener las preguntas de la evaluación, con opciones cargadas y ordenadas aleatoriamente
+        // Obtener todas las preguntas de la evaluación, con opciones cargadas y ordenadas aleatoriamente
         $preguntas = $evaluacion->preguntas()->with('opciones')->inRandomOrder()->get();
 
         // Verificar si existen preguntas en la evaluación
         if ($preguntas->isEmpty()) {
             return redirect()->back()->with('warning', 'No hay preguntas disponibles en esta evaluación');
         }
+
+        // Obtener el número de preguntas a mostrar
+        $numeroPreguntas = $evaluacion->numero_preguntas;
+
+        // Obtener las preguntas a mostrar
+        $preguntasMostradas = $preguntas->take($numeroPreguntas);
 
         // Verificar si el usuario ha accedido previamente a la evaluación y si no, agrega primer intento
         if (!$user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->exists()) {
@@ -49,10 +57,11 @@ class EvaluacionController extends Controller
         return view('evaluaciones.show', [
             'modulo' => $evaluacion->modulo,
             'evaluacion' => $evaluacion,
-            'preguntas' => $preguntas,
+            'preguntas' => $preguntasMostradas,
             'pivot' => $pivot
         ]);
     }
+
 
     // Guardar respuestas
     public function submit(Request $request, $evaluacion_id)
@@ -74,8 +83,10 @@ class EvaluacionController extends Controller
         // Obtener las respuestas del usuario
         $respuestas = $request->input('respuestas', []);
 
-        // Verificar que se hayan contestado todas las preguntas
-        if (count($respuestas) !== $evaluacion->preguntas->count()) {
+        // Verificar que se hayan contestado todas las preguntas mostradas
+        $numeroPreguntasMostradas = $evaluacion->numero_preguntas; // Obtener el número de preguntas mostradas
+
+        if (count($respuestas) !== $numeroPreguntasMostradas) {
             return redirect()->back()->with('warning', 'Completa las preguntas.');
         } else {
             // Si el usuario ya ha accedido previamente, agregar un intento adicional a la tabla intermedia de evaluaciones y usuarios
@@ -86,15 +97,17 @@ class EvaluacionController extends Controller
             ->where('evaluacion_id', $evaluacion->id)
             ->first();
 
+        //return print_r($respuestas);
+
         if ($resultado) {
-            $resultado->respuestas = json_encode($respuestas);
+            $resultado->respuestas = json_encode(array_values($respuestas));
             $resultado->save();
         } else {
             // Si no se encuentra ningún resultado, se podría crear uno nuevo
             $resultado = new Resultado([
                 'user_id' => auth()->id(),
                 'evaluacion_id' => $evaluacion->id,
-                'respuestas' => json_encode($respuestas),
+                'respuestas' => json_encode(array_values($respuestas)),
             ]);
             $resultado->save();
         }
@@ -109,6 +122,7 @@ class EvaluacionController extends Controller
     }
 
     // Ver resultados
+// Ver resultados
     public function resultado($evaluacion_id)
     {
         $user = Auth::user();
@@ -125,13 +139,22 @@ class EvaluacionController extends Controller
 
         // Verificar las respuestas y calcular el puntaje
         $puntaje = 0;
-        foreach ($evaluacion->preguntas as $pregunta) {
-            $respuesta = $pregunta->opciones()->find($respuestas[strval($pregunta->id)]);
-            if ($respuesta->es_correcta) {
+        $preguntas = [];
+
+        foreach ($respuestas as $pregunta_id => $opcion_id) {
+            $opcion = Opcion::find($opcion_id);
+
+            if ($opcion->es_correcta) {
                 $puntaje++;
             }
+
+            $preguntas[] = [
+                'enunciado' => $opcion->pregunta->enunciado,
+                'opcion' => $opcion->texto,
+                'es_correcta' => $opcion->es_correcta,
+            ];
         }
 
-        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas', 'modulo', 'puntaje'));
+        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas', 'modulo', 'puntaje', 'preguntas'));
     }
 }

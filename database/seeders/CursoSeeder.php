@@ -33,19 +33,6 @@ class CursoSeeder extends Seeder
             $evaluacion = Evaluacion::factory()->create([
                 'modulo_id' => $modulo->id
             ]);
-
-            // Crear 12 preguntas para la evaluación, con 5 opciones cada una
-            $preguntas = Pregunta::factory(12)->create(['evaluacion_id' => $evaluacion->id]);
-
-            foreach ($preguntas as $pregunta) {
-                // Crear 5 opciones para cada pregunta
-                Opcion::factory(5)->create(['pregunta_id' => $pregunta->id]);
-                // Marcar una de las opciones como correcta
-                Opcion::where('pregunta_id', $pregunta->id)
-                    ->inRandomOrder()
-                    ->limit(1)
-                    ->update(['es_correcta' => true]);
-            }
         }
     }
 }

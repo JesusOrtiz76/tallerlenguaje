@@ -39,7 +39,7 @@
                                     {{ Request::is('temas/'.$tema->id) ? ' active' : '' }}"
                                        href="{{ route('temas.show', $tema->id) }}">
                                         <i class="fa-solid fa-chalkboard-user"></i>
-                                        {{ Str::limit($tema->titulo, 30, '...') }}
+                                        {{ Str::limit($tema->titulo, 25, '...') }}
                                     </a>
                                 @endforeach
                             </div>
