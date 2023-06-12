@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Curso;
 use App\Models\Evaluacion;
 use App\Models\Modulo;
 use App\Models\Opcion;
-use App\Models\Pregunta;
 use App\Models\Resultado;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 
 class EvaluacionController extends Controller
 {

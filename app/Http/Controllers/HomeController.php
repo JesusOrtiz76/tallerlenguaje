@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Curso;
-use App\Models\Modulo;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-
 class HomeController extends Controller
 {
     /**

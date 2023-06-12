@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Curso;
 use App\Models\Modulo;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 
 class ModuloController extends Controller
 {
