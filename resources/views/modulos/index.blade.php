@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 <div class="card blur-bg shadow-sm border-0 overflow-auto">
                     <div class="card-body p-lg-5">
-                        <h1 class="text-primary mb-4">Módulos del curso "{{ $curso->nombre }}"</h1>
+                        <h1 class="text-gradient mb-4 text-center">Módulos del curso</h1>
                         <table class="table table-hover">
                             <thead>
                             <tr>

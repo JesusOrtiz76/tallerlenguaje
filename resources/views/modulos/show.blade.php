@@ -8,8 +8,8 @@
             <div class="col-md-8">
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
-                        <h1 class="text-primary mb-4">{{ $modulo->nombre }}</h1>
-                        <p>{{ $modulo->descripcion }}</p>
+                        <h1 class="text-gradient mb-4 text-center">{{ $modulo->nombre }}</h1>
+                        <p class="text-justify">{{ $modulo->descripcion }}</p>
 
                         <h3>Temas</h3>
                         <ul>
@@ -25,7 +25,7 @@
                         </ul>
 
                         <h3>Evaluación</h3>
-                        <p>
+                        <p class="text-justify">
                             Completa la evaluación para pasar al siguiente módulo.
                         </p>
                         @forelse ($modulo->evaluaciones as $evaluacion)

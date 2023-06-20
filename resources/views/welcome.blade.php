@@ -80,7 +80,7 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form class="form" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -159,7 +159,10 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">M&oacute;dulos</h2>
-            <h3 class="section-subheading text-muted">Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} módulos, que se describen a continuación.</h3>
+            <h3 class="section-subheading text-muted">
+                Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} módulos, que se describen a
+                continuación.
+            </h3>
         </div>
         <ul class="modulo">
             @foreach($cursos[0]->modulos as $modulo)
@@ -167,7 +170,7 @@
                     <div class="modulo-image">
                         <img class="rounded-circle img-fluid"
                              src="{{ asset('storage/' . $modulo->img_path) }}"
-                             alt="Imagen del {{ $modulo->nombre }}" />
+                             alt="Imagen del {{ $modulo->nombre }}">
                     </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">

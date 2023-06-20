@@ -10,14 +10,14 @@
                     <div class="card-body p-lg-5">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="fas fa-rotate-left fa-2x me-3 text-primary"></i>
-                            <h1>{{ __('Reset Password') }}</h1>
+                            <h1 class="text-gradient mb-4 text-center">{{ __('Reset Password') }}</h1>
                         </div>
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('password.email') }}">
+                        <form class="form" method="POST" action="{{ route('password.email') }}">
                             @csrf
                             <div class="form-outline mb-4">
                                 <label for="email">{{ __('Email Address') }}</label>

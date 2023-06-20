@@ -10,7 +10,7 @@
                     <div class="card-body p-lg-5">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="fas fa-envelope fa-2x me-3 text-primary"></i>
-                            <h1>{{ __('Verify Your Email Address') }}</h1>
+                            <h1 class="text-gradient mb-4">{{ __('Verify Your Email Address') }}</h1>
                         </div>
                         @if (session('resent'))
                             <div class="alert alert-success" role="alert">
@@ -20,7 +20,7 @@
 
                         {{ __("Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.") }}
                         <br>
-                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                        <form class="form" class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                             @csrf
                             <button type="submit" class="btn btn-primary align-baseline mt-5">{{ __('Resend Verification Email') }}</button>.
                         </form>

@@ -63,3 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 });
+
+document.oncontextmenu = function() {
+    return false;
+}
+

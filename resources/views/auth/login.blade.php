@@ -9,17 +9,17 @@
             <div class="card shadow-sm border-0 blur-bg" style="border-radius: 0.5rem;">
                 <div class="row g-0">
                     <div class="col-md-3 col-lg-3 d-none d-md-block">
-                        <img src="assets/img/bg-abstract.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0.5rem 0rem 0rem 0.5rem;" />
+                        <img src="assets/img/bg-abstract.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0.5rem 0rem 0rem 0.5rem;">
                     </div>
                     <div class="col-md-9 col-lg-9 d-flex align-items-center">
                         <div class="card-body p-5 p-lg-5">
 
-                            <form method="POST" action="{{ route('login') }}">
+                            <form class="form" method="POST" action="{{ route('login') }}">
                                 @csrf
 
                                 <div class="d-flex align-items-center mb-3 pb-1">
                                     <i class="fas fa-key fa-2x me-3 text-primary"></i>
-                                    <span class="h1"> {{ __('Login') }} </span>
+                                    <h1 class="text-gradient mb-4"> {{ __('Login') }} </h1>
                                 </div>
 
                                 <div class="form-outline mb-4">

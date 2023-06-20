@@ -10,11 +10,11 @@
                     <div class="card-body p-lg-5">
                         <div class="d-flex align-items-center mb-3 pb-1">
                             <i class="fas fa-rotate-left fa-2x me-3 text-primary"></i>
-                            <h1>{{ __('Confirm Password') }}</h1>
+                            <h1 class="text-gradient mb-4 text-center">{{ __('Confirm Password') }}</h1>
                         </div>
                         {{ __('Please confirm your password before continuing.') }}
 
-                        <form method="POST" action="{{ route('password.confirm') }}">
+                        <form class="form" method="POST" action="{{ route('password.confirm') }}">
                             @csrf
 
                             <div class="row mb-3">

@@ -7,7 +7,7 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-lg-6 p-5">
                 <p class="text-uppercase">{{ __('Welcom to the course') }}:</p>
-                <h1 class="text-primary mb-4">{{ $cursos[0]->nombre }}</h1>
+                <h1 class="text-gradient mb-4">{{ $cursos[0]->nombre }}</h1>
                 <p class="text-muted">{{ $cursos[0]->descripcion }}</p>
                 <a href="{{ route('cursos.index') }}" class="btn btn-primary mt-5">{{ __('Go to course') }}</a>
             </div>

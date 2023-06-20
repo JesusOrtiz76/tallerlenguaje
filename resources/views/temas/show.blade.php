@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-9">
-                <h1 class="text-primary mb-4">{{ $modulo->nombre }} - {{ $tema->titulo }}</h1>
+                <h1 class="text-gradient mb-4 text-center">{{ $tema->titulo }}</h1>
                 <p class="mb-4">{{ $tema->descripcion }}</p>
                 <div class="mb-3">
                     @php

@@ -13,17 +13,17 @@
                                  class="h-100 img-responsive"
                                  alt="login form"
                                  class="img-fluid"
-                                 style="border-radius: 0.5rem 0rem 0rem 0.5rem;" />
+                                 style="border-radius: 0.5rem 0rem 0rem 0.5rem;">
                         </div>
                         <div class="col-md-9 col-lg-9 d-flex align-items-center">
                             <div class="card-body p-5 p-lg-5">
 
-                                <form method="POST" action="{{ route('register') }}">
+                                <form class="form" method="POST" action="{{ route('register') }}">
                                     @csrf
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-address-card fa-2x me-3 text-primary"></i>
-                                        <h1> {{ __('Register') }} </h1>
+                                        <h1 class="text-gradient mb-4"> {{ __('Register') }} </h1>
                                     </div>
 
                                     <div class="form-outline mb-4">

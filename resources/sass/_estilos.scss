@@ -124,7 +124,7 @@ header.masthead {
     padding-top: 77px;
     text-align: center;
     color: #fff;
-    background-image: linear-gradient(to bottom, rgba($primary, 0.8) 0%, rgba($primary_, 0.1) 100%), url("../assets/img/header-bg.jpg");
+    background-image: linear-gradient(315deg, rgba($primary, 0.5) 0%, rgba($primary_, 0.5) 150%), url("../assets/img/header-bg.jpg");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -519,7 +519,7 @@ a {
 
 
 .dashboard-bg {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.45) 100%), url("../assets/img/background-img.svg");
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%), url("../assets/img/background-img.svg");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -587,72 +587,6 @@ a {
     display: inline-block;
 }
 
-.border-left-primary {
-    border-left: .25rem solid $primary !important
-}
-
-.border-bottom-primary {
-    border-bottom: .25rem solid $primary !important
-}
-
-.border-left-secondary {
-    border-left: .25rem solid #858796 !important
-}
-
-.border-bottom-secondary {
-    border-bottom: .25rem solid #858796 !important
-}
-
-.border-left-success {
-    border-left: .25rem solid $success !important
-}
-
-.border-bottom-success {
-    border-bottom: .25rem solid $success !important
-}
-
-.border-left-info {
-    border-left: .25rem solid $info !important
-}
-
-.border-bottom-info {
-    border-bottom: .25rem solid $info !important
-}
-
-.border-left-warning {
-    border-left: .25rem solid $warning !important
-}
-
-.border-bottom-warning {
-    border-bottom: .25rem solid $warning !important
-}
-
-.border-left-danger {
-    border-left: .25rem solid $danger !important
-}
-
-.border-bottom-danger {
-    border-bottom: .25rem solid $danger !important
-}
-
-.grafica-responsive {
-    position: relative;
-    text-align: left;
-    line-height: normal;
-    display: inline-block;
-    zoom: 1;
-    vertical-align: middle;
-    font-weight: normal;
-    font-variant: normal;
-    font-style: normal;
-    text-decoration: none;
-    padding: 0px;
-    margin: 0px;
-    border: none;
-    direction: ltr;
-    transform: none;
-}
-
 .table td {
     background-color: transparent;
 }
@@ -665,3 +599,25 @@ a {
 th {
     background-color: transparent;
 }
+
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.text-gradient {
+    background: linear-gradient(315deg, $primary 0%, $primary_ 50%, $primary 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+ .text-justify {
+     text-align: justify;
+     text-justify: inter-word;
+ }

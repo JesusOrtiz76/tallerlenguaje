@@ -6,20 +6,20 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
-                <h1 class="text-primary mb-4">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
+                <h1 class="text-gradient mb-4 text-center">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
 
-                <!--<p>{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>-->
+                <!--<p class="text-justify">{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>-->
                 @if ($pivot ?? null)
                     @php
                         $intentosRestantes = $evaluacion->intentos_max - $pivot->pivot->intentos;
                         $intentoActual = $pivot->pivot->intentos + 1;
                     @endphp
-                    <p>{{ __('Intento :intentoActual/:intentosTotales', ['intentoActual' => $intentoActual, 'intentosTotales' => $evaluacion->intentos_max]) }}</p>
+                    <p class="text-justify">{{ __('Intento :intentoActual/:intentosTotales', ['intentoActual' => $intentoActual, 'intentosTotales' => $evaluacion->intentos_max]) }}</p>
                 @else
-                    <p>{{ __('Intento 1/:intentosTotales', ['intentosTotales' => $evaluacion->intentos_max]) }}</p>
+                    <p class="text-justify">{{ __('Intento 1/:intentosTotales', ['intentosTotales' => $evaluacion->intentos_max]) }}</p>
                 @endif
 
-                <form method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
+                <form class="form" method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
                 @csrf
                     @foreach ($preguntas as $pregunta)
                         <div class="card mb-4 shadow-sm border-0 blur-bg">
