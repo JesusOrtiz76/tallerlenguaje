@@ -45,7 +45,7 @@
                         </div>
                     @endforeach
                     <div class="w-100 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
+                        <button type="submit" class="btn btn-lg btn-primary col-4">{{ __('Enviar') }}</button>
                     </div>
                 </form>
             </div>

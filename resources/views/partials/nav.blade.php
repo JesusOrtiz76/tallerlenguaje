@@ -12,7 +12,7 @@
     }
 @endphp
 
-<nav class="navbar navbar-expand-lg" id="mainNav">
+<nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
     <div class="{{ $classContainer }}">
 
         {!! $buttonHtml !!}
@@ -32,11 +32,14 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">{{ __('Go to course') }}</a>
+                </li>
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                    </li>
                     @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link  text-uppercase" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -49,12 +52,6 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">{{ __('Introduction') }}</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown"
                            class="nav-link dropdown-toggle  text-uppercase"

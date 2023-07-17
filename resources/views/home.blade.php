@@ -1,20 +1,59 @@
 @extends('layouts.app')
 
-@section('title','Introducción')
+@section('title','Cursos')
 
 @section('content')
     <div class="container">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-6 p-5">
-                <p class="text-uppercase">{{ __('Welcom to the course') }}:</p>
-                <h1 class="text-gradient mb-4">{{ $cursos[0]->nombre }}</h1>
-                <p class="text-muted">{{ $cursos[0]->descripcion }}</p>
-                <a href="{{ route('cursos.index') }}" class="btn btn-primary mt-5">{{ __('Go to course') }}</a>
+        @forelse ($cursos as $curso)
+            <div class="row d-flex justify-content-center align-items-center flex-lg-row flex-column">
+                @if($loop->iteration % 2 == 0)
+                    <div class="col-lg-6 p-5 order-2 order-lg-1">
+                        <img class="img-fluid mt-4" src="{{ asset('storage/' . $curso->image) }}" alt="Imagen del curso {{ $curso->nombre }}">
+                    </div>
+                    <div class="col-lg-6 p-5 order-1 order-lg-2">
+                        <p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
+                        <h1 class="text-gradient mb-4">{{ $curso->nombre }}</h1>
+                        <p class="text-muted text-justify">{{ $curso->descripcion }}</p>
+                        @if(Auth::check())
+                            @if(Auth::user()->cursos->contains($curso))
+                                <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary">Continuar</a>
+                            @else
+                                <form class="form" method="POST" action="{{ route('cursos.inscribirse', $curso->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Inscribirse</button>
+                                </form>
+                            @endif
+                        @endif
+                    </div>
+                @else
+                    <div class="col-lg-6 p-5 order-1">
+                        <p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
+                        <h1 class="text-gradient mb-4">{{ $curso->nombre }}</h1>
+                        <p class="text-muted text-justify">{{ $curso->descripcion }}</p>
+                        @if(Auth::check())
+                            @if(Auth::user()->cursos->contains($curso))
+                                <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary">Continuar</a>
+                            @else
+                                <form class="form" method="POST" action="{{ route('cursos.inscribirse', $curso->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Inscribirse</button>
+                                </form>
+                            @endif
+                        @endif
+                    </div>
+                    <div class="col-lg-6 p-5 order-2">
+                        <img class="img-fluid mt-4" src="{{ asset('storage/' . $curso->image) }}" alt="Imagen del curso {{ $curso->nombre }}">
+                    </div>
+                @endif
             </div>
-            <div class="col-lg-6 p-5">
-                <img class="img-fluid mt-4" src="assets/img/test.svg" alt="Imagen del curso">
+        @empty
+            <div class="row">
+                <div class="card">
+                    <div class="card-body p-lg-5">
+                        {{ __('No Data') }}
+                    </div>
+                </div>
             </div>
-
-        </div>
+        @endforelse
+    </div>
 @endsection
-

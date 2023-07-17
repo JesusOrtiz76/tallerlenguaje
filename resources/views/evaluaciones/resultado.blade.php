@@ -12,30 +12,32 @@
                             Resultado de la {{ $evaluacion->nombre }} del {{ $modulo->nombre }}
                         </h1>
                         <p class="text-justify">Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->numero_preguntas }}</p>
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>Pregunta</th>
-                                <th>Tu respuesta</th>
-                                <th>Resultado</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($preguntas as $pregunta)
+                        <div class="table-responsive overflow-auto">
+                            <table class="table table-hover">
+                                <thead>
                                 <tr>
-                                    <td>{{ $pregunta['enunciado'] }}</td>
-                                    <td>{{ $pregunta['opcion'] }}</td>
-                                    <td>
-                                        @if ($pregunta['es_correcta'])
-                                            <span class="badge bg-success">Correcta</span>
-                                        @else
-                                            <span class="badge bg-warning text-dark">Incorrecta</span>
-                                        @endif
-                                    </td>
+                                    <th>Pregunta</th>
+                                    <th>Tu respuesta</th>
+                                    <th>Resultado</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                @foreach ($preguntas as $pregunta)
+                                    <tr>
+                                        <td style="min-width: 300px;">{{ $pregunta['enunciado'] }}</td>
+                                        <td style="min-width: 200px;">{{ $pregunta['opcion'] }}</td>
+                                        <td>
+                                            @if ($pregunta['es_correcta'])
+                                                <span class="badge bg-success">Correcta</span>
+                                            @else
+                                                <span class="badge bg-warning text-dark">Incorrecta</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

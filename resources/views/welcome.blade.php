@@ -44,8 +44,11 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Objetivos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">M&oacute;dulos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#modulos">M&oacute;dulos</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">{{ __('Go to course') }}</a>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
@@ -60,9 +63,6 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">{{ __('Go to course') }}</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle  text-uppercase"
                            href="#"
@@ -94,15 +94,25 @@
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
-        <div class="masthead-subheading"> {{ __('Welcom to the course') }} </div>
+        <div class="masthead-subheading"> {{ __('Welcome to the course') }} </div>
         <div class="masthead-heading text-uppercase"> {{ $cursos[0]->nombre }} </div>
-        <a class="btn btn-primary text-uppercase" href="#services"> {{ __('Info') }} </a>
-        <br><br><br>
+        <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap" href="{{ route('home') }}">
+            {{ __('Go to course') }}
+        </a>
+
+        <!-- Animation Mousey-->
+        <a href="#objetivos">
+            <div class="scroll-downs">
+                <div class="mousey">
+                    <div class="scroller"></div>
+                </div>
+            </div>
+        </a>
     </div>
 </header>
 
 <!-- Objetivos -->
-<section class="page-section" id="services">
+<section class="page-section" id="objetivos">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Objetivos del curso</h2>
@@ -155,7 +165,7 @@
 </section>
 
 <!-- Modulos -->
-<section class="page-section mb-6" id="about">
+<section class="page-section" id="modulos">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">M&oacute;dulos</h2>
@@ -168,7 +178,7 @@
             @foreach($cursos[0]->modulos as $modulo)
                 <li class="{{ $loop->iteration % 2 == 0 ? 'modulo-inverted' : '' }}">
                     <div class="modulo-image">
-                        <img class="rounded-circle img-fluid"
+                        <img class="rounded-circle"
                              src="{{ asset('storage/' . $modulo->img_path) }}"
                              alt="Imagen del {{ $modulo->nombre }}">
                     </div>
@@ -177,7 +187,7 @@
                             <h4>{{ $modulo->nombre }}</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted">{{ $modulo->descripcion }}</p>
+                            <p class="text-muted text-justify">{{ $modulo->descripcion }}</p>
                         </div>
                     </div>
                 </li>
@@ -198,13 +208,13 @@
 </section>
 
 <!-- Footer-->
-<footer class="footer bg-dark">
-    <div class="container py-lg-3 d-flex justify-content-center">
-        <span class="text-light px-1 me-2 text-end" style="font-size: 9pt">
+<footer class="py-lg-2 mt-5 bg-dark border-top">
+    <div class="container py-1 d-flex justify-content-center">
+        <span class="text-white px-1 me-2 text-end" style="font-size: 9pt">
             Servicios Educativos Integrados al Estado de M&eacute;xico.<br>
             Copyright &copy; {{ now()->year }}.
         </span>
-        <span class="text-light px-1 ps-2 separador-footer" style="font-size: 9pt">
+        <span class="text-white px-1 ps-2 separador-footer" style="font-size: 9pt">
             Unidad de Asuntos Jurídicos e Igualdad de Género.<br>
             Dirección de Informática y Telecomunicaciones.
         </span>

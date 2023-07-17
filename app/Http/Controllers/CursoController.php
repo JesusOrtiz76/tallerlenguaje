@@ -8,13 +8,6 @@ use App\Models\Inscripcion;
 
 class CursoController extends Controller
 {
-    // Obtener cursos
-    public function index()
-    {
-        $cursos = Curso::all();
-        return view('cursos.index', compact('cursos'));
-    }
-
     // Inscribirse al curso
     public function inscribirse($curso_id)
     {
@@ -27,13 +20,13 @@ class CursoController extends Controller
 
             // Verificar que el usuario no esté ya inscrito en el curso
             if (Inscripcion::where('curso_id', $curso_id)->where('user_id', Auth::id())->first()) {
-                return redirect()->route('cursos.index', $curso_id)
+                return redirect()->route('home')
                     ->with('warning', 'Ya estás inscrito en este curso');
             } else {
                 // Matricular al usuario en el curso
                 $curso->users()->attach(Auth::user()->id);
-                return redirect()->route('cursos.index', $curso_id)
-                    ->with('success', 'Te has inscrito en este curso');
+                return redirect()->route('home')
+                    ->with('success', 'Te has inscrito en este curso ' . $curso->nombre);
             }
         } else {
             // Redirigir al usuario a la página de inicio con un mensaje de error

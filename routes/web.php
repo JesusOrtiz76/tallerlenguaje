@@ -28,7 +28,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //Cursos
-    Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
     Route::get('cursos/{curso}/modulos', [ModuloController::class, 'index'])->name('modulos.index');
     Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])->name('cursos.inscribirse');
 
