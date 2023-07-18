@@ -28,21 +28,28 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //Cursos
-    Route::get('cursos/{curso}/modulos', [ModuloController::class, 'index'])->name('modulos.index');
-    Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])->name('cursos.inscribirse');
+    Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])
+        ->name('cursos.inscribirse');
 
     //Modulos
-    Route::get('modulos/{modulo}', [ModuloController::class, 'show'])->name('modulos.show');
+    Route::get('cursos/{curso}/modulos', [ModuloController::class, 'index'])
+        ->name('modulos.index');
 
-    //Temas de estudio
-    Route::get('temas/{tema}', [TemaController::class, 'show'])->name('temas.show');
+    Route::get('modulos/{modulo}', [ModuloController::class, 'show'])
+        ->name('modulos.show');
+
+    //Temas
+    Route::get('temas/{tema}', [TemaController::class, 'show'])
+        ->name('temas.show');
 
     //Evaluaciones
-    //Route::post('/evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
-    Route::get('evaluaciones/{evaluacion}', [EvaluacionController::class, 'show'])->name('evaluaciones.show');
-    Route::post('modulos/{modulo}/evaluaciones/{evaluacion}/submit', [EvaluacionController::class, 'submit'])->name('evaluaciones.submit');
+    Route::get('evaluaciones/{evaluacion}', [EvaluacionController::class, 'show'])
+        ->name('evaluaciones.show');
+
+    Route::post('evaluaciones/{evaluacion}/submit', [EvaluacionController::class, 'submit'])
+        ->name('evaluaciones.submit');
 
     //Resultados
-    Route::get('modulos/{modulo}/evaluaciones/{evaluacion}/resultado', [EvaluacionController::class, 'resultado'])->name('evaluaciones.resultado');
-
+    Route::get('evaluaciones/{evaluacion}/resultado', [EvaluacionController::class, 'resultado'])
+        ->name('evaluaciones.resultado');
 });

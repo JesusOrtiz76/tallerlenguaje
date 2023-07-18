@@ -32,7 +32,7 @@
                             <div class="mb-3">
                                 <a href="{{ route('evaluaciones.show', $evaluacion->id) }}" class="btn btn-primary">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</a>
                                 @if($user->resultados()->where('evaluacion_id', $evaluacion->id)->exists())
-                                    <a href="{{ route('evaluaciones.resultado', [$evaluacion->modulo_id, $evaluacion->id]) }}" class="btn btn-primary ms-2">Ver resultado</a>
+                                    <a href="{{ route('evaluaciones.resultado', $evaluacion->id) }}" class="btn btn-primary ms-2">Ver resultado</a>
                                 @endif
                             </div>
                         @empty

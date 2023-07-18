@@ -118,7 +118,6 @@ class EvaluacionController extends Controller
     }
 
     // Ver resultados
-// Ver resultados
     public function resultado($evaluacion_id)
     {
         $user = Auth::user();
