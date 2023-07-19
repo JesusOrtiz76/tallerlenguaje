@@ -30,15 +30,26 @@
                         </p>
                         @forelse ($modulo->evaluaciones as $evaluacion)
                             <div class="mb-3">
-                                <a href="{{ route('evaluaciones.show', $evaluacion->id) }}" class="btn btn-primary">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</a>
-                                @if($user->resultados()->where('evaluacion_id', $evaluacion->id)->exists())
-                                    <a href="{{ route('evaluaciones.resultado', $evaluacion->id) }}" class="btn btn-primary ms-2">Ver resultado</a>
-                                @endif
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="{{ route('evaluaciones.show', $evaluacion->id) }}"
+                                           class="btn btn-primary btn-sm w-100">
+                                            {{ $evaluacion->nombre }} del {{ $modulo->nombre }}
+                                        </a>
+                                    </div>
+                                    @if($user->resultados()->where('evaluacion_id', $evaluacion->id)->exists())
+                                        <div class="col-6">
+                                            <a href="{{ route('evaluaciones.resultado', $evaluacion->id) }}"
+                                               class="btn btn-primary btn-sm w-100">
+                                                Resultado de {{ $evaluacion->nombre }}
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         @empty
                             <span>No hay evaluaciones para mostrar</span>
                         @endforelse
-
                     </div>
                 </div>
             </div>

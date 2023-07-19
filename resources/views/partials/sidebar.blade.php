@@ -4,7 +4,9 @@
             <div class="mb-4">
                 <div class="w-100 d-flex justify-content-center">
                     <a class="btn-sidebar" href="{{ route('modulos.index', $curso->id) }}">
-                        <h5 class="text-uppercase text-primary mb-2 text-center">Módulos del curso<br>"{{ $curso->nombre }}"</h5>
+                        <h5 class="text-uppercase text-primary mb-2 text-center">
+                            Módulos del curso<br>"{{ $curso->nombre }}"
+                        </h5>
                     </a>
                 </div>
                 @foreach ($curso->modulos as $modulo)

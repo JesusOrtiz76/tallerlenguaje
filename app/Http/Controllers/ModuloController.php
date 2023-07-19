@@ -28,7 +28,8 @@ class ModuloController extends Controller
 
         $temas = $modulo->temas;
         $evaluaciones = $modulo->evaluaciones;
-        return view('modulos.show', compact('curso', 'modulo', 'temas', 'evaluaciones', 'user'));
+        return view('modulos.show',
+            compact('curso', 'modulo', 'temas', 'evaluaciones', 'user'));
     }
 
 }

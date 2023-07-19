@@ -80,7 +80,11 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form class="form" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form class="form"
+                                  id="logout-form"
+                                  action="{{ route('logout') }}"
+                                  method="POST"
+                                  class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -96,7 +100,8 @@
     <div class="container">
         <div class="masthead-subheading"> {{ __('Welcome to the course') }} </div>
         <div class="masthead-heading text-uppercase"> {{ $cursos[0]->nombre }} </div>
-        <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap" href="{{ route('home') }}">
+        <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap"
+           href="{{ route('home') }}">
             {{ __('Go to course') }}
         </a>
 

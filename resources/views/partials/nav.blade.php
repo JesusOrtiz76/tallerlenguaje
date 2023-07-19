@@ -69,7 +69,11 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form class="form" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form class="form"
+                                  id="logout-form"
+                                  action="{{ route('logout') }}"
+                                  method="POST"
+                                  class="d-none">
                                 @csrf
                             </form>
                         </div>

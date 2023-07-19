@@ -28,7 +28,10 @@
                                             {{ $modulo->descripcion }}
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('modulos.show', $modulo) }}" class="btn btn-primary">Ver módulo</a>
+                                            <a href="{{ route('modulos.show', $modulo) }}"
+                                               class="btn btn-primary">
+                                                Ver módulo
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

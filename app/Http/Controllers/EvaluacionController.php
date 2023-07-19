@@ -20,6 +20,14 @@ class EvaluacionController extends Controller
         // Obtener la evaluación con el módulo correspondiente
         $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
 
+        // Obtener el curso al que pertenece la evaluación
+        $curso = $evaluacion->modulo->curso;
+
+        // Verificar si el usuario está inscrito en el curso
+        if (!$user->cursos()->where('cursos.id', $curso->id)->exists()) {
+            return redirect()->route('home')->with('warning', 'No estás inscrito en este curso');
+        }
+
         // Obtener todas las preguntas de la evaluación, con opciones cargadas y ordenadas aleatoriamente
         $preguntas = $evaluacion->preguntas()->with('opciones')->inRandomOrder()->get();
 
@@ -73,7 +81,9 @@ class EvaluacionController extends Controller
 
         // Verificar si el usuario ya ha completado la evaluación la cantidad máxima de veces permitida
         if ($evaluacion && $evaluacion->pivot->intentos >= $evaluacion->intentos_max) {
-            return redirect()->back()->with('warning', 'Has alcanzado la cantidad máxima de intentos para esta evaluación.');
+            return redirect()
+                ->back()
+                ->with('warning', 'Has alcanzado la cantidad máxima de intentos para esta evaluación.');
         }
 
         // Obtener las respuestas del usuario
@@ -85,7 +95,8 @@ class EvaluacionController extends Controller
         if (count($respuestas) !== $numeroPreguntasMostradas) {
             return redirect()->back()->with('warning', 'Completa las preguntas.');
         } else {
-            // Si el usuario ya ha accedido previamente, agregar un intento adicional a la tabla intermedia de evaluaciones y usuarios
+            /* Si el usuario ya ha accedido previamente, agregar un intento adicional a la tabla intermedia de
+            evaluaciones y usuarios */
             $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->increment('intentos');
         }
 
@@ -111,9 +122,13 @@ class EvaluacionController extends Controller
         // Si el guardado es exitoso redireccionamos a modulos.show
         if ($evaluacion->pivot->save()) {
             // Redirigir al usuario a la página de resultados
-            return redirect()->route('modulos.show', $modulo->id)->with('success', 'Evaluación completada.');
+            return redirect()
+                ->route('modulos.show', $modulo->id)
+                ->with('success', 'Evaluación completada.');
         } else {
-            return redirect()->route('modulos.show', $modulo->id)->with('error', 'Ocurrió un error al enviar las respuestas.');
+            return redirect()
+                ->route('modulos.show', $modulo->id)
+                ->with('error', 'Ocurrió un error al enviar las respuestas.');
         }
     }
 
@@ -150,6 +165,7 @@ class EvaluacionController extends Controller
             ];
         }
 
-        return view('evaluaciones.resultado', compact('evaluacion', 'resultado', 'respuestas', 'modulo', 'puntaje', 'preguntas'));
+        return view('evaluaciones.resultado',
+            compact('evaluacion', 'resultado', 'respuestas', 'modulo', 'puntaje', 'preguntas'));
     }
 }

@@ -9,6 +9,7 @@
                 <h1 class="text-gradient mb-4 text-center">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
 
                 <!--<p class="text-justify">{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>-->
+
                 @if ($pivot ?? null)
                     @php
                         $intentosRestantes = $evaluacion->intentos_max - $pivot->pivot->intentos;
@@ -19,7 +20,9 @@
                     <p class="text-justify">{{ __('Intento 1/:intentosTotales', ['intentosTotales' => $evaluacion->intentos_max]) }}</p>
                 @endif
 
-                <form class="form" method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
+                <form id="formulario_evaluacion"
+                      method="POST"
+                      action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
                 @csrf
                     @foreach ($preguntas as $pregunta)
                         <div class="card mb-4 shadow-sm border-0 blur-bg">
@@ -50,4 +53,22 @@
                 </form>
             </div>
         </div>
+        <script>
+            document.getElementById('formulario_evaluacion').addEventListener('submit', function(e) {
+                let respuestas = document.querySelectorAll('input[type=radio]:checked');
+
+                // Verificar si el número de respuestas es igual al número de preguntas
+                if (respuestas.length !== {{ count($preguntas) }}) {
+                    e.preventDefault(); // Previene el envío del formulario si no todas las preguntas han sido contestadas
+
+                    Swal.fire({
+                        title: 'Mensaje',
+                        text: "Completa las preguntas.",
+                        icon: 'warning',
+                        confirmButtonColor: '#FFC107',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            });
+        </script>
 @endsection

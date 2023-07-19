@@ -3,14 +3,18 @@
     height: 100vh;
 }
 
-// Estilos para tabla
+// Estilos para tabla, efecto hover
 .table-hover tbody tr:hover {
     background-color: var(--color-hover, $hover_color);
 }
 
-// Estilos de la pantalla principal
+// Estilos de las secciones de la pantalla de bienvenida
 .page-section {
-    padding: 6rem 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .page-section h2.section-heading,
@@ -34,6 +38,8 @@
         padding: 9rem 0;
     }
 }
+
+// Estilos de la barra de navegación, tema obscuro y claro
 
 [data-bs-theme="dark"] #mainNav {
     padding: 15px 10px;
@@ -92,6 +98,8 @@
     font-weight: 700;
 }
 
+// Estilos del logo, tema obscuro y claro
+
 [data-bs-theme="dark"] #mainNav .navbar-brand {
     width: 228.81px;
     height: 45px;
@@ -114,6 +122,8 @@
 #mainNav .navbar-nav .nav-item .nav-link:hover {
     color: $primary;
 }
+
+// Estilos del Masthead de la pantalla de bienvenida
 
 header.masthead {
     display: flex;
@@ -174,6 +184,62 @@ header.masthead .masthead-heading {
         font-size: 3.5rem;
     }
 }
+
+// Gradiente del título
+
+.text-gradient {
+    background: linear-gradient(315deg, $primary 0%, $primary_ 50%, $primary 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+// Animación para scroll de la pantalla principal
+
+.scroll-downs {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.mousey {
+    display: block;
+    width: 30px;
+    height: 45px;
+    border: 1.5px solid white;
+    border-radius: 15px;
+    opacity: 0.75;
+    box-sizing: content-box;
+}
+
+.scroller {
+    width: 3px;
+    height: 10px;
+    background: white;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll 2s infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translate(-50%, -50%); }
+    15% { transform: translate(-50%, 50%); }
+    100% { transform: translate(-50%, -50%); }
+}
+
+// Estilos para la sección de módulos de la pantalla de bienvenida
 
 .modulo {
     position: relative;
@@ -419,7 +485,10 @@ header.masthead .masthead-heading {
     margin: 40px 0; }
 
 .wrapper {
-    width: 100%; }
+    width: 100%;
+}
+
+// Estilos para el sidebar
 
 #sidebar {
     min-width: 300px;
@@ -501,6 +570,8 @@ a {
     overflow-y: auto;
 }
 
+// Fondo de imagen de la página, tema obscuro y claro
+
 [data-bs-theme="dark"] .blur-bg {
     background: rgba($bg_dark, 0.80);
     backdrop-filter: blur(8.3px);
@@ -521,7 +592,6 @@ a {
     background-size: cover;
 }
 
-
 .dashboard-bg {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%), url("../assets/img/background-img.svg");
     background-repeat: no-repeat;
@@ -531,6 +601,7 @@ a {
 }
 
 /* "fusion"ER CSS */
+
 .page-loader {
     width: 100%;
     height: 100vh;
@@ -551,6 +622,7 @@ a {
 }
 
 /* Estilos para la pantalla de carga */
+
 .loader-container {
     display: none;
     position: fixed;
@@ -585,11 +657,15 @@ a {
     }
 }
 
+// Separador en footer
+
 .separador-footer {
     border-left: 1px solid #a1a1a1;
     height: 100%;
     display: inline-block;
 }
+
+// Fondo transparente en las tablas
 
 .table td {
     background-color: transparent;
@@ -611,52 +687,30 @@ body {
     user-select: none;
 }
 
-.text-gradient {
-    background: linear-gradient(315deg, $primary 0%, $primary_ 50%, $primary 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+// Anillo de progreso de captura del curso
+
+.progress-ring {
+    width: 38px;
+    height: 38px;
 }
 
- .text-justify {
-     text-align: justify;
-     text-justify: inter-word;
- }
-
-.scroll-downs {
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+.progress-ring__circle {
+    stroke: $primary;
+    stroke-width: 4;
+    fill: transparent;
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
 }
 
-.mousey {
-    display: block;
-    width: 30px;
-    height: 45px;
-    border: 1.5px solid white;
-    border-radius: 15px;
-    opacity: 0.75;
-    box-sizing: content-box;
+.progress-ring__circle-bg {
+    stroke: rgba(0, 0, 0, 0.2);
+    stroke-width: 4;
+    fill: transparent;
 }
 
-.scroller {
-    width: 3px;
-    height: 10px;
-    background: white;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: scroll 2s infinite;
-}
-
-@keyframes scroll {
-    0% { transform: translate(-50%, -50%); }
-    15% { transform: translate(-50%, 50%); }
-    100% { transform: translate(-50%, -50%); }
+.percentage-label {
+    font-size: 10px;
+    text-anchor: middle;
+    fill: $primary;
 }
