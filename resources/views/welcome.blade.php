@@ -120,7 +120,7 @@
 <section class="page-section" id="objetivos">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Objetivos del curso</h2>
+            <h2 class="section-heading text-uppercase text-gradient">Objetivos del curso</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
         <div class="row text-center">
@@ -173,7 +173,7 @@
 <section class="page-section" id="modulos">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">M&oacute;dulos</h2>
+            <h2 class="section-heading text-uppercase text-gradient">M&oacute;dulos</h2>
             <h3 class="section-subheading text-muted">
                 Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} módulos, que se describen a
                 continuación.

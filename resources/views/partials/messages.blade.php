@@ -5,7 +5,8 @@
             icon: 'warning',
             title: 'Mensaje',
             text: '{{ session('warning') }}',
-            confirmButtonColor: '#FFC107',
+            confirmButtonColor: '#FCCD00',
+            iconColor: '#FCCD00',
         });
         @endif
 
@@ -14,7 +15,8 @@
             icon: 'error',
             title: 'Mensaje',
             text: '{{ session('error') }}',
-            confirmButtonColor: '#DC3545',
+            confirmButtonColor: '#E1143D',
+            iconColor: '#E1143D',
         });
         @endif
 
@@ -23,7 +25,8 @@
             icon: 'success',
             title: 'Mensaje',
             text: '{{ session('success') }}',
-            confirmButtonColor: '#28A745',
+            confirmButtonColor: '#9DC323',
+            iconColor: '#9DC323',
         });
         @endif
     });

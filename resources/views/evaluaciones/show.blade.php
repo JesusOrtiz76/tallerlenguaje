@@ -65,8 +65,8 @@
                         title: 'Mensaje',
                         text: "Completa las preguntas.",
                         icon: 'warning',
-                        confirmButtonColor: '#FFC107',
-                        confirmButtonText: 'Entendido'
+                        confirmButtonColor: '#FCCD00',
+                        iconColor: '#FCCD00',
                     });
                 }
             });

@@ -41,18 +41,22 @@
 
                                 <!-- Anillo de progreso -->
                                 <div class="col-auto">
-                                    <div class="progress-ring">
-                                        <svg width="38" height="38" viewBox="0 0 38 38">
-                                            <circle class="progress-ring__circle-bg" r="16" cx="19" cy="19"/>
-                                            <circle class="progress-ring__circle" r="16" cx="19" cy="19"
-                                                    stroke-dasharray="{!! $circunferencia !!}"
-                                                    stroke-dashoffset="{!! $llenado !!}"/>
-                                            <text x="19" y="22"
-                                                  class="percentage-label"
-                                                  text-anchor="middle">
-                                                {!! $porcentaje !!} %
-                                            </text>
-                                        </svg>
+                                    <div class="progress-ring d-flex align-items-center">
+                                        <small>
+                                            <svg width="38" height="38" viewBox="0 0 38 38">
+                                                <circle class="progress-ring__circle-bg" r="16" cx="19" cy="19"/>
+                                                <circle class="progress-ring__circle" r="16" cx="19" cy="19"
+                                                        stroke-dasharray="{!! $circunferencia !!}"
+                                                        stroke-dashoffset="{!! $llenado !!}"/>
+                                                <text x="19" y="22"
+                                                      class="percentage-label"
+                                                      text-anchor="middle">{!! $porcentaje !!} %
+                                                </text>
+                                            </svg>
+                                        </small>
+                                        <small class="text-nowrap text-primary ms-2">
+                                            Completado
+                                        </small>
                                     </div>
                                 </div>
                             </div>
@@ -85,18 +89,23 @@
                                 </div>
 
                                 <!-- Anillo de progreso -->
-                                <div class="col-auto">
-                                    <div class="progress-ring">
-                                        <svg width="38" height="38" viewBox="0 0 38 38">
-                                            <circle class="progress-ring__circle-bg" r="16" cx="19" cy="19"/>
-                                            <circle class="progress-ring__circle" r="16" cx="19" cy="19"
-                                                    stroke-dasharray="{!! $circunferencia !!}"
-                                                    stroke-dashoffset="{!! $llenado !!}"/>
-                                            <text x="19" y="22"
-                                                  class="percentage-label"
-                                                  text-anchor="middle">{!! $porcentaje !!} %
-                                            </text>
-                                        </svg>
+                                <div class="col">
+                                    <div class="progress-ring d-flex align-items-center">
+                                        <small>
+                                            <svg width="38" height="38" viewBox="0 0 38 38">
+                                                <circle class="progress-ring__circle-bg" r="16" cx="19" cy="19"/>
+                                                <circle class="progress-ring__circle" r="16" cx="19" cy="19"
+                                                        stroke-dasharray="{!! $circunferencia !!}"
+                                                        stroke-dashoffset="{!! $llenado !!}"/>
+                                                <text x="19" y="22"
+                                                      class="percentage-label"
+                                                      text-anchor="middle">{!! $porcentaje !!} %
+                                                </text>
+                                            </svg>
+                                        </small>
+                                        <small class="text-nowrap text-primary ms-2">
+                                            Completado
+                                        </small>
                                     </div>
                                 </div>
                             </div>
