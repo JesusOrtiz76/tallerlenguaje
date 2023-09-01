@@ -45,12 +45,12 @@
                                         <small>
                                             <svg width="38" height="38" viewBox="0 0 38 38">
                                                 <circle class="progress-ring__circle-bg" r="16" cx="19" cy="19"/>
-                                                <circle class="progress-ring__circle" r="16" cx="19" cy="19"
-                                                        stroke-dasharray="{!! $circunferencia !!}"
-                                                        stroke-dashoffset="{!! $llenado !!}"/>
+                                                <circle class="progress-ring__circle" r="{{ $radio }}" cx="19" cy="19"
+                                                        stroke-dasharray="{{ $circunferencia }}"
+                                                        stroke-dashoffset="{{ $llenados[$curso->id] }}"/>
                                                 <text x="19" y="22"
                                                       class="percentage-label"
-                                                      text-anchor="middle">{!! $porcentaje !!} %
+                                                      text-anchor="middle">{{ $porcentajes[$curso->id] }} %
                                                 </text>
                                             </svg>
                                         </small>
@@ -89,17 +89,17 @@
                                 </div>
 
                                 <!-- Anillo de progreso -->
-                                <div class="col">
+                                <div class="col-auto">
                                     <div class="progress-ring d-flex align-items-center">
                                         <small>
                                             <svg width="38" height="38" viewBox="0 0 38 38">
                                                 <circle class="progress-ring__circle-bg" r="16" cx="19" cy="19"/>
-                                                <circle class="progress-ring__circle" r="16" cx="19" cy="19"
-                                                        stroke-dasharray="{!! $circunferencia !!}"
-                                                        stroke-dashoffset="{!! $llenado !!}"/>
+                                                <circle class="progress-ring__circle" r="{{ $radio }}" cx="19" cy="19"
+                                                        stroke-dasharray="{{ $circunferencia }}"
+                                                        stroke-dashoffset="{{ $llenados[$curso->id] }}"/>
                                                 <text x="19" y="22"
                                                       class="percentage-label"
-                                                      text-anchor="middle">{!! $porcentaje !!} %
+                                                      text-anchor="middle">{{ $porcentajes[$curso->id] }} %
                                                 </text>
                                             </svg>
                                         </small>

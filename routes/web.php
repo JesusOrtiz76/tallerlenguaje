@@ -8,6 +8,7 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,15 @@ Route::get('/', [WelcomeController::class, 'index']);
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Aplicar el middleware checkregisterdate solo al registro
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])
+    ->name('register')
+    ->middleware('checkregisterdate');
+
+Route::post('register', [RegisterController::class, 'register'])
+    ->middleware('checkregisterdate');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //Cursos

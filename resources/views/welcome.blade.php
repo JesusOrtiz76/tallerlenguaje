@@ -10,10 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -121,7 +117,14 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase text-gradient">Objetivos del curso</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h3 class="section-subheading text-muted text-justify">Tiene como propósito primordial, hacer énfasis en
+                la correcta aplicación del “Protocolo para la prevención, detección y actuación en casos de Abuso Sexual
+                Infantil, Acoso Escolar y Maltrato, en las escuelas de Educación Básica de SIEM”, con la finalidad de
+                que todo el personal adscrito a Servicios Educativos Integrados al Estado de México
+                (SEIEM), es decir, Autoridades Escolares (Supervisores Generales, Supervisores y
+                Directores), Docentes frente a grupo, Personal Administrativo y de Apoyo a la
+                Educación, tengan mayores herramientas para la aplicabilidad de los procedimientos
+                en los casos que se puedan presentar en los diferentes niveles educativos.</h3>
         </div>
         <div class="row text-center">
             <div class="col-md-6 mb-3">
@@ -130,9 +133,10 @@
                         <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Objetivo</h4>
-                <p class="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Minima ómaxime quam architecto quo inventore harum ex magni, dicta impedit.
+                <p class="text-muted text-justify">
+                    Conocer los conceptos básicos, desde una perspectiva más digerible, con la finalidad
+                    de acercar los elementos necesarios para garantizar que la prevención, detección y
+                    actuación en los casos contemplados se realicen a cabalidad.
                 </p>
             </div>
             <div class="col-md-6 mb-3">
@@ -141,8 +145,13 @@
                         <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Instrucciones</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                <p class="text-muted text-justify">Para realizar su registro deberá ser servidor público
+                    activo adscrito a Servicios Educativos Integrados al Estado de México (SEIEM), deberá llenar el
+                    <a href="{{ route('register') }}"><strong>Formulario de Registro</strong></a>
+                    y ingresar su nombre, RFC y correo electrónico, y posteriormente podrá crear una
+                    contraseña de 8 caracteres, utilizando únicamente, mayúsculas, minúsculas y números o símbolos.
+                    Al finalizar el registro recibirá un correo de verificación para validar sus datos y así poder
+                    acceder al contenido del curso y evaluaciones.
                 </p>
             </div>
             <div class="col-md-6 mb-3">
@@ -151,8 +160,12 @@
                         <i class="fa fa-file-contract fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Acreditaci&oacute;n</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                <p class="text-muted text-justify">Para poder acreditar el curso en línea
+                    “Protocolo de Actuación de SEIEM”, al final de cada uno de los Módulos deberás realizar la
+                    evaluación que se presenta, contando con 3 oportunidades para acreditar cada uno de los módulos,
+                    las preguntas contienen respuestas de opción múltiple. Al acreditar las evaluaciones de los 4
+                    módulos, estarás en posibilidades de descargar la CONSTANCIA DE ACREDITACIÓN, misma que
+                    contará con valor curricular.
                 </p>
             </div>
             <div class="col-md-6 mb-3">
@@ -161,8 +174,10 @@
                         <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Duraci&oacute;n</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                <p class="text-muted text-justify">El periodo de duración del curso en línea
+                    “Protocolo de Actuación de SEIEM”, será no mayor a 3 meses, en el que la fecha de registro del curso
+                    será del 25 de septiembre 2023 al 29 de septiembre 2023; el periodo de inicio del curso
+                    será el día 2 de octubre 2023, finalizando el día 15 de diciembre 2023.
                 </p>
             </div>
         </div>
