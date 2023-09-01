@@ -8,8 +8,6 @@
             <div class="col-md-8">
                 <h1 class="text-gradient mb-4 text-center">{{ $evaluacion->nombre }} del {{ $modulo->nombre }}</h1>
 
-                <!--<p class="text-justify">{{ __('Esta evaluación tiene un límite de tiempo de 15 minutos. Usted tiene :tiempo_lim minutos restantes.',['tiempo_lim' => $evaluacion->tiempo_lim / 60]) }}</p>-->
-
                 @if ($pivot ?? null)
                     @php
                         $intentosRestantes = $evaluacion->intentos_max - $pivot->pivot->intentos;
@@ -59,7 +57,8 @@
 
                 // Verificar si el número de respuestas es igual al número de preguntas
                 if (respuestas.length !== {{ count($preguntas) }}) {
-                    e.preventDefault(); // Previene el envío del formulario si no todas las preguntas han sido contestadas
+                    // Previene el envío del formulario si no todas las preguntas han sido contestadas
+                    e.preventDefault();
 
                     Swal.fire({
                         title: 'Mensaje',

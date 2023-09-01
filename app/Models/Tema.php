@@ -11,7 +11,6 @@ class Tema extends Model
 
     protected $fillable = [
         'titulo',
-        'descripcion',
         'modulo_id',
         'archivo',
     ];

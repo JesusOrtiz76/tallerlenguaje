@@ -37,12 +37,16 @@ class TemaController extends Controller
 
         if ($currentDate->lt($accessStartDate)) {
             $formattedStartDate = $accessStartDate->isoFormat('dddd D [de] MMMM [de] Y');
-            return redirect()->route('home')->with('warning', 'El periodo para el acceso a este curso inicia el ' . $formattedStartDate);
+            return redirect()
+                ->route('home')
+                ->with('warning', 'El periodo para el acceso a este curso inicia el ' . $formattedStartDate);
         }
 
         if ($currentDate->gt($accessEndDate)) {
             $formattedEndDate = $accessEndDate->isoFormat('dddd D [de] MMMM [de] Y');
-            return redirect()->route('home')->with('warning', 'El periodo para el acceso a este curso finalizó el ' . $formattedEndDate);
+            return redirect()
+                ->route('home')
+                ->with('warning', 'El periodo para el acceso a este curso finalizó el ' . $formattedEndDate);
         }
 
         // Verificar si el usuario está inscrito en el curso

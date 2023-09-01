@@ -127,7 +127,7 @@
                 en los casos que se puedan presentar en los diferentes niveles educativos.</h3>
         </div>
         <div class="row text-center">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
@@ -139,7 +139,7 @@
                     actuación en los casos contemplados se realicen a cabalidad.
                 </p>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
@@ -154,30 +154,31 @@
                     acceder al contenido del curso y evaluaciones.
                 </p>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-file-contract fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Acreditaci&oacute;n</h4>
                 <p class="text-muted text-justify">Para poder acreditar el curso en línea
-                    “Protocolo de Actuación de SEIEM”, al final de cada uno de los Módulos deberás realizar la
+                    “Protocolo de Actuación de SEIEM”, al final de cada uno de los Módulos deberá realizar la
                     evaluación que se presenta, contando con 3 oportunidades para acreditar cada uno de los módulos,
-                    las preguntas contienen respuestas de opción múltiple. Al acreditar las evaluaciones de los 4
-                    módulos, estarás en posibilidades de descargar la CONSTANCIA DE ACREDITACIÓN, misma que
-                    contará con valor curricular.
+                    las preguntas contienen respuestas de opción múltiple. Al acreditar las evaluaciones de los
+                    {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la CONSTANCIA DE
+                    ACREDITACIÓN, misma que contará con valor curricular.
                 </p>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
                     </span>
-                <h4 class="my-3">Duraci&oacute;n</h4>
+                <h4 class="my-3">Duración</h4>
                 <p class="text-muted text-justify">El periodo de duración del curso en línea
                     “Protocolo de Actuación de SEIEM”, será no mayor a 3 meses, en el que la fecha de registro del curso
-                    será del 25 de septiembre 2023 al 29 de septiembre 2023; el periodo de inicio del curso
-                    será el día 2 de octubre 2023, finalizando el día 15 de diciembre 2023.
+                    será del {{ $formattedStartRegisterDate }} al {{ $formattedEndRegisterDate }}; el periodo de inicio del curso será el día
+                    <strong>{{ $formattedStartDate }}</strong>, finalizando el día
+                    <strong>{{ $formattedEndDate }}</strong>.
                 </p>
             </div>
         </div>

@@ -20,11 +20,15 @@ class CheckRegisterDate
         $formattedEndDate = $registerEndDate->isoFormat('dddd D [de] MMMM [de] Y');
 
         if ($currentDate->lt($registerStartDate)) {
-            return redirect()->route('login')->with('warning', 'El periodo de registro inicia el ' . $formattedStartDate);
+            return redirect()
+                ->route('login')
+                ->with('warning', 'El periodo de registro inicia el ' . $formattedStartDate);
         }
 
         if ($currentDate->gt($registerEndDate)) {
-            return redirect()->route('login')->with('warning', 'El periodo de registro finalizó el ' . $formattedEndDate);
+            return redirect()
+                ->route('login')
+                ->with('warning', 'El periodo de registro finalizó el ' . $formattedEndDate);
         }
 
         return $next($request);
