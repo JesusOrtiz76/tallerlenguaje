@@ -6,9 +6,9 @@ use App\Models\Modulo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Evaluacion>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tema>
  */
-class EvaluacionFactory extends Factory
+class TemaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,8 @@ class EvaluacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => 'Evaluación',
+            'titulo' => $this->faker->sentence(3),
+            'archivo' => $this->faker->filePath(),
             'modulo_id' => Modulo::factory(),
         ];
     }
