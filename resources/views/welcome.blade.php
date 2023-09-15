@@ -24,7 +24,7 @@
 </div>
 
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg fixed-top border-bottom" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top"></a>
         <button class="btn btn-white d-inline-block d-lg-none ml-auto"

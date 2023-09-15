@@ -55,7 +55,7 @@ class EvaluacionController extends Controller
         }
 
         // Obtener todas las preguntas de la evaluación, con opciones cargadas y ordenadas aleatoriamente
-        $preguntas = $evaluacion->preguntas()->with('opciones')->inRandomOrder()->get();
+        $preguntas = $evaluacion->preguntas()->with('opciones')->get();
 
         // Verificar si existen preguntas en la evaluación
         if ($preguntas->isEmpty()) {

@@ -12,7 +12,7 @@
     }
 @endphp
 
-<nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+<nav class="navbar navbar-expand-lg sticky-top border-bottom" id="mainNav">
     <div class="{{ $classContainer }}">
 
         {!! $buttonHtml !!}

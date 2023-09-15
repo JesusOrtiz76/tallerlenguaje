@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])
 Route::post('register', [RegisterController::class, 'register'])
     ->middleware('checkregisterdate');
 
-
+// Rutas para todos los usuarios autenticados
 Route::middleware(['auth', 'verified'])->group(function () {
     //Cursos
     Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])
@@ -62,4 +63,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Resultados
     Route::get('evaluaciones/{evaluacion}/resultado', [EvaluacionController::class, 'resultado'])
         ->name('evaluaciones.resultado');
+});
+
+
+// Solo para administradores
+Route::middleware(['auth', 'checkUserRole:Admin'])->group(function () {
+    // Dashboard
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Lista de usuarios registrados
+    Route::get('users', [AdminController::class, 'index'])->name('admin.users');
 });

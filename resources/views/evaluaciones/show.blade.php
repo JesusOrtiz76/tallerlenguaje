@@ -27,7 +27,7 @@
                             <div class="card-body px-lg-3">
                                 <h5 class="mb-3">{{ $pregunta->enunciado }}</h5>
                                 <div class="w-100 d-flex justify-content-center row ps-4">
-                                    @foreach ($pregunta->opciones->shuffle() as $opcion)
+                                    @foreach ($pregunta->opciones as $opcion)
                                         <input type="radio"
                                                class="btn-check"
                                                name="respuestas[{{ $pregunta->id }}]"
@@ -36,9 +36,9 @@
                                                @if(old('respuestas.'.$pregunta->id, '') == $opcion->id)
                                                    checked
                                             @endif>
-                                        <label class="btn col btn-outline-primary py-1 m-1"
+                                        <label class="btn col btn-outline-primary py-1 m-1 text-justify"
                                                for="respuesta_{{ $opcion->id }}">
-                                            {{ $opcion->texto }}
+                                            {!! nl2br(e($opcion->texto)) !!}
                                         </label>
                                     @endforeach
                                 </div>
