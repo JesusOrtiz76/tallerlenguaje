@@ -6,14 +6,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto">
-                <div class="card shadow-sm border-0 blur-bg" style="border-radius: 0.5rem;">
+                <div class="card shadow-sm border-0 blur-bg">
                     <div class="row g-0">
                         <div class="col-md-3 col-lg-3 d-none d-md-block">
-                            <img src="assets/img/bg-abstract.jpg"
+                            <img src="{{ asset('assets/img/bg-abstract.jpg') }}"
                                  class="h-100 img-responsive"
                                  alt="login form"
-                                 class="img-fluid"
-                                 style="border-radius: 0.5rem 0rem 0rem 0.5rem;">
+                                 style="border-radius: 0.5rem 0 0 0.5rem;">
                         </div>
                         <div class="col-md-9 col-lg-9 d-flex align-items-center">
                             <div class="card-body p-5 p-lg-5">
@@ -34,13 +33,12 @@
                                                name="name"
                                                value="{{ old('name') }}"
                                                oninput="toCap(this)"
-                                               required
                                                autocomplete="name"
                                                autofocus>
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
 
@@ -52,13 +50,12 @@
                                                name="rfc"
                                                value="{{ old('rfc') }}"
                                                oninput="toMay(this)"
-                                               required
                                                autocomplete="rfc"
                                                autofocus>
                                         @error('rfc')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
 
@@ -70,13 +67,12 @@
                                                name="email"
                                                value="{{ old('email') }}"
                                                oninput="toMin(this)"
-                                               required
                                                autocomplete="email"
                                                autofocus>
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
 
@@ -87,12 +83,11 @@
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password"
                                                value="{{ old('password') }}"
-                                               required
                                                autocomplete="new-password">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
 
@@ -102,7 +97,6 @@
                                                type="password"
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password_confirmation"
-                                               required
                                                autocomplete="new-password">
                                     </div>
 

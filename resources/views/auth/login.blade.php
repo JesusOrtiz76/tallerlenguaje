@@ -9,7 +9,10 @@
             <div class="card shadow-sm border-0 blur-bg" style="border-radius: 0.5rem;">
                 <div class="row g-0">
                     <div class="col-md-3 col-lg-3 d-none d-md-block">
-                        <img src="assets/img/bg-abstract.jpg" class="h-100 img-responsive" alt="login form" class="img-fluid" style="border-radius: 0.5rem 0rem 0rem 0.5rem;">
+                        <img src="{{ asset('assets/img/bg-abstract.jpg') }}"
+                             class="h-100 img-responsive"
+                             alt="login form"
+                             style="border-radius: 0.5rem 0 0 0.5rem;">
                     </div>
                     <div class="col-md-9 col-lg-9 d-flex align-items-center">
                         <div class="card-body p-5 p-lg-5">
