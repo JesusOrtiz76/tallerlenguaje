@@ -5,7 +5,7 @@
                 <div class="w-100 d-flex justify-content-center">
                     <a class="btn-sidebar" href="{{ route('modulos.index', $curso->id) }}">
                         <h5 class="text-uppercase text-primary mb-2 text-center">
-                            Módulos del curso<br>"{{ $curso->nombre }}"
+                            Módulos del curso
                         </h5>
                     </a>
                 </div>
@@ -22,7 +22,7 @@
                         {{ Request::is('modulos/'.$modulo->id) ? ' active' : '' }}"
                            href="{{ route('modulos.show', $modulo->id) }}">
                             <i class="fa-regular fa-folder-closed"></i>
-                            {{ Str::limit($modulo->nombre, 25, '...') }}
+                            {{ Str::limit($modulo->nombre, 23, '...') }}
                         </a>
                         <button class="btn btn-outline-primary dropdown-toggle"
                                 data-bs-toggle="collapse"
@@ -41,7 +41,7 @@
                                     {{ Request::is('temas/'.$tema->id) ? ' active' : '' }}"
                                        href="{{ route('temas.show', $tema->id) }}">
                                         <i class="fa-solid fa-chalkboard-user"></i>
-                                        {{ Str::limit($tema->titulo, 25, '...') }}
+                                        {{ Str::limit($tema->titulo, 24, '...') }}
                                     </a>
                                 @endforeach
                             </div>

@@ -134,9 +134,13 @@
                     </span>
                 <h4 class="my-3">Objetivo</h4>
                 <p class="text-muted text-justify">
-                    Conocer los conceptos básicos, desde una perspectiva más digerible, con la finalidad
-                    de acercar los elementos necesarios para garantizar que la prevención, detección y
-                    actuación en los casos contemplados se realicen a cabalidad.
+                    Comprender los conceptos básicos necesarios que, de manera significativa, permitan a la comunidad
+                    educativa, conocer las responsabilidades y acciones inmediatas a realizar par la prevención,
+                    detección y actuación en los casos de abuso sexual infantil, acoso escolar y maltrato de los alumnos
+                    dentro de los planteles de educación básica, públicos y privados, pertenecientes al Subsistema
+                    Educativo Federalizado a cargo de Servicios Educativos Integrados al Estado de México (SEIEM), con
+                    la finalidad de salvaguardar sus derechos fundamentales, así como su integridad física, psicológica
+                    y sexual.
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -148,9 +152,9 @@
                 <p class="text-muted text-justify">Para realizar su registro deberá ser servidor público
                     activo adscrito a Servicios Educativos Integrados al Estado de México (SEIEM), deberá llenar el
                     <a href="{{ route('register') }}"><strong>Formulario de Registro</strong></a>
-                    y ingresar su nombre, RFC y correo electrónico, y posteriormente podrá crear una
-                    contraseña de 8 caracteres, utilizando únicamente, mayúsculas, minúsculas y números o símbolos.
-                    Al finalizar el registro recibirá un correo de verificación para validar sus datos y así poder
+                    ingresando su nombre, RFC y correo electrónico, posteriormente, podrá crear una
+                    contraseña de 8 caracteres, utilizando mayúsculas, minúsculas, números o símbolos.
+                    Al finalizar,recibirá un correo de verificación para validar sus datos y así poder
                     acceder al contenido del curso y evaluaciones.
                 </p>
             </div>
@@ -164,8 +168,8 @@
                     “Protocolo de Actuación de SEIEM”, al final de cada uno de los Módulos deberá realizar la
                     evaluación que se presenta, contando con 3 oportunidades para acreditar cada uno de los módulos,
                     las preguntas contienen respuestas de opción múltiple. Al acreditar las evaluaciones de los
-                    {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la CONSTANCIA DE
-                    ACREDITACIÓN, misma que contará con valor curricular.
+                    {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la
+                    <strong>CONSTANCIA DE ACREDITACIÓN</strong>, misma que contará con valor curricular.
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -174,9 +178,10 @@
                         <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Duración</h4>
-                <p class="text-muted text-justify">El periodo de duración del curso en línea
-                    “Protocolo de Actuación de SEIEM”, será no mayor a 3 meses, en el que la fecha de registro del curso
-                    será del {{ $formattedStartRegisterDate }} al {{ $formattedEndRegisterDate }}; el periodo de inicio del curso será el día
+                <p class="text-muted text-justify">La duración del curso en línea del Protocolo de Actuación para la
+                    Prevención, Detección y Actuación en caso de Abuso Sexual Infantil, Acoso Escolar y Maltrato en las
+                    Escuelas de Educación Básica de SEIEM, no será mayor a seis meses, contados a partir de la fecha de
+                    su registro. La fecha para registro al curso será a partir del día
                     <strong>{{ $formattedStartDate }}</strong>, finalizando el día
                     <strong>{{ $formattedEndDate }}</strong>.
                 </p>
