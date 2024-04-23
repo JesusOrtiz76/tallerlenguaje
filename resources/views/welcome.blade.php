@@ -119,7 +119,7 @@
             <h2 class="section-heading text-uppercase text-gradient">Objetivos del curso</h2>
             <h3 class="section-subheading text-muted text-justify">Tiene como propósito primordial, hacer énfasis en
                 la correcta aplicación del “Protocolo para la prevención, detección y actuación en casos de Abuso Sexual
-                Infantil, Acoso Escolar y Maltrato, en las escuelas de Educación Básica de SIEM”, con la finalidad de
+                Infantil, Acoso Escolar y Maltrato, en las escuelas de Educación Básica de SEIEM”, con la finalidad de
                 que todo el personal adscrito a Servicios Educativos Integrados al Estado de México
                 (SEIEM), es decir, Autoridades Escolares (Supervisores Generales, Supervisores y
                 Directores), Docentes frente a grupo, Personal Administrativo y de Apoyo a la
