@@ -6,6 +6,7 @@
 
 import './bootstrap';
 import './scripts';
+import './infoDev';
 import { createApp } from 'vue';
 import Swal from 'sweetalert2';
 window.Swal = Swal;

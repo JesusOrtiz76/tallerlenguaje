@@ -5,6 +5,10 @@
         $('#sidebar').toggleClass('show');
     });
 
+    $('#closeSidebar').on('click', function () {
+        $('#sidebar').removeClass('show');
+    });
+
 })(jQuery);
 
 // Mostrar el spinner al cargar la página

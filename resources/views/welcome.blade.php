@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>SEIEM | {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -116,10 +116,10 @@
 <section class="page-section" id="objetivos">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase text-gradient">Objetivos del curso</h2>
-            <h3 class="section-subheading text-muted text-justify">Tiene como propósito primordial, hacer énfasis en
+            <h2 class="section-heading text-uppercase text-gradient">Introducción</h2>
+            <h3 class="section-subheading text-muted text-justify">El curso tiene como propósito primordial, hacer énfasis en
                 la correcta aplicación del “Protocolo para la prevención, detección y actuación en casos de Abuso Sexual
-                Infantil, Acoso Escolar y Maltrato, en las escuelas de Educación Básica de SEIEM”, con la finalidad de
+                e                Infantil, Acoso Escolar y Maltrato, en las escuelas de Educación Básica de SEIEM”, con la finalidad de
                 que todo el personal adscrito a Servicios Educativos Integrados al Estado de México
                 (SEIEM), es decir, Autoridades Escolares (Supervisores Generales, Supervisores y
                 Directores), Docentes frente a grupo, Personal Administrativo y de Apoyo a la
@@ -134,13 +134,11 @@
                     </span>
                 <h4 class="my-3">Objetivo</h4>
                 <p class="text-muted text-justify">
-                    Comprender los conceptos básicos necesarios que, de manera significativa, permitan a la comunidad
-                    educativa, conocer las responsabilidades y acciones inmediatas a realizar par la prevención,
-                    detección y actuación en los casos de abuso sexual infantil, acoso escolar y maltrato de los alumnos
-                    dentro de los planteles de educación básica, públicos y privados, pertenecientes al Subsistema
-                    Educativo Federalizado a cargo de Servicios Educativos Integrados al Estado de México (SEIEM), con
-                    la finalidad de salvaguardar sus derechos fundamentales, así como su integridad física, psicológica
-                    y sexual.
+                    Comprender los conceptos básicos necesarios que, de manera significativa, permitan a la comunidad educativa, conocer las responsabilidades
+                    y acciones inmediatas a realizar para la prevención, detección y actuación en los casos de abuso sexual infantil, acoso escolar y maltrato
+                    de los alumnos dentro de los planteles de educación básica, públicos y privados, pertenecientes al Subsistema Educativo Federalizado a cargo
+                    de Servicios Educativos Integrados al Estado de México (SEIEM), con la finalidad de salvaguardar sus derechos fundamentales, así como su integridad
+                    física, psicológica y sexual.
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -149,13 +147,12 @@
                         <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Instrucciones</h4>
-                <p class="text-muted text-justify">Para realizar su registro deberá ser servidor público
-                    activo adscrito a Servicios Educativos Integrados al Estado de México (SEIEM), deberá llenar el
+                <p class="text-muted text-justify">Para realizar su registro, deberá ser servidor público activo adscrito a
+                    Servicios Educativos Integrados al Estado de México (SEIEM), deberá llenar el
                     <a href="{{ route('register') }}"><strong>Formulario de Registro</strong></a>
-                    ingresando su nombre, RFC y correo electrónico, posteriormente, podrá crear una
-                    contraseña de 8 caracteres, utilizando mayúsculas, minúsculas, números o símbolos.
-                    Al finalizar,recibirá un correo de verificación para validar sus datos y así poder
-                    acceder al contenido del curso y evaluaciones.
+                    , ingresando su nombre, RFC y correo electrónico, posteriormente, podrá crear una contraseña de 8 caracteres, utilizando mayúsculas,
+                    minúsculas, números o símbolos. Al finalizar, recibirá un correo electrónico de verificación para validar sus datos y así poder acceder
+                    al contenido del curso y evaluaciones.
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -165,11 +162,13 @@
                     </span>
                 <h4 class="my-3">Acreditaci&oacute;n</h4>
                 <p class="text-muted text-justify">Para poder acreditar el curso en línea
-                    “Protocolo de Actuación de SEIEM”, al final de cada uno de los Módulos deberá realizar la
+                    “Protocolo de Actuación para la Prevención, Detección y
+                    Actuación en caso de Abuso Sexual Infantil, Acoso Escolar y Maltrato en las Escuelas de Educación Básica de SEIEM”,
+                    al final de cada uno de los Módulos deberá realizar la
                     evaluación que se presenta, contando con 3 oportunidades para acreditar cada uno de los módulos,
                     las preguntas contienen respuestas de opción múltiple. Al acreditar las evaluaciones de los
-                    {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la
-                    <strong>CONSTANCIA DE ACREDITACIÓN</strong>, misma que contará con valor curricular.
+                    {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la CONSTANCIA DE
+                    ACREDITACIÓN, misma que contará con valor curricular.
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -178,10 +177,10 @@
                         <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Duración</h4>
-                <p class="text-muted text-justify">La duración del curso en línea del Protocolo de Actuación para la
-                    Prevención, Detección y Actuación en caso de Abuso Sexual Infantil, Acoso Escolar y Maltrato en las
-                    Escuelas de Educación Básica de SEIEM, no será mayor a seis meses, contados a partir de la fecha de
-                    su registro. La fecha para registro al curso será a partir del día
+                <p class="text-muted text-justify">La duración del curso en línea del "Protocolo de Actuación para la Prevención, Detección y
+                    Actuación en caso de Abuso Sexual Infantil, Acoso Escolar y Maltrato en las Escuelas de Educación Básica de SEIEM", no será
+                    mayor a seis meses, contados a partir de la fecha de su registro. La fecha para registro al curso será del
+                    será
                     <strong>{{ $formattedStartDate }}</strong>, finalizando el día
                     <strong>{{ $formattedEndDate }}</strong>.
                 </p>

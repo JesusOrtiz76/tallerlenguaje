@@ -1,54 +1,72 @@
-<nav id="sidebar" class="vh-100 shadow blur-bg">
-    <div class="sidebar-content">
-        @foreach ($cursos as $curso)
-            <div class="mb-4">
-                <div class="w-100 d-flex justify-content-center">
-                    <a class="btn-sidebar" href="{{ route('modulos.index', $curso->id) }}">
-                        <h5 class="text-uppercase text-primary mb-2 text-center">
-                            Módulos del curso
-                        </h5>
-                    </a>
-                </div>
-                @foreach ($curso->modulos as $modulo)
-                    @php
-                        $activo = false;
-                        $temas_ids = collect($modulo->temas)->pluck('id');
-                        if (Request::is('temas/*') && $temas_ids->contains(Request::segment(2))) {
-                            $activo = true;
-                        }
-                    @endphp
-                    <div class="btn-group d-flex justify-content-between my-2">
-                        <a class="btn btn-outline-primary btn-sidebar btn-text-left w-100
-                        {{ Request::is('modulos/'.$modulo->id) ? ' active' : '' }}"
-                           href="{{ route('modulos.show', $modulo->id) }}">
-                            <i class="fa-regular fa-folder-closed"></i>
-                            {{ Str::limit($modulo->nombre, 23, '...') }}
-                        </a>
-                        <button class="btn btn-outline-primary dropdown-toggle"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapse-{{ $modulo->id }}"
-                                aria-expanded="{{ $activo ? 'true' : 'false' }}"
-                                aria-controls="collapse-{{ $modulo->id }}">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                    </div>
+<nav id="sidebar" class="vh-100 shadow d-flex flex-column justify-content-between blur-bg">
 
-                    <div class="collapse{{ $activo ? ' show' : '' }}" id="collapse-{{ $modulo->id }}">
-                        @if (count($modulo->temas))
-                            <div class="btn-group-vertical w-100">
-                                @foreach ($modulo->temas as $tema)
-                                    <a class="btn btn-outline-secondary btn-sidebar btn-text-left
-                                    {{ Request::is('temas/'.$tema->id) ? ' active' : '' }}"
-                                       href="{{ route('temas.show', $tema->id) }}">
-                                        <i class="fa-solid fa-chalkboard-user"></i>
-                                        {{ Str::limit($tema->titulo, 24, '...') }}
-                                    </a>
-                                @endforeach
-                            </div>
-                        @endif
+    <div class="col">
+        <div class="w-100 d-flex justify-content-end p-3">
+            <button type="button" id="closeSidebar" class="btn btn-white">
+                <i class="fa fa-x me-1"></i>
+                <span class="sr-only">Close Sidebar</span>
+            </button>
+        </div>
+        <!-- Contenido superior -->
+        <div class="sidebar-content">
+            @foreach ($cursos as $curso)
+                <div class="mb-4">
+                    <div class="w-100 d-flex justify-content-center">
+                        <a class="btn-sidebar" href="{{ route('modulos.index', $curso->id) }}">
+                            <h5 class="text-uppercase text-primary mb-2 text-center">
+                                Módulos del curso
+                            </h5>
+                        </a>
                     </div>
-                @endforeach
-            </div>
-        @endforeach
+                    @foreach ($curso->modulos as $modulo)
+                        @php
+                            $activo = false;
+                            $temas_ids = collect($modulo->temas)->pluck('id');
+                            if (Request::is('temas/*') && $temas_ids->contains(Request::segment(2))) {
+                                $activo = true;
+                            }
+                        @endphp
+                        <div class="btn-group d-flex justify-content-between my-2">
+                            <a class="btn btn-outline-primary btn-sidebar btn-text-left w-100
+                        {{ Request::is('modulos/'.$modulo->id) ? ' active' : '' }}"
+                               href="{{ route('modulos.show', $modulo->id) }}">
+                                <i class="fa-regular fa-folder-closed"></i>
+                                {{ Str::limit($modulo->nombre, 23, '...') }}
+                            </a>
+                            <button class="btn btn-outline-primary dropdown-toggle"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse-{{ $modulo->id }}"
+                                    aria-expanded="{{ $activo ? 'true' : 'false' }}"
+                                    aria-controls="collapse-{{ $modulo->id }}">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                        </div>
+
+                        <div class="collapse{{ $activo ? ' show' : '' }}" id="collapse-{{ $modulo->id }}">
+                            @if (count($modulo->temas))
+                                <div class="btn-group-vertical w-100">
+                                    @foreach ($modulo->temas as $tema)
+                                        <a class="btn btn-outline-secondary btn-sidebar btn-text-left
+                                    {{ Request::is('temas/'.$tema->id) ? ' active' : '' }}"
+                                           href="{{ route('temas.show', $tema->id) }}">
+                                            <i class="fa-solid fa-chalkboard-user"></i>
+                                            {{ Str::limit($tema->titulo, 24, '...') }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Contenido inferior -->
+    <div class="sidebar-footer d-flex flex-column align-items-end">
+        <a href="{{ asset('storage/assets/docs/Manual de Usuario Curso Protocolo.pdf') }}" download>
+            Manual de Usuario
+            <i class="fa-solid fa-circle-info"></i>
+        </a>
     </div>
 </nav>

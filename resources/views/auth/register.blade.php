@@ -32,7 +32,7 @@
                                                class="form-control @error('name') is-invalid @enderror"
                                                name="name"
                                                value="{{ old('name') }}"
-                                               oninput="toCap(this)"
+                                               oninput="toMay(this)"
                                                autocomplete="name"
                                                autofocus>
                                         @error('name')

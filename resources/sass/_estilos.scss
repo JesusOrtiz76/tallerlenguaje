@@ -43,13 +43,7 @@
 // Estilos de la barra de navegación, tema obscuro y claro
 
 [data-bs-theme="dark"] #mainNav {
-    padding: 15px 10px;
     background: rgba($bg_dark, 0.80);
-    backdrop-filter: blur(8.3px);
-    -webkit-backdrop-filter: blur(8.3px);
-    width: 100%;
-    margin-bottom: 40px;
-    z-index: 1;
 }
 
 #mainNav {
@@ -78,12 +72,7 @@
 // Estilos del logo, tema obscuro y claro
 
 [data-bs-theme="dark"] #mainNav .navbar-brand {
-    width: 228.81px;
-    height: 45px;
     background-image: url('../assets/img/dark-navbar-logo.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
 }
 
 #mainNav .navbar-brand {
@@ -449,9 +438,9 @@ header.masthead .masthead-heading {
     object-fit: cover;
 }
 
-@media (min-width: 920px) {
+@media (max-width: 1291.98px) {
     .with-sidebar {
-        padding-left: 300px !important;
+        padding-left: 0 !important;
     }
 }
 
@@ -481,27 +470,46 @@ header.masthead .masthead-heading {
     margin-left: -300px;
 }
 
-#sidebar .logo {
-    display: block;
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-}
-
-#sidebar .logo span {
-    display: block;
-}
-
-@media (max-width: 991.98px) {
+@media (max-width: 1291.98px) {
     #sidebar {
-        margin-left: -300px;
+        position: fixed; /* Posiciona fijo en la pantalla */
+        left: 0; /* Alineado a la izquierda */
+        top: 0; /* Alineado a la parte superior */
+        height: 100vh; /* Altura completa de la ventana */
+        margin-left: -300px; /* Oculto inicialmente */
+        z-index: 1050; /* Sobre el contenido principal */
     }
 
     #sidebar.show {
-        margin-left: 0;
+        margin-left: 0; /* Se muestra desplazando desde la izquierda */
     }
 }
 
+@media (max-width: 767.98px) {
+    #sidebar {
+        min-width: 100%; /* El sidebar ocupa el 100% del ancho */
+        max-width: 100%; /* Establece un máximo del 100% para evitar desbordamiento */
+        margin-left: -100%; /* Oculta inicialmente el sidebar fuera de la pantalla */
+    }
+
+    #sidebar.show {
+        margin-left: 0; /* El sidebar se muestra ocupando toda la pantalla */
+    }
+}
+
+/* Estilo por defecto: botón de cierre visible */
+#closeSidebar {
+    display: block; /* o inline-block, dependiendo de tus estilos actuales */
+}
+
+/* Ocultar el botón en pantallas grandes */
+@media (min-width: 1292px) {
+    #closeSidebar {
+        display: none;
+    }
+}
+
+/* Botones sidebar */
 .btn-text-left {
     text-align: left;
 }
@@ -514,11 +522,27 @@ a {
     text-decoration: none;
 }
 
+/* Contenido principal del Sidebar */
 .sidebar-content {
     padding: 5rem 1rem 3rem 1rem; //up left down right
     width: 100%;
 }
 
+/* Pie del Sidebar */
+.sidebar-footer {
+    padding: 1rem 1rem 1rem 1rem; //up left down right
+    width: 100%;
+
+    a {
+        text-align: end;
+        font-size: 8.5pt;
+        font-style: italic;
+    }
+
+    i{
+        margin-left: 0.5rem;
+    }
+}
 
 @media (min-width: 200px) {
     .animate {
@@ -535,6 +559,7 @@ a {
     }
 }
 
+/* Estilos del contenido principal */
 #content {
     width: 100%;
     min-width: 375px;

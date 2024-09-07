@@ -22,7 +22,7 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index'])->name('/');
 
 Auth::routes(['verify' => true]);
 
