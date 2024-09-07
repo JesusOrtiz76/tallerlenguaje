@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "{$tema->titulo} del {$modulo->nombre}")
+@section('title', "{$tema->otitulo} del {$modulo->onombre}")
 
 @section('content')
     <div class="container">

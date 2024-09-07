@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title',"Módulos del curso '$curso->onombre'")
+@section('title',"Módulos del curso")
 
 @section('content')
     <div class="container">

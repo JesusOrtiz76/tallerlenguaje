@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title',"$modulo->nombre")
+@section('title',"$modulo->onombre")
 
 @section('content')
     <div class="container">
