@@ -24,8 +24,8 @@ class CursoController extends Controller
         }
 
         // Comprobar las fechas de acceso
-        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->fecha_inicio);
-        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->fecha_fin);
+        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio);
+        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin);
 
         // Configurar la localización a español para el formato de fecha
         Carbon::setLocale('es');
@@ -51,6 +51,6 @@ class CursoController extends Controller
         // Matricular al usuario en el curso
         $curso->users()->attach(Auth::user()->id);
         return redirect()->route('home')
-            ->with('success', 'Te has inscrito en este curso ' . $curso->nombre);
+            ->with('success', 'Te has inscrito en este curso ' . $curso->onombre);
     }
 }

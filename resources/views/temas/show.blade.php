@@ -6,10 +6,10 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-9">
-                <h1 class="text-gradient mb-4 text-center">{{ $tema->titulo }}</h1>
+                <h1 class="text-gradient mb-4 text-center">{{ $tema->otitulo }}</h1>
                 <div class="mb-3">
                     @php
-                        $archivoPath = storage_path("app/public/{$tema->archivo}");
+                        $archivoPath = storage_path("app/public/{$tema->ohtml_file}");
                         if (is_file($archivoPath)) {
                             echo file_get_contents($archivoPath);
                         } else {

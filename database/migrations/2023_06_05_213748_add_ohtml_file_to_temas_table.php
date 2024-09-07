@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('rfc',13)->after('name')->unique();
+        Schema::table('r10temas', function (Blueprint $table) {
+            $table->string('ohtml_file')->nullable()->after('otitulo');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('rfc');
+        Schema::table('r10temas', function (Blueprint $table) {
+            $table->dropColumn('ohtml_file');
         });
     }
 };

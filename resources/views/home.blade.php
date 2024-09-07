@@ -10,15 +10,15 @@
 
                     <div class="col-lg-6 p-5 order-2 order-lg-1">
                         <img class="img-fluid mt-4"
-                             src="{{ asset('storage/' . $curso->image) }}"
-                             alt="Imagen del curso {{ $curso->nombre }}">
+                             src="{{ asset('storage/' . $curso->oimg_path) }}"
+                             alt="Imagen del curso {{ $curso->onombre }}">
                     </div>
 
                     <div class="col-lg-6 p-5 order-1 order-lg-2">
 
                         <p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
-                        <h1 class="text-gradient mb-4">{{ $curso->nombre }}</h1>
-                        <p class="text-muted text-justify">{{ $curso->descripcion }}</p>
+                        <h1 class="text-gradient mb-4">{{ $curso->onombre }}</h1>
+                        <p class="text-muted text-justify">{{ $curso->odescripcion }}</p>
 
                         @if(Auth::check())
                             <div class="row">
@@ -66,8 +66,8 @@
                     <div class="col-lg-6 p-5 order-1">
 
                         <p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
-                        <h1 class="text-gradient mb-4">{{ $curso->nombre }}</h1>
-                        <p class="text-muted text-justify">{{ $curso->descripcion }}</p>
+                        <h1 class="text-gradient mb-4">{{ $curso->onombre }}</h1>
+                        <p class="text-muted text-justify">{{ $curso->odescripcion }}</p>
 
                         @if(Auth::check())
                             <div class="row">
@@ -114,8 +114,8 @@
 
                     <div class="col-lg-6 p-5 order-2">
                         <img class="img-fluid mt-4"
-                             src="{{ asset('storage/' . $curso->image) }}"
-                             alt="Imagen del curso {{ $curso->nombre }}">
+                             src="{{ asset('storage/' . $curso->oimg_path) }}"
+                             alt="Imagen del curso {{ $curso->onombre }}">
                     </div>
                 @endif
             </div>

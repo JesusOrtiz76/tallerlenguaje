@@ -15,7 +15,7 @@ class AdminController extends Controller
 
         if ($search) {
             $users = $users->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('rfc', 'LIKE', "%{$search}%")
+                ->orWhere('orfc', 'LIKE', "%{$search}%")
                 ->orWhere('email', 'LIKE', "%{$search}%");
         }
 

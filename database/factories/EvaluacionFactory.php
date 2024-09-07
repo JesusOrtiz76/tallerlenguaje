@@ -18,8 +18,8 @@ class EvaluacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => 'Evaluación',
             'modulo_id' => Modulo::factory(),
+            'onombre' => 'Evaluación',
         ];
     }
 }

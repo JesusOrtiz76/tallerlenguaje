@@ -18,9 +18,9 @@ class TemaFactory extends Factory
     public function definition(): array
     {
         return [
-            'titulo' => $this->faker->sentence(3),
-            'archivo' => $this->faker->filePath(),
             'modulo_id' => Modulo::factory(),
+            'otitulo' => $this->faker->sentence(3),
+            'ohtml_file' => $this->faker->filePath(),
         ];
     }
 }

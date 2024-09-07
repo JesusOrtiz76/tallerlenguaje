@@ -95,7 +95,7 @@
 <header class="masthead">
     <div class="container">
         <div class="masthead-subheading"> {{ __('Welcome to the course') }} </div>
-        <div class="masthead-heading text-uppercase"> {{ $cursos[0]->nombre }} </div>
+        <div class="masthead-heading text-uppercase"> {{ $cursos[0]->onombre }} </div>
         <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap"
            href="{{ route('home') }}">
             {{ __('Go to course') }}
@@ -118,7 +118,7 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase text-gradient">Introducción</h2>
             <h3 class="section-subheading text-muted text-justify">El curso tiene como propósito primordial,
-                hacer énfasis en la correcta aplicación del “{{ $cursos[0]->nombre }}”, con la finalidad de
+                hacer énfasis en la correcta aplicación del “{{ $cursos[0]->onombre }}”, con la finalidad de
                 que todo el personal adscrito a Servicios Educativos Integrados al Estado de México
                 (SEIEM), es decir, Autoridades Escolares (Supervisores Generales, Supervisores y
                 Directores), Docentes frente a grupo, Personal Administrativo y de Apoyo a la
@@ -213,15 +213,15 @@
             @foreach($cursos[0]->modulos as $modulo)
                 <li class="{{ $loop->iteration % 2 == 0 ? 'modulo-inverted' : '' }}">
                     <div class="modulo-image">
-                        <img class="rounded-circle" src="{{ asset('storage/' . $modulo->img_path) }}"
-                             alt="Imagen del {{ $modulo->nombre }}">
+                        <img class="rounded-circle" src="{{ asset('storage/' . $modulo->oimg_path) }}"
+                             alt="Imagen del {{ $modulo->onombre }}">
                     </div>
                     <div class="modulo-panel">
                         <div class="modulo-heading">
-                            <h4>{{ $modulo->nombre }}</h4>
+                            <h4>{{ $modulo->onombre }}</h4>
                         </div>
                         <div class="modulo-body">
-                            <p class="text-muted text-justify">{{ $modulo->descripcion }}</p>
+                            <p class="text-muted text-justify">{{ $modulo->odescripcion }}</p>
                         </div>
                     </div>
                 </li>

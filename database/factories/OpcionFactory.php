@@ -17,8 +17,8 @@ class OpcionFactory extends Factory
     public function definition(): array
     {
         return [
-            'texto' => $this->faker->sentence(5),
-            'es_correcta' => false,
+            'otexto' => $this->faker->sentence(5),
+            'oes_correcta' => false,
         ];
     }
 }

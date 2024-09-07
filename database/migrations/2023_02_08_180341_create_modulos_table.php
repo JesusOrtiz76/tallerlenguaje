@@ -13,14 +13,14 @@ class CreateModulosTable extends Migration
      */
     public function up()
     {
-        Schema::create('modulos', function (Blueprint $table) {
+        Schema::create('r10modulos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('curso_id');
-            $table->string('nombre');
-            $table->text('descripcion');
+            $table->string('onombre');
+            $table->text('odescripcion');
             $table->timestamps();
 
-            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
+            $table->foreign('curso_id')->references('id')->on('r10cursos')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateModulosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modulos');
+        Schema::dropIfExists('r10modulos');
     }
 }

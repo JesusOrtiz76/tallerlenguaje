@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function calcularPorcentajePorCurso($user, $curso) {
+    public function calcularPorcentajePorCurso($user, $cursoId) {
 
         // Obtener todos los módulos del curso actual
-        $totalModulos = Modulo::where('curso_id', $curso)->pluck('id');
+        $totalModulos = Modulo::where('curso_id', $cursoId)->pluck('id');
 
         // Contar todas las evaluaciones para los módulos de ese curso
         $totalEvaluacionesCurso = Evaluacion::whereIn('modulo_id', $totalModulos)->count();

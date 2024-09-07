@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title',"Módulos del curso '$curso->nombre'")
+@section('title',"Módulos del curso '$curso->onombre'")
 
 @section('content')
     <div class="container">
@@ -22,10 +22,10 @@
                                 @foreach($modulos as $modulo)
                                     <tr>
                                         <td class="text-nowrap align-middle">
-                                            <strong>{{ $modulo->nombre }}</strong>
+                                            <strong>{{ $modulo->onombre }}</strong>
                                         </td>
                                         <td class="text-justify" style="min-width: 500px;">
-                                            {{ $modulo->descripcion }}
+                                            {{ $modulo->odescripcion }}
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ route('modulos.show', $modulo) }}"

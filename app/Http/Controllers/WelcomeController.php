@@ -17,8 +17,8 @@ class WelcomeController extends Controller
         $registerEndDate   = Carbon::createFromFormat('Y/m/d', env('REGISTER_END_DATE'));
 
         // Comprobar las fechas de acceso del primer curso
-        $accessStartDate   = Carbon::createFromFormat('Y-m-d', $curso->fecha_inicio);
-        $accessEndDate     = Carbon::createFromFormat('Y-m-d', $curso->fecha_fin);
+        $accessStartDate   = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio);
+        $accessEndDate     = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin);
 
         // Configurar la localización a español para el formato de fecha
         Carbon::setLocale('es');

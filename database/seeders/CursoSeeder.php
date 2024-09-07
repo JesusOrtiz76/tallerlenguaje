@@ -21,8 +21,14 @@ class CursoSeeder extends Seeder
         // Crear un curso
         $curso = Curso::factory()->create();
 
-        // Crear 6 módulos para el curso
-        $modulos = Modulo::factory(6)->create(['curso_id' => $curso->id]);
+        // Crear 4 módulos para el curso
+        $contador = 1;
+        $modulos = Modulo::factory(4)->create([
+            'curso_id' => $curso->id,
+            'onombre' => function () use (&$contador) {
+                return "Módulo " . $contador++;
+            }
+        ]);
 
         foreach ($modulos as $modulo) {
             // Crear 3 temas para el módulo
@@ -31,8 +37,8 @@ class CursoSeeder extends Seeder
             // Crear una evaluación para el módulo
             $evaluacion = Evaluacion::factory()->create([
                 'modulo_id' => $modulo->id,
-                'tiempo_lim' => 15, // duración de la evaluación en minutos
-                'intentos_max' => 3, // máximo de intentos permitidos
+                'otiempo_lim' => 15, // duración de la evaluación en minutos
+                'ointentos_max' => 3, // máximo de intentos permitidos
             ]);
 
             // Crear 12 preguntas para la evaluación, con 5 opciones cada una
@@ -45,7 +51,7 @@ class CursoSeeder extends Seeder
                 Opcion::where('pregunta_id', $pregunta->id)
                     ->inRandomOrder()
                     ->limit(1)
-                    ->update(['es_correcta' => true]);
+                    ->update(['oes_correcta' => true]);
             }
         }
     }

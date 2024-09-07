@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('temas', function (Blueprint $table) {
+        Schema::create('r10temas', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->text('descripcion')->nullable();
-            $table->foreignId('modulo_id')->constrained()->onDelete('cascade');
-            $table->text('contenido')->nullable();
-            $table->string('img_path')->nullable();
+            $table->foreignId('modulo_id')->constrained('r10modulos')->onDelete('cascade');
+            $table->string('otitulo');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('temas');
+        Schema::dropIfExists('r10temas');
     }
 };

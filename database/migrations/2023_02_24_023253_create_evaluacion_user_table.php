@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evaluacion_user', function (Blueprint $table) {
+        Schema::create('r10evaluacion_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('evaluacion_id');
-            $table->integer('intentos')->default(0);
-            $table->integer('resultados')->default(0);
+            $table->integer('ointentos')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('evaluacion_id')->references('id')->on('evaluaciones')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('r10users')->onDelete('cascade');
+            $table->foreign('evaluacion_id')->references('id')->on('r10evaluaciones')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluacion_user');
+        Schema::dropIfExists('r10evaluacion_user');
     }
 };

@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 // Solo para administradores
-Route::middleware(['auth', 'checkUserRole:Admin'])->group(function () {
+Route::middleware(['auth', 'checkUserRole:admin'])->group(function () {
     // Dashboard
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 

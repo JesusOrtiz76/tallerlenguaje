@@ -14,6 +14,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
+    protected $table = 'r10users';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
-        'rfc',
+        'orfc',
         'email',
         'password',
     ];
@@ -48,14 +49,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function cursos()
     {
-        return $this->belongsToMany(Curso::class, 'inscripciones')
+        return $this->belongsToMany(Curso::class, 'r10inscripciones', 'user_id', 'curso_id')
             ->withTimestamps();
     }
 
     public function evaluaciones()
     {
-        return $this->belongsToMany(Evaluacion::class)
-            ->withPivot('intentos')
+        return $this->belongsToMany(Evaluacion::class, 'r10evaluacion_user', 'user_id', 'evaluacion_id')
+            ->withPivot('ointentos')
             ->withTimestamps();
     }
 

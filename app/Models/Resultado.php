@@ -9,10 +9,12 @@ class Resultado extends Model
 {
     use HasFactory;
 
+    protected $table = 'r10resultados';
+
     protected $fillable = [
         'user_id',
         'evaluacion_id',
-        'respuestas',
+        'orespuestas',
     ];
 
     public function user()

@@ -9,10 +9,7 @@ class Pregunta extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'enunciado',
-        'evaluacion_id'
-    ];
+    protected $table = 'r10preguntas';
 
     public function evaluacion()
     {

@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evaluaciones', function (Blueprint $table) {
+        Schema::create('r10evaluaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('modulo_id');
-            $table->string('nombre');
-            $table->text('descripcion')->nullable();
-            $table->integer('tiempo_lim')->default(900); // 900 seconds = 15 minutes
-            $table->integer('intentos_max')->default(3);
+            $table->string('onombre');
+            $table->integer('otiempo_lim')->default(900); // 900 seconds = 15 minutes
+            $table->integer('ointentos_max')->default(3);
             $table->timestamps();
 
-            $table->foreign('modulo_id')->references('id')->on('modulos')->onDelete('cascade');
+            $table->foreign('modulo_id')->references('id')->on('r10modulos')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluaciones');
+        Schema::dropIfExists('r10evaluaciones');
     }
 };

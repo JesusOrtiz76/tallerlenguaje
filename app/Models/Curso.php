@@ -9,16 +9,14 @@ class Curso extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'titulo',
-        'descripcion',
-    ];
+    protected $table = 'r10cursos';
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'inscripciones')
+        return $this->belongsToMany(User::class, 'r10inscripciones', 'curso_id', 'user_id')
             ->withTimestamps();
     }
+
 
     public function modulos()
     {

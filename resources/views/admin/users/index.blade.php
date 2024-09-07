@@ -60,7 +60,7 @@
                                             {{ $user->name }}
                                         </td>
                                         <td class="text-center">
-                                            {{ $user->rfc }}
+                                            {{ $user->orfc }}
                                         </td>
                                         <td>
                                             {{ $user->email }}

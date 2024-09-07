@@ -17,7 +17,7 @@ class PreguntaFactory extends Factory
     public function definition(): array
     {
         return [
-            'enunciado' => $this->faker->sentence(10),
+            'oenunciado' => $this->faker->sentence(10),
         ];
     }
 }

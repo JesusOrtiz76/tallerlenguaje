@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('evaluaciones', function (Blueprint $table) {
-            $table->dropColumn('descripcion');
+        Schema::table('r10modulos', function (Blueprint $table) {
+            $table->string('oimg_path')->nullable()->after('odescripcion');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('evaluaciones', function (Blueprint $table) {
-            $table->text('descripcion')->nullable();
+        Schema::table('r10modulos', function (Blueprint $table) {
+            $table->dropColumn('oimg_path');
         });
     }
 };

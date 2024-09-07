@@ -17,11 +17,11 @@ class CursoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->sentence(3),
-            'descripcion' => $this->faker->paragraph(1),
-            'image' => $this->faker->imageUrl(),
-            'fecha_inicio' => $this->faker->dateTimeBetween('now', '+1 week'),
-            'fecha_fin' => $this->faker->dateTimeBetween('+1 week', '+4 weeks'),
+            'onombre' => $this->faker->sentence(3),
+            'odescripcion' => $this->faker->paragraph(1),
+            'oimg_path' => $this->faker->imageUrl(),
+            'ofecha_inicio' => $this->faker->dateTimeBetween('now'),
+            'ofecha_fin' => $this->faker->dateTimeBetween('+1 week', '+4 weeks'),
         ];
     }
 }

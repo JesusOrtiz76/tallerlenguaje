@@ -29,8 +29,8 @@ class TemaController extends Controller
         $currentDate = Carbon::now();
 
         // Comprobar las fechas de acceso
-        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->fecha_inicio);
-        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->fecha_fin);
+        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio);
+        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin);
 
         // Configurar la localización a español para el formato de fecha
         Carbon::setLocale('es');
@@ -50,7 +50,7 @@ class TemaController extends Controller
         }
 
         // Verificar si el usuario está inscrito en el curso
-        if (!$user->cursos()->where('cursos.id', $curso->id)->exists()) {
+        if (!$user->cursos()->where('curso_id', $curso->id)->exists()) {
             return redirect()->route('home')->with('warning', 'No estás inscrito en este curso');
         }
 

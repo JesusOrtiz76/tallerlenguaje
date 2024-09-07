@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('evaluaciones', function (Blueprint $table) {
-            $table->integer('numero_preguntas')->default('10')->nullable()->after('intentos_max');
+        Schema::table('r10evaluaciones', function (Blueprint $table) {
+            $table->integer('onumero_preguntas')->default('10')->nullable()->after('ointentos_max');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('evaluaciones', function (Blueprint $table) {
-            $table->dropColumn('numero_preguntas');
+        Schema::table('r10evaluaciones', function (Blueprint $table) {
+            $table->dropColumn('onumero_preguntas');
         });
     }
 };

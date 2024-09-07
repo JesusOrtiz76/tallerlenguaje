@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title',"Resultado de la $evaluacion->nombre del $modulo->nombre")
+@section('title',"Resultado de la $evaluacion->onombre del $modulo->onombre")
 
 @section('content')
     <div class="container">
@@ -9,9 +9,9 @@
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
                         <h1 class="text-gradient mb-4 text-center">
-                            Resultado de {{ $evaluacion->nombre }} del {{ $modulo->nombre }}
+                            Resultado de {{ $evaluacion->onombre }} del {{ $modulo->onombre }}
                         </h1>
-                        <p class="text-justify">Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->numero_preguntas }}</p>
+                        <p class="text-justify">Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->onumero_preguntas }}</p>
                         <div class="table-responsive overflow-auto">
                             <table class="table table-hover">
                                 <thead>

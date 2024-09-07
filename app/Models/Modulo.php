@@ -9,11 +9,7 @@ class Modulo extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'titulo',
-        'descripcion',
-        'curso_id'
-    ];
+    protected $table = 'r10modulos';
 
     public function curso()
     {

@@ -9,11 +9,7 @@ class Tema extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'titulo',
-        'modulo_id',
-        'archivo',
-    ];
+    protected $table = 'r10temas';
 
     public function modulo()
     {

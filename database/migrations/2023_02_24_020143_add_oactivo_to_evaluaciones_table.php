@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('evaluaciones', function (Blueprint $table) {
-            $table->boolean('activo')->after('intentos_max')->default(1);
+        Schema::table('r10evaluaciones', function (Blueprint $table) {
+            $table->boolean('oactivo')->after('ointentos_max')->default(1);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('evaluaciones', function (Blueprint $table) {
+        Schema::table('r10evaluaciones', function (Blueprint $table) {
             //
         });
     }

@@ -8,15 +8,15 @@
             <div class="col-md-8">
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
-                        <h1 class="text-gradient mb-4 text-center">{{ $modulo->nombre }}</h1>
-                        <p class="text-justify">{{ $modulo->descripcion }}</p>
+                        <h1 class="text-gradient mb-4 text-center">{{ $modulo->onombre }}</h1>
+                        <p class="text-justify">{{ $modulo->odescripcion }}</p>
 
                         <h3>Temas</h3>
                         <ul>
                             @forelse($modulo->temas as $tema)
                                 <li>
                                     <a href="{{ route('temas.show', $tema->id) }}">
-                                        {{ $tema->titulo }}
+                                        {{ $tema->otitulo }}
                                     </a>
                                 </li>
                             @empty
@@ -34,14 +34,14 @@
                                     <div class="col-6">
                                         <a href="{{ route('evaluaciones.show', $evaluacion->id) }}"
                                            class="btn btn-primary btn-sm w-100">
-                                            {{ $evaluacion->nombre }} del {{ $modulo->nombre }}
+                                            {{ $evaluacion->onombre }} del {{ $modulo->onombre }}
                                         </a>
                                     </div>
                                     @if($user->resultados()->where('evaluacion_id', $evaluacion->id)->exists())
                                         <div class="col-6">
                                             <a href="{{ route('evaluaciones.resultado', $evaluacion->id) }}"
                                                class="btn btn-primary btn-sm w-100">
-                                                Resultado de {{ $evaluacion->nombre }}
+                                                Resultado de {{ $evaluacion->onombre }}
                                             </a>
                                         </div>
                                     @endif

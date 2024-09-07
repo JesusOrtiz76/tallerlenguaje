@@ -31,10 +31,10 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
 
-        $user = User::where('rfc', $data['rfc'])->first();
+        $user = User::where('orfc', $data['rfc'])->first();
 
         if (!$user) {
-            $rules['rfc'][] = 'unique:users';
+            $rules['rfc'][] = 'unique:r10users,orfc';
         }
 
         return Validator::make($data, $rules, [
@@ -50,7 +50,7 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $userWithRfc = User::where('rfc', $request->rfc)->first();
+        $userWithRfc = User::where('orfc', $request->rfc)->first();
         $userWithEmail = User::where('email', $request->email)->first();
 
         if ($userWithEmail && (!$userWithRfc || $userWithEmail->id != $userWithRfc->id)) {
@@ -69,7 +69,7 @@ class RegisterController extends Controller
         } else if (!$userWithRfc) {
             $newUser = User::create([
                 'name' => $request->name,
-                'rfc' => $request->rfc,
+                'orfc' => $request->rfc,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);

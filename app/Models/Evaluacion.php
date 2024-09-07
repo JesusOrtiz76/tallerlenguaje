@@ -9,14 +9,7 @@ class Evaluacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'evaluaciones';
-
-    protected $fillable = [
-        'titulo',
-        'tiempo_lim',
-        'numero_preguntas',
-        'modulo_id',
-    ];
+    protected $table = 'r10evaluaciones';
 
     public function modulo()
     {
@@ -25,8 +18,8 @@ class Evaluacion extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'evaluacion_user')
-            ->withPivot('intentos')
+        return $this->belongsToMany(User::class, 'r10evaluacion_user', 'evaluacion_id', 'user_id')
+            ->withPivot('ointentos')
             ->withTimestamps();
     }
 

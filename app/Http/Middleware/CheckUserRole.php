@@ -16,11 +16,11 @@ class CheckUserRole
      */
     public function handle($request, Closure $next, $rol)
     {
-        if (!Auth::check()) // Si el usuario no está autenticado
+        if (!Auth::check())
             return redirect('login');
 
         $user = Auth::user();
-        if ($user->rol != $rol) {
+        if ($user->orol != $rol) {
             // Redireccionar al usuario si no tiene el rol necesario
             return redirect('home')->with('warning', 'No tienes permiso para acceder a esta área');
         }

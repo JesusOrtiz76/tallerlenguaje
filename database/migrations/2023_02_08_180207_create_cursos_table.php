@@ -13,13 +13,13 @@ class CreateCursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('cursos', function (Blueprint $table) {
+        Schema::create('r10cursos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->text('descripcion');
-            $table->string('image')->nullable();
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->string('onombre');
+            $table->text('odescripcion');
+            $table->string('oimg_path')->nullable();
+            $table->date('ofecha_inicio');
+            $table->date('ofecha_fin');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateCursosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cursos');
+        Schema::dropIfExists('r10cursos');
     }
 }
