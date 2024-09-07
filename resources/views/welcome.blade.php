@@ -150,15 +150,21 @@
                         <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Instrucciones</h4>
-                <p class="text-muted text-justify">Para realizar su registro, deberá ser servidor público activo
-                    adscrito a
-                    Servicios Educativos Integrados al Estado de México (SEIEM), deberá llenar el
-                    <a href="{{ route('register') }}"><strong>Formulario de Registro</strong></a>,
-                    ingresando su nombre, RFC y correo electrónico, posteriormente, podrá crear una contraseña de 8
-                    caracteres, utilizando mayúsculas,
-                    minúsculas, números o símbolos. Al finalizar, recibirá un correo electrónico de verificación
-                    para validar sus datos y así poder acceder
-                    al contenido del curso y evaluaciones.
+                <p class="text-muted text-justify">
+                    Para realizar su registro, deberá ser servidor público activo adscrito a Servicios Educativos
+                    Integrados al Estado de México (SEIEM), deberá llenar el
+                    <a href="{{ route('register') }}"><i class="fa fa-address-card"></i> <strong>Formulario de
+                            Registro</strong></a>, ingresando su
+                    nombre, RFC y correo electrónico, posteriormente, podrá crear una contraseña de 8 caracteres,
+                    utilizando mayúsculas, minúsculas, números o símbolos. Al finalizar, recibirá un correo
+                    electrónico de verificación para validar sus datos y así poder acceder al contenido del curso y
+                    evaluaciones.
+                </p>
+                <p class="text-muted text-justify">
+                    Descargue el
+                    <a href="{{ asset('storage/assets/docs/Manual de Usuario Curso Protocolo.pdf') }}" download>
+                        <i class="fa fa-book"></i> <strong>Manual de Usuario</strong>
+                    </a> para más información.
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -167,16 +173,17 @@
                         <i class="fa fa-file-contract fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Acreditaci&oacute;n</h4>
-                <p class="text-muted text-justify">Para poder acreditar el curso en línea
-                    “Protocolo de Actuación para la Prevención, Detección y
-                    Actuación en caso de Abuso Sexual Infantil, Acoso Escolar y Maltrato en las Escuelas de
-                    Educación Básica de SEIEM”,
-                    al final de cada uno de los Módulos deberá realizar la
-                    evaluación que se presenta, contando con 3 oportunidades para acreditar cada uno de los módulos,
-                    las preguntas contienen respuestas de opción múltiple. Al acreditar las evaluaciones de los
-                    {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la CONSTANCIA DE
-                    ACREDITACIÓN, misma que contará con valor curricular.
+                <p class="text-muted text-justify">
+                    Para poder acreditar el curso en línea “{{ $cursos[0]->onombre }}”, al final de cada uno de los
+                    Módulos deberá realizar la evaluación que se presenta, contando con 3 oportunidades para
+                    acreditar cada uno de los módulos, las preguntas contienen respuestas de opción múltiple. Al
+                    acreditar las evaluaciones de los {{ count($cursos[0]->modulos) }} módulos, estará en
+                    posibilidades de descargar la
+                    <span class="text-primary">
+                            <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>,
+                    misma que contará con valor curricular.
                 </p>
+
             </div>
             <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
@@ -184,14 +191,12 @@
                         <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="my-3">Duración</h4>
-                <p class="text-muted text-justify">La duración del curso en línea del "Protocolo de Actuación para
-                    la Prevención, Detección y
-                    Actuación en caso de Abuso Sexual Infantil, Acoso Escolar y Maltrato en las Escuelas de
-                    Educación Básica de SEIEM", no será
-                    mayor a seis meses, contados a partir de la fecha de su registro. La fecha para registro al
-                    curso será del
-                    será
-                    <strong>{{ $formattedStartDate }}</strong>, finalizando el día
+                <p class="text-muted text-justify">
+                    El registro para el curso "{{ $cursos[0]->onombre }}" estará disponible del
+                    <strong>{{ $formattedStartRegisterDate }}</strong> al
+                    <strong>{{ $formattedEndRegisterDate }}</strong>. Una vez registrado, tendrá acceso al curso
+                    desde
+                    su registro hasta el
                     <strong>{{ $formattedEndDate }}</strong>.
                 </p>
             </div>
