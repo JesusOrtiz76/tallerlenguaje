@@ -60,6 +60,23 @@
                                     </div>
 
                                     <div class="form-outline mb-4">
+                                        <label for="oclave">{{ __('Clave del Centro de Trabajo') }}</label>
+                                        <input id="oclave"
+                                               type="text"
+                                               class="form-control @error('oclave') is-invalid @enderror"
+                                               name="oclave"
+                                               value="{{ old('oclave') }}"
+                                               oninput="toMay(this)"
+                                               autocomplete="oclave"
+                                               autofocus>
+                                        @error('oclave')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
                                         <label for="email">{{ __('Email Address') }}</label>
                                         <input id="email"
                                                type="email"

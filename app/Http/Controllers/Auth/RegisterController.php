@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\CentroTrabajo;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -24,63 +24,44 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
+        // Definir las reglas de validación
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'rfc' => ['required', 'string', 'max:13', 'min:13'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'rfc' => ['required', 'string', 'size:13', 'unique:r10users,orfc'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:r10users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'oclave' => ['required', 'string', 'size:10', 'regex:/^15[A-Z]{3}\d{4}[A-Z]$/', 'exists:r10centrostrabajo,oclave'],
         ];
 
-        $user = User::where('orfc', $data['rfc'])->first();
+        // Mensajes de error personalizados
+        $messages = [
+            'oclave.required' => 'La clave del centro de trabajo es obligatoria.',
+            'oclave.string' => 'La clave del centro de trabajo debe ser una cadena válida.',
+            'oclave.size' => 'La clave del centro de trabajo debe tener exactamente 10 caracteres.',
+            'oclave.regex' => 'El formato de la clave del centro de trabajo no es válido.',
+            'oclave.exists' => 'La clave del centro de trabajo no existe.',
+        ];
 
-        if (!$user) {
-            $rules['rfc'][] = 'unique:r10users,orfc';
-        }
-
-        return Validator::make($data, $rules, [
-            'rfc.required' => 'El RFC es requerido.',
-            'rfc.string' => 'El RFC debe ser una cadena de texto.',
-            'rfc.max' => 'El RFC debe tener exactamente 13 caracteres.',
-            'rfc.min' => 'El RFC debe tener exactamente 13 caracteres.',
-            'rfc.unique' => 'El RFC ya ha sido registrado.',
-        ]);
+        return Validator::make($data, $rules, $messages);
     }
 
     public function register(Request $request)
     {
+        // Validar los datos ingresados
         $this->validator($request->all())->validate();
 
-        $userWithRfc = User::where('orfc', $request->rfc)->first();
-        $userWithEmail = User::where('email', $request->email)->first();
+        // Crear el nuevo usuario y asociarle el centro de trabajo
+        $newUser = User::create([
+            'name' => $request->name,
+            'orfc' => $request->rfc,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'centrotrabajo_id' => CentroTrabajo::where('oclave', $request->oclave)->first()->id,
+        ]);
 
-        if ($userWithEmail && (!$userWithRfc || $userWithEmail->id != $userWithRfc->id)) {
-            return redirect()->back()->withInput($request->all())->withErrors([
-                'email' => "El correo electrónico ya está en uso."
-            ]);
-        }
+        // Enviar la notificación de verificación de correo electrónico
+        $newUser->sendEmailVerificationNotification();
 
-        if ($userWithRfc && !$userWithRfc->hasVerifiedEmail()) {
-            $userWithRfc->email = $request->email;
-            $userWithRfc->save();
-
-            $userWithRfc->sendEmailVerificationNotification();
-
-            return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu dirección de correo electrónico.');
-        } else if (!$userWithRfc) {
-            $newUser = User::create([
-                'name' => $request->name,
-                'orfc' => $request->rfc,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-            $newUser->sendEmailVerificationNotification();
-
-            return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu dirección de correo electrónico.');
-        } else {
-            return redirect()->back()->withInput($request->all())->withErrors([
-                'rfc' => "El usuario con el RFC ya existe y su correo ha sido verificado."
-            ]);
-        }
+        return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu dirección de correo electrónico.');
     }
 }
