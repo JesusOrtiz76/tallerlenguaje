@@ -4,7 +4,7 @@
         Swal.fire({
             icon: 'warning',
             title: 'Mensaje',
-            text: '{{ session('warning') }}',
+            html: '{{ session('warning') }}',
             confirmButtonColor: '#FCCD00',
             iconColor: '#FCCD00',
         });
@@ -14,7 +14,7 @@
         Swal.fire({
             icon: 'error',
             title: 'Mensaje',
-            text: '{{ session('error') }}',
+            html: '{{ session('error') }}',
             confirmButtonColor: '#E1143D',
             iconColor: '#E1143D',
         });
@@ -24,10 +24,20 @@
         Swal.fire({
             icon: 'success',
             title: 'Mensaje',
-            text: '{{ session('success') }}',
+            html: '{{ session('success') }}',
             confirmButtonColor: '#9DC323',
             iconColor: '#9DC323',
         });
         @endif
     });
+
+    // SweetAlert para mensajes de alerta AJAX
+    function showSweetAlert(type, message) {
+        Swal.fire({
+            icon: type,
+            title: 'Mensaje',
+            text: message,
+            confirmButtonColor: type === 'success' ? '#28A745' : (type === 'error' ? '#DC3545' : '#FFC107'),
+        });
+    }
 </script>

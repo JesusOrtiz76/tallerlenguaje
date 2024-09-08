@@ -4,37 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use App\Models\Modulo;
+use App\Traits\VerificaEvaluacionesCompletasTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class ModuloController extends Controller
 {
-    // Obtener módulos
-    public function index(Curso $curso)
-    {
-        // Obtener el tiempo de caché global desde el archivo .env
-        $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
-
-        // Definir la clave de caché para los módulos de este curso
-        $modulosCacheKey = 'modulos_curso_' . $curso->id;
-
-        // Obtener o almacenar en caché los módulos del curso
-        $modulos = Cache::remember($modulosCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($curso) {
-            return $curso->modulos;
-        });
-
-        if ($modulos->isEmpty()) {
-            return redirect()->back()->with('warning', 'No hay módulos registrados en este curso.');
-        } else {
-            return view('modulos.index', compact('curso', 'modulos'));
-        }
-    }
+    use VerificaEvaluacionesCompletasTrait;
 
     // Obtener detalles del módulo
     public function show(Curso $curso, Modulo $modulo)
     {
         // Obtener el usuario autenticado
         $user = Auth::user();
+
+        // Verificar si hay algún módulo pendiente antes del actual
+        $mensajePendiente = $this->verificarModuloPendiente($modulo);
+
+        // Si hay un mensaje de módulo pendiente, mostrarlo
+        if ($mensajePendiente) {
+            return redirect()->back()->with('warning', $mensajePendiente);
+        }
 
         // Obtener el tiempo de caché global desde el archivo .env
         $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
@@ -54,7 +44,7 @@ class ModuloController extends Controller
         $temas = $moduloData['temas'];
         $evaluaciones = $moduloData['evaluaciones'];
 
-        return view('modulos.show',
-            compact('curso', 'modulo', 'temas', 'evaluaciones', 'user'));
+        // Retornar la vista con el curso original, no el derivado del módulo
+        return view('modulos.show', compact('curso', 'modulo', 'temas', 'evaluaciones', 'user'));
     }
 }

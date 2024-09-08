@@ -7,6 +7,7 @@ use App\Models\Modulo;
 use App\Models\Opcion;
 use App\Models\Resultado;
 use App\Traits\VerificaAccesoTrait;
+use App\Traits\VerificaEvaluacionesCompletasTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,23 @@ use Illuminate\Support\Facades\Cache;
 class EvaluacionController extends Controller
 {
     use VerificaAccesoTrait;
+    use VerificaEvaluacionesCompletasTrait;
 
     // Obtener contenido de la evaluación (Preguntas y respuestas)
     public function show($id)
     {
         // Obtener el usuario autenticado
         $user = Auth::user();
+        $evaluacion = Evaluacion::with('modulo')->findOrFail($id);
+        $modulo = $evaluacion->modulo;
+
+        // Verificar si hay algún módulo pendiente antes del actual
+        $mensajePendiente = $this->verificarModuloPendiente($modulo);
+
+        // Si hay un mensaje de módulo pendiente, mostrarlo
+        if ($mensajePendiente) {
+            return redirect()->back()->with('warning', $mensajePendiente);
+        }
 
         // Obtener el tiempo de caché global desde el archivo .env
         $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);

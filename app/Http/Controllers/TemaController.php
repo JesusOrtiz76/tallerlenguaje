@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Tema;
 use App\Traits\VerificaAccesoTrait;
+use App\Traits\VerificaEvaluacionesCompletasTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class TemaController extends Controller
 {
-    use VerificaAccesoTrait;
+    use VerificaAccesoTrait, VerificaEvaluacionesCompletasTrait;
 
     public function show($temaId)
     {
@@ -41,6 +42,14 @@ class TemaController extends Controller
         $resultado = $this->verificarAccesoCurso($user, $curso);
         if ($resultado['error']) {
             return redirect()->route('home')->with('warning', $resultado['message']);
+        }
+
+        // Verificar si hay algún módulo pendiente antes del actual
+        $mensajePendiente = $this->verificarModuloPendiente($modulo);
+
+        // Si hay un mensaje de módulo pendiente, mostrarlo
+        if ($mensajePendiente) {
+            return redirect()->back()->with('warning', $mensajePendiente);
         }
 
         // Mostrar el tema seleccionado

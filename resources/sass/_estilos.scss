@@ -716,3 +716,54 @@ body {
     text-anchor: middle;
     fill: $primary;
 }
+
+// Extender estilos de botones de Bootstrap con los nuevos colores
+.btn-golden {
+    color: #fff;
+    background-color: $golden;
+    border-color: $golden;
+
+    &:hover {
+        color: #fff;
+        background-color: $golden_hover;
+        border-color: $golden_hover;
+    }
+
+    &:focus,
+    &:active {
+        color: #fff;
+        background-color: darken($golden, 10%);
+        border-color: darken($golden, 10%);
+        box-shadow: 0 0 0 0.2rem rgba($golden, 0.5);
+    }
+
+    &:disabled {
+        background-color: lighten($golden, 15%);
+        border-color: lighten($golden, 15%);
+    }
+}
+
+.btn-outline-golden {
+    color: $golden;
+    background-color: transparent;
+    border-color: $golden;
+
+    &:hover {
+        color: #fff;
+        background-color: $golden;
+        border-color: $golden;
+    }
+
+    &:focus,
+    &:active {
+        color: #fff;
+        background-color: $golden_hover;
+        border-color: $golden_hover;
+        box-shadow: 0 0 0 0.2rem rgba($golden, 0.5);
+    }
+
+    &:disabled {
+        color: lighten($golden, 15%);
+        border-color: lighten($golden, 15%);
+    }
+}

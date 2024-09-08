@@ -1,5 +1,4 @@
 <nav id="sidebar" class="vh-100 shadow d-flex flex-column justify-content-between blur-bg">
-
     <div class="col">
         <div class="w-100 d-flex justify-content-end p-3">
             <button type="button" id="closeSidebar" class="btn btn-white">
@@ -20,37 +19,72 @@
                     </div>
                     @foreach ($curso->modulos as $modulo)
                         @php
+                            // Verificar si el tema, evaluación o módulo está activo
+                            $activoModulo = Request::is('modulos/' . $modulo->id);
                             $activo = false;
                             $temas_ids = collect($modulo->temas)->pluck('id');
-                            if (Request::is('temas/*') && $temas_ids->contains(Request::segment(2))) {
+                            $evaluaciones_ids = collect($modulo->evaluaciones)->pluck('id');
+                            if (
+                                (Request::is('temas/*') && $temas_ids->contains(Request::segment(2))) ||
+                                (Request::is('evaluaciones/*') && $evaluaciones_ids->contains(Request::segment(2))) ||
+                                (Request::is('evaluaciones/*/resultado') && $evaluaciones_ids->contains(Request::segment(2)))
+                            ) {
                                 $activo = true;
                             }
                         @endphp
+
                         <div class="btn-group d-flex justify-content-between my-2">
-                            <a class="btn btn-outline-primary btn-sidebar btn-text-left w-100
-                        {{ Request::is('modulos/'.$modulo->id) ? ' active' : '' }}"
+                            <a class="btn btn-sidebar btn-text-left w-100
+                               {{ $activoModulo || $activo ? 'btn-primary' : 'btn-outline-primary' }}"
                                href="{{ route('modulos.show', $modulo->id) }}">
                                 <i class="fa-regular fa-folder-closed"></i>
                                 {{ Str::limit($modulo->onombre, 23, '...') }}
                             </a>
-                            <button class="btn btn-outline-primary dropdown-toggle"
+                            <button class="btn {{ $activoModulo || $activo ? 'btn-primary' : 'btn-outline-primary' }} dropdown-toggle"
                                     data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{ $modulo->id }}"
-                                    aria-expanded="{{ $activo ? 'true' : 'false' }}"
+                                    aria-expanded="{{ $activoModulo || $activo ? 'true' : 'false' }}"
                                     aria-controls="collapse-{{ $modulo->id }}">
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                         </div>
 
-                        <div class="collapse{{ $activo ? ' show' : '' }}" id="collapse-{{ $modulo->id }}">
+                        <div class="collapse{{ $activoModulo || $activo ? ' show' : '' }}" id="collapse-{{ $modulo->id }}">
                             @if (count($modulo->temas))
                                 <div class="btn-group-vertical w-100">
                                     @foreach ($modulo->temas as $tema)
-                                        <a class="btn btn-outline-secondary btn-sidebar btn-text-left
-                                    {{ Request::is('temas/'.$tema->id) ? ' active' : '' }}"
+                                        <a class="btn btn-sidebar btn-text-left
+                                           {{ Request::is('temas/'.$tema->id) ? 'btn-golden' : 'btn-outline-golden' }}"
                                            href="{{ route('temas.show', $tema->id) }}">
                                             <i class="fa-solid fa-chalkboard-user"></i>
                                             {{ Str::limit($tema->otitulo, 24, '...') }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if (count($modulo->evaluaciones))
+                                <div class="btn-group-vertical w-100 mt-2">
+                                    @foreach ($modulo->evaluaciones as $evaluacion)
+                                        @php
+                                            $completado = false;
+                                            $link = route('evaluaciones.show', $evaluacion->id); // Enlace por defecto a la evaluación
+                                            if (Auth::check()) {
+                                                // Obtenemos el pivote de la evaluación del usuario
+                                                $pivot = Auth::user()->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
+                                                $completado = $pivot && $pivot->pivot->ointentos >= 1;
+
+                                                // Si la evaluación está completada, generar el enlace de resultados con el ID correcto
+                                                if ($completado) {
+                                                    $link = route('evaluaciones.resultado', [$evaluacion->id]);
+                                                }
+                                            }
+                                        @endphp
+                                        <a class="btn btn-sidebar btn-text-left
+                                           {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado') ? 'btn-golden' : 'btn-outline-golden' }}"
+                                           href="{{ $link }}">
+                                            <i class="fa-solid {{ $completado ? 'fa-check-circle' : 'fa-hourglass-half' }}"></i>
+                                            {{ $completado ? 'Ver Resultados: ' . Str::limit($evaluacion->onombre, 24, '...') : 'Pendiente: ' . Str::limit($evaluacion->onombre, 24, '...') }}
                                         </a>
                                     @endforeach
                                 </div>
