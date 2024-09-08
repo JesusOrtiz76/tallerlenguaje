@@ -11,7 +11,23 @@
                         <h1 class="text-gradient mb-4 text-center">
                             Resultado de {{ $evaluacion->onombre }} del {{ $modulo->onombre }}
                         </h1>
-                        <p class="text-justify">Tu puntaje es: {{ $puntaje }}/{{ $evaluacion->onumero_preguntas }}</p>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+
+                            <button class="btn btn-outline-primary">
+                                Tu puntaje es: <strong>{{ $puntaje }}/{{ $evaluacion->onumero_preguntas }}</strong>
+                            </button>
+
+
+                            @if($evaluacion->sinIntentos())
+                                <button class="btn btn-primary" disabled>Intentos agotados</button>
+                            @else
+                                <a href="{{ route('evaluaciones.show', $evaluacion->id) }}" class="btn btn-primary">
+                                    Realizar otro intento
+                                </a>
+                            @endif
+                        </div>
+
                         <div class="table-responsive overflow-auto">
                             <table class="table table-hover">
                                 <thead>
@@ -38,6 +54,7 @@
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>

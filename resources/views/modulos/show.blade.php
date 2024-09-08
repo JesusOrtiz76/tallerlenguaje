@@ -32,10 +32,16 @@
                             <div class="mb-3">
                                 <div class="row">
                                     <div class="col-6">
-                                        <a href="{{ route('evaluaciones.show', $evaluacion->id) }}"
-                                           class="btn btn-primary btn-sm w-100">
-                                            {{ $evaluacion->onombre }} del {{ $modulo->onombre }}
-                                        </a>
+                                        @if($evaluacion->sinIntentos())
+                                            <button class="btn btn-primary btn-sm w-100" disabled>
+                                                {{ $evaluacion->onombre }}
+                                            </button>
+                                        @else
+                                            <a href="{{ route('evaluaciones.show', $evaluacion->id) }}"
+                                               class="btn btn-primary btn-sm w-100">
+                                                {{ $evaluacion->onombre }}
+                                            </a>
+                                        @endif
                                     </div>
                                     @if($user->resultados()->where('evaluacion_id', $evaluacion->id)->exists())
                                         <div class="col-6">

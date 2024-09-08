@@ -10,7 +10,6 @@ use App\Traits\VerificaAccesoTrait;
 use App\Traits\VerificaEvaluacionesCompletasTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 
 class EvaluacionController extends Controller
@@ -21,7 +20,6 @@ class EvaluacionController extends Controller
     // Obtener contenido de la evaluación (Preguntas y respuestas)
     public function show($id)
     {
-        // Obtener el usuario autenticado
         $user = Auth::user();
         $evaluacion = Evaluacion::with('modulo')->findOrFail($id);
         $modulo = $evaluacion->modulo;
@@ -29,18 +27,13 @@ class EvaluacionController extends Controller
         // Verificar si hay algún módulo pendiente antes del actual
         $mensajePendiente = $this->verificarModuloPendiente($modulo);
 
-        // Si hay un mensaje de módulo pendiente, mostrarlo
         if ($mensajePendiente) {
             return redirect()->back()->with('warning', $mensajePendiente);
         }
 
-        // Obtener el tiempo de caché global desde el archivo .env
         $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
-
-        // Definir la clave de caché para la evaluación
         $evaluacionCacheKey = 'evaluacion_' . $id . '_user_' . $user->id;
 
-        // Obtener o almacenar en caché la evaluación y sus preguntas
         $evaluacionData = Cache::remember($evaluacionCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($id) {
             $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
             return [
@@ -51,18 +44,15 @@ class EvaluacionController extends Controller
 
         $evaluacion = $evaluacionData['evaluacion'];
         $preguntas = $evaluacionData['preguntas'];
-
-        // Obtener el módulo y curso relacionados
         $modulo = $evaluacion->modulo;
         $curso = $modulo->curso;
 
-        // Usar el trait para verificar tanto las fechas de acceso como la inscripción del usuario
+        // Verificar acceso a curso
         $resultado = $this->verificarAccesoCurso($user, $curso);
         if ($resultado['error']) {
             return redirect()->route('home')->with('warning', $resultado['message']);
         }
 
-        // Verificar si hay preguntas
         if ($preguntas->isEmpty()) {
             return redirect()->back()->with('warning', 'No hay preguntas disponibles en esta evaluación');
         }
@@ -70,31 +60,11 @@ class EvaluacionController extends Controller
         $numeroPreguntas = $evaluacion->onumero_preguntas;
         $preguntasMostradas = $preguntas->take($numeroPreguntas);
 
-        // Verificar si el usuario ha accedido previamente a la evaluación y, si no, agregar primer intento
-        $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
-        if (!$pivot) {
-            DB::transaction(function () use ($user, $evaluacion) {
-                // Crear el intento inicial (ointentos = 0)
-                $user->evaluaciones()->attach($evaluacion->id, ['ointentos' => 0]);
-            });
-            $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
-            if (!$pivot) {
-                return redirect()->back()->with('error', 'Error al registrar el intento inicial de la evaluación. Por favor, intenta de nuevo.');
-            }
-        }
-
-        // Verificar si se han agotado los intentos
-        if ($pivot->pivot->ointentos >= $evaluacion->ointentos_max) {
-            return redirect()->route('evaluaciones.resultado', [$evaluacion->modulo_id, $evaluacion->id])
-                ->with('warning', 'Ya has agotado tus intentos para esta evaluación');
-        }
-
         // Cargar la vista con las preguntas y la evaluación
         return view('evaluaciones.show', [
-            'modulo' => $evaluacion->modulo,
+            'modulo' => $modulo,
             'evaluacion' => $evaluacion,
             'preguntas' => $preguntasMostradas,
-            'pivot' => $pivot
         ]);
     }
 
@@ -169,12 +139,14 @@ class EvaluacionController extends Controller
             ];
         }
 
+        // Cargar la vista con el resultado
         return view('evaluaciones.resultado', compact(
             'evaluacion',
             'resultado',
             'respuestas',
             'modulo',
             'puntaje',
-            'preguntas'));
+            'preguntas'
+        ));
     }
 }

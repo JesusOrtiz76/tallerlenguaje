@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Evaluacion extends Model
 {
@@ -31,5 +32,17 @@ class Evaluacion extends Model
     public function resultado()
     {
         return $this->hasOne(Resultado::class);
+    }
+
+    public function sinIntentos()
+    {
+        $user = Auth::user();
+        $pivot = $user->evaluaciones()->where('evaluacion_id', $this->id)->first();
+
+        if ($pivot && $pivot->pivot->ointentos >= $this->ointentos_max) {
+            return true;
+        }
+
+        return false;
     }
 }
