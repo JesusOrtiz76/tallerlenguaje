@@ -8,14 +8,14 @@
             <div class="col-md-8">
                 <h1 class="text-gradient mb-4 text-center">{{ $evaluacion->onombre }} del {{ $modulo->onombre }}</h1>
 
-                @if ($pivot ?? null)
-                    @php
-                        $intentosRestantes = $evaluacion->ointentos_max - $pivot->pivot->ointentos;
-                        $intentoActual = $pivot->pivot->ointentos + 1;
-                    @endphp
-                    <p class="text-justify">{{ __('Intento :intentoActual/:intentosTotales', ['intentoActual' => $intentoActual, 'intentosTotales' => $evaluacion->ointentos_max]) }}</p>
+                @if ($intentoActual)
+                    <p class="text-justify">
+                        {{ __('Intento :intentoActual/:intentosTotales', ['intentoActual' => $intentoActual, 'intentosTotales' => $evaluacion->ointentos_max]) }}
+                    </p>
                 @else
-                    <p class="text-justify">{{ __('Intento 1/:intentosTotales', ['intentosTotales' => $evaluacion->ointentos_max]) }}</p>
+                    <p class="text-justify">
+                        {{ __('Intento 1/:intentosTotales', ['intentosTotales' => $evaluacion->ointentos_max]) }}
+                    </p>
                 @endif
 
                 <form id="formulario_evaluacion" method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">

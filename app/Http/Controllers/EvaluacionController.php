@@ -57,14 +57,21 @@ class EvaluacionController extends Controller
             return redirect()->back()->with('warning', 'No hay preguntas disponibles en esta evaluación');
         }
 
+        // Utilizar los métodos del modelo para obtener los intentos
+        $intentoActual = $evaluacion->intentoActual();
+        $intentosRestantes = $evaluacion->intentosRestantes();
+
+        // Mostrar preguntas según el límite
         $numeroPreguntas = $evaluacion->onumero_preguntas;
         $preguntasMostradas = $preguntas->take($numeroPreguntas);
 
-        // Cargar la vista con las preguntas y la evaluación
+        // Cargar la vista con las preguntas, la evaluación y los intentos
         return view('evaluaciones.show', [
             'modulo' => $modulo,
             'evaluacion' => $evaluacion,
             'preguntas' => $preguntasMostradas,
+            'intentoActual' => $intentoActual,
+            'intentosRestantes' => $intentosRestantes,
         ]);
     }
 
