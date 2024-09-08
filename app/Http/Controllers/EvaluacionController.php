@@ -6,50 +6,51 @@ use App\Models\Evaluacion;
 use App\Models\Modulo;
 use App\Models\Opcion;
 use App\Models\Resultado;
+use App\Traits\VerificaAccesoTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class EvaluacionController extends Controller
 {
+    use VerificaAccesoTrait;
+
     // Obtener contenido de la evaluación (Preguntas y respuestas)
     public function show($id)
     {
         // Obtener el usuario autenticado
         $user = Auth::user();
 
-        // Obtener la evaluación con el módulo correspondiente
-        $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
+        // Obtener el tiempo de caché global desde el archivo .env
+        $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
 
-        // Obtener el curso al que pertenece la evaluación
-        $curso = $evaluacion->modulo->curso;
+        // Definir la clave de caché para la evaluación
+        $evaluacionCacheKey = 'evaluacion_' . $id . '_user_' . $user->id;
 
-        // Comprobar periodo de evaluación
-        $currentDate = Carbon::now();
-        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio);
-        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin);
+        // Obtener o almacenar en caché la evaluación y sus preguntas
+        $evaluacionData = Cache::remember($evaluacionCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($id) {
+            $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
+            return [
+                'evaluacion' => $evaluacion,
+                'preguntas' => $evaluacion->preguntas()->with('opciones')->get()
+            ];
+        });
 
-        Carbon::setLocale('es');
+        $evaluacion = $evaluacionData['evaluacion'];
+        $preguntas = $evaluacionData['preguntas'];
 
-        if ($currentDate->lt($accessStartDate)) {
-            return redirect()->route('home')
-                ->with('warning', 'El periodo para el acceso a este curso inicia el ' . $accessStartDate->isoFormat('dddd D [de] MMMM [de] Y'));
+        // Obtener el módulo y curso relacionados
+        $modulo = $evaluacion->modulo;
+        $curso = $modulo->curso;
+
+        // Usar el trait para verificar tanto las fechas de acceso como la inscripción del usuario
+        $resultado = $this->verificarAccesoCurso($user, $curso);
+        if ($resultado['error']) {
+            return redirect()->route('home')->with('warning', $resultado['message']);
         }
 
-        if ($currentDate->gt($accessEndDate)) {
-            return redirect()->route('home')
-                ->with('warning', 'El periodo para el acceso a este curso finalizó el ' . $accessEndDate->isoFormat('dddd D [de] MMMM [de] Y'));
-        }
-
-        // Verificar si el usuario está inscrito en el curso
-        if (!$user->cursos()->where('curso_id', $curso->id)->exists()) {
-            return redirect()->route('home')->with('warning', 'No estás inscrito en este curso');
-        }
-
-        // Obtener todas las preguntas de la evaluación con opciones
-        $preguntas = $evaluacion->preguntas()->with('opciones')->get();
-
-        // Verificar si existen preguntas
+        // Verificar si hay preguntas
         if ($preguntas->isEmpty()) {
             return redirect()->back()->with('warning', 'No hay preguntas disponibles en esta evaluación');
         }
@@ -59,10 +60,15 @@ class EvaluacionController extends Controller
 
         // Verificar si el usuario ha accedido previamente a la evaluación y, si no, agregar primer intento
         $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
-
         if (!$pivot) {
-            $user->evaluaciones()->attach($evaluacion->id, ['ointentos' => 0]);
+            DB::transaction(function () use ($user, $evaluacion) {
+                // Crear el intento inicial (ointentos = 0)
+                $user->evaluaciones()->attach($evaluacion->id, ['ointentos' => 0]);
+            });
             $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
+            if (!$pivot) {
+                return redirect()->back()->with('error', 'Error al registrar el intento inicial de la evaluación. Por favor, intenta de nuevo.');
+            }
         }
 
         // Verificar si se han agotado los intentos
@@ -83,15 +89,21 @@ class EvaluacionController extends Controller
     // Guardar respuestas
     public function submit(Request $request, $evaluacion_id)
     {
-        // Obtener usuario y evaluación
+        // Obtener usuario autenticado y evaluación
         $user = Auth::user();
         $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
         $modulo = Modulo::find($evaluacion->modulo_id);
+        $curso = $modulo->curso;
+
+        // Usar el trait para verificar tanto las fechas de acceso como la inscripción del usuario
+        $resultado = $this->verificarAccesoCurso($user, $curso);
+        if ($resultado['error']) {
+            return redirect()->route('home')->with('warning', $resultado['message']);
+        }
 
         // Verificar si el usuario ha alcanzado los intentos permitidos
         if ($evaluacion->pivot->ointentos >= $evaluacion->ointentos_max) {
-            return redirect()->back()
-                ->with('warning', 'Has alcanzado la cantidad máxima de intentos para esta evaluación.');
+            return redirect()->back()->with('warning', 'Has alcanzado la cantidad máxima de intentos para esta evaluación.');
         }
 
         // Obtener las respuestas del usuario
@@ -99,10 +111,8 @@ class EvaluacionController extends Controller
 
         // Verificar que se hayan contestado todas las preguntas
         $numeroPreguntasMostradas = $evaluacion->onumero_preguntas;
-
         if (count($respuestas) !== $numeroPreguntasMostradas) {
-            return redirect()
-                ->back()->with('warning', 'Completa todas las preguntas.');
+            return redirect()->back()->with('warning', 'Completa todas las preguntas.');
         }
 
         // Incrementar intentos del usuario
@@ -111,14 +121,13 @@ class EvaluacionController extends Controller
         ]);
 
         // Guardar respuestas
-        $resultado = Resultado::updateOrCreate(
+        Resultado::updateOrCreate(
             ['user_id' => $user->id, 'evaluacion_id' => $evaluacion->id],
             ['orespuestas' => json_encode(array_values($respuestas))]
         );
 
         // Redirigir al usuario
-        return redirect()->route('modulos.show', $modulo->id)
-            ->with('success', 'Evaluación completada.');
+        return redirect()->route('modulos.show', $modulo->id)->with('success', 'Evaluación completada.');
     }
 
     // Ver resultados

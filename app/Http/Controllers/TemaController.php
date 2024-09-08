@@ -2,56 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Curso;
-use App\Models\Modulo;
 use App\Models\Tema;
-use Illuminate\Support\Carbon;
+use App\Traits\VerificaAccesoTrait;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
 
 class TemaController extends Controller
 {
-    // Obtener contenido del tema
+    use VerificaAccesoTrait;
+
     public function show($temaId)
     {
         // Obtener el usuario autenticado
         $user = Auth::user();
 
-        // Obtener el tema y el módulo al que pertenece
-        $tema = Tema::findOrFail($temaId);
-        $modulo = Modulo::find($tema->modulo_id);
+        // Obtener el tiempo de caché global desde el archivo .env
+        $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
 
-        // Obtener el curso al que pertenece el módulo
-        $curso = Curso::find($modulo->curso_id);
+        // Definir la clave de caché para el tema, módulo y curso
+        $temaCacheKey = 'tema_' . $temaId . '_modulo_curso';
 
-        // Comprobar periodo de evaluación
-        // Obtener fecha actual
-        $currentDate = Carbon::now();
+        // Obtener o almacenar en caché el tema, módulo y curso
+        $temaData = Cache::remember($temaCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($temaId) {
+            $tema = Tema::with('modulo.curso')->findOrFail($temaId);
+            return [
+                'tema' => $tema,
+                'modulo' => $tema->modulo,
+                'curso' => $tema->modulo->curso
+            ];
+        });
 
-        // Comprobar las fechas de acceso
-        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio);
-        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin);
+        // Extraer los datos del tema, módulo y curso del array cacheado
+        $tema = $temaData['tema'];
+        $modulo = $temaData['modulo'];
+        $curso = $temaData['curso'];
 
-        // Configurar la localización a español para el formato de fecha
-        Carbon::setLocale('es');
-
-        if ($currentDate->lt($accessStartDate)) {
-            $formattedStartDate = $accessStartDate->isoFormat('dddd D [de] MMMM [de] Y');
-            return redirect()
-                ->route('home')
-                ->with('warning', 'El periodo para el acceso a este curso inicia el ' . $formattedStartDate);
-        }
-
-        if ($currentDate->gt($accessEndDate)) {
-            $formattedEndDate = $accessEndDate->isoFormat('dddd D [de] MMMM [de] Y');
-            return redirect()
-                ->route('home')
-                ->with('warning', 'El periodo para el acceso a este curso finalizó el ' . $formattedEndDate);
-        }
-
-        // Verificar si el usuario está inscrito en el curso
-        if (!$user->cursos()->where('curso_id', $curso->id)->exists()) {
-            return redirect()->route('home')->with('warning', 'No estás inscrito en este curso');
+        // Verificar acceso usando el trait
+        $resultado = $this->verificarAccesoCurso($user, $curso);
+        if ($resultado['error']) {
+            return redirect()->route('home')->with('warning', $resultado['message']);
         }
 
         // Mostrar el tema seleccionado

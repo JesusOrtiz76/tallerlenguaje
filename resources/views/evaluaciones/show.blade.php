@@ -20,21 +20,23 @@
 
                 <form id="formulario_evaluacion" method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
                     @csrf
-                    @foreach ($preguntas as $pregunta)
-                        <div class="card mb-4 shadow-sm border-0 blur-bg">
-                            <div class="card-body px-lg-3">
-                                <h5 class="mb-3">{{ $pregunta->oenunciado }}</h5>
-                                <div class="w-100 d-flex justify-content-center row ps-4">
-                                    @foreach ($pregunta->opciones as $opcion)
-                                        <input type="radio" class="btn-check" name="respuestas[{{ $pregunta->id }}]" id="respuesta_{{ $opcion->id }}" value="{{ $opcion->id }}" @if(old('respuestas.'.$pregunta->id, '') == $opcion->id) checked @endif>
-                                        <label class="btn col btn-outline-primary py-1 m-1 text-justify" for="respuesta_{{ $opcion->id }}">
-                                            {!! nl2br(e($opcion->otexto)) !!}
-                                        </label>
-                                    @endforeach
-                                </div>
+
+                    @foreach ($preguntas->shuffle() as $pregunta)
+                    <div class="card mb-4 shadow-sm border-0 blur-bg">
+                        <div class="card-body px-lg-3">
+                            <h5 class="mb-3">{{ $pregunta->oenunciado }}</h5>
+                            <div class="w-100 d-flex justify-content-center row ps-4">
+                                @foreach ($pregunta->opciones->shuffle() as $opcion)
+                                <input type="radio" class="btn-check" name="respuestas[{{ $pregunta->id }}]" id="respuesta_{{ $opcion->id }}" value="{{ $opcion->id }}" @if(old('respuestas.'.$pregunta->id, '') == $opcion->id) checked @endif>
+                                <label class="btn col btn-outline-primary py-1 m-1 text-justify" for="respuesta_{{ $opcion->id }}">
+                                    {!! nl2br(e($opcion->otexto)) !!}
+                                </label>
+                                @endforeach
                             </div>
                         </div>
+                    </div>
                     @endforeach
+
                     <div class="w-100 d-flex justify-content-center">
                         <button type="submit" class="btn btn-lg btn-primary col-4">{{ __('Enviar') }}</button>
                     </div>
