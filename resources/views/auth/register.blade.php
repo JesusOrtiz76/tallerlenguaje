@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label for="oclave">{{ __('Clave del Centro de Trabajo') }}</label>
+                                        <label for="oclave">{{ __('Clave del centro de trabajo') }}</label>
                                         <input id="oclave"
                                                type="text"
                                                class="form-control @error('oclave') is-invalid @enderror"
@@ -87,6 +87,22 @@
                                                autocomplete="email"
                                                autofocus>
                                         @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="email-confirm">{{ __('Confirm Email Address') }}</label>
+                                        <input id="email-confirm"
+                                               type="email"
+                                               class="form-control @error('email_confirmation') is-invalid @enderror"
+                                               name="email_confirmation"
+                                               value="{{ old('email_confirmation') }}"
+                                               oninput="toMin(this)"
+                                               autocomplete="email_confirmation">
+                                        @error('email_confirmation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -155,7 +155,9 @@
                     Integrados al Estado de México (SEIEM), deberá llenar el
                     <a href="{{ route('register') }}"><i class="fa fa-address-card"></i> <strong>Formulario de
                             Registro</strong></a>, ingresando su
-                    nombre, RFC y correo electrónico, posteriormente, podrá crear una contraseña de 8 caracteres,
+                    nombre, RFC, clave del centro de trabajo y correo electrónico, posteriormente, podrá crear una
+                    contraseña
+                    de 8 caracteres,
                     utilizando mayúsculas, minúsculas, números o símbolos. Al finalizar, recibirá un correo
                     electrónico de verificación para validar sus datos y así poder acceder al contenido del curso y
                     evaluaciones.

@@ -29,6 +29,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'rfc' => ['required', 'string', 'size:13', 'unique:r10users,orfc'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:r10users,email'],
+            'email_confirmation' => ['required', 'string', 'email', 'same:email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'oclave' => ['required', 'string', 'size:10', 'regex:/^15[A-Z]{3}\d{4}[A-Z]$/', 'exists:r10centrostrabajo,oclave'],
         ];
@@ -40,10 +41,12 @@ class RegisterController extends Controller
             'oclave.size' => 'La clave del centro de trabajo debe tener exactamente 10 caracteres.',
             'oclave.regex' => 'El formato de la clave del centro de trabajo no es válido.',
             'oclave.exists' => 'La clave del centro de trabajo no existe.',
+            'email_confirmation.same' => 'La confirmación del correo electrónico debe coincidir con el correo electrónico.',
         ];
 
         return Validator::make($data, $rules, $messages);
     }
+
 
     public function register(Request $request)
     {
