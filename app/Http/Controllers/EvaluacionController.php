@@ -65,6 +65,14 @@ class EvaluacionController extends Controller
         $numeroPreguntas = $evaluacion->onumero_preguntas;
         $preguntasMostradas = $preguntas->take($numeroPreguntas);
 
+        // Verificar si el usuario ha accedido previamente a la evaluación y, si no, agregar primer intento
+        $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
+
+        if (!$pivot) {
+            $user->evaluaciones()->attach($evaluacion->id, ['ointentos' => 0]);
+            $pivot = $user->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
+        }
+
         // Cargar la vista con las preguntas, la evaluación y los intentos
         return view('evaluaciones.show', [
             'modulo' => $modulo,
@@ -78,7 +86,8 @@ class EvaluacionController extends Controller
     // Guardar respuestas
     public function submit(Request $request, $evaluacion_id)
     {
-        // Obtener usuario autenticado y evaluación
+
+        // Obtener usuario y evaluación
         $user = Auth::user();
         $evaluacion = $user->evaluaciones()->findOrFail($evaluacion_id);
         $modulo = Modulo::find($evaluacion->modulo_id);
@@ -100,8 +109,10 @@ class EvaluacionController extends Controller
 
         // Verificar que se hayan contestado todas las preguntas
         $numeroPreguntasMostradas = $evaluacion->onumero_preguntas;
+
         if (count($respuestas) !== $numeroPreguntasMostradas) {
-            return redirect()->back()->with('warning', 'Completa todas las preguntas.');
+            return redirect()
+                ->back()->with('warning', 'Completa todas las preguntas.');
         }
 
         // Incrementar intentos del usuario
@@ -110,13 +121,14 @@ class EvaluacionController extends Controller
         ]);
 
         // Guardar respuestas
-        Resultado::updateOrCreate(
+        $resultado = Resultado::updateOrCreate(
             ['user_id' => $user->id, 'evaluacion_id' => $evaluacion->id],
             ['orespuestas' => json_encode(array_values($respuestas))]
         );
 
         // Redirigir al usuario
-        return redirect()->route('modulos.show', $modulo->id)->with('success', 'Evaluación completada.');
+        return redirect()->route('modulos.show', $modulo->id)
+            ->with('success', 'Evaluación completada.');
     }
 
     // Ver resultados

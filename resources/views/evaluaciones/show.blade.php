@@ -18,7 +18,7 @@
                     </p>
                 @endif
 
-                <form id="formulario_evaluacion" method="POST" action="{{ route('evaluaciones.submit', ['modulo' => $modulo->id, 'evaluacion' => $evaluacion->id]) }}">
+                <form id="formulario_evaluacion" method="POST" action="{{ route('evaluaciones.submit', ['evaluacion' => $evaluacion->id]) }}">
                     @csrf
 
                     @foreach ($preguntas->shuffle() as $pregunta)
