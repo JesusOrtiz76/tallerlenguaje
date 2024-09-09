@@ -12,6 +12,27 @@ class ModuloController extends Controller
 {
     use VerificaEvaluacionesCompletasTrait;
 
+    // Obtener módulos
+    public function index(Curso $curso)
+    {
+        // Obtener el tiempo de caché global desde el archivo .env
+        $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
+
+        // Definir la clave de caché para los módulos de este curso
+        $modulosCacheKey = 'modulos_curso_' . $curso->id;
+
+        // Obtener o almacenar en caché los módulos del curso
+        $modulos = Cache::remember($modulosCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($curso) {
+            return $curso->modulos;
+        });
+
+        if ($modulos->isEmpty()) {
+            return redirect()->back()->with('warning', 'No hay módulos registrados en este curso.');
+        } else {
+            return view('modulos.index', compact('curso', 'modulos'));
+        }
+    }
+
     // Obtener detalles del módulo
     public function show(Curso $curso, Modulo $modulo)
     {
