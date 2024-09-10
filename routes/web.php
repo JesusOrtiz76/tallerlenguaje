@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Solo para administradores
 Route::middleware(['auth', 'checkUserRole:admin'])->group(function () {
     // Dashboard
-    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Lista de usuarios registrados
     Route::get('users', [AdminController::class, 'index'])->name('admin.users');

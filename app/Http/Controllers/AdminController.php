@@ -23,9 +23,4 @@ class AdminController extends Controller
 
         return view('admin.users.index', ['users' => $users]);
     }
-
-    public function dashboard()
-    {
-        return view('admin.dashboard');
-    }
 }

@@ -767,3 +767,55 @@ body {
         border-color: lighten($golden, 15%);
     }
 }
+
+/* Border color cards para el dashboard */
+
+.border-top-primary {
+    border-top: 0.2rem solid $primary !important;
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.border-top-secondary {
+    border-top: 0.2rem solid $secondary !important;
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.border-left-primary {
+    border-left: 0.3rem solid $primary;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.border-left-success {
+    border-left: 0.3rem solid $success;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.border-left-info {
+    border-left: 0.3rem solid $info;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.border-left-warning {
+    border-left: 0.3rem solid $warning;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.border-left-secondary {
+    border-left: 0.3rem solid $secondary;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
