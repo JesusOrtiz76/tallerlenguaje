@@ -25,7 +25,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('/');
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false, 'reset' => false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -38,7 +38,7 @@ Route::post('register', [RegisterController::class, 'register'])
     ->middleware('checkregisterdate');
 
 // Rutas para todos los usuarios autenticados
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     //Cursos
     Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])
         ->name('cursos.inscribirse');

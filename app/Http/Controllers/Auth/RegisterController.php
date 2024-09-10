@@ -78,9 +78,9 @@ class RegisterController extends Controller
             $userWithRfc->save();
 
             // Enviar una nueva notificación de verificación
-            $userWithRfc->sendEmailVerificationNotification();
+            //$userWithRfc->sendEmailVerificationNotification();
 
-            return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu nueva dirección de correo electrónico.');
+            return redirect()->route('login')->with('success', '¡Registro exitoso!');
         }
 
         // Si el usuario no existe, creamos uno nuevo
@@ -94,9 +94,9 @@ class RegisterController extends Controller
             ]);
 
             // Enviar la notificación de verificación
-            $newUser->sendEmailVerificationNotification();
+            //$newUser->sendEmailVerificationNotification();
 
-            return redirect()->route('login')->with('success', '¡Registro exitoso! Se ha enviado un correo de verificación a tu dirección de correo electrónico.');
+            return redirect()->route('login')->with('success', '¡Registro exitoso!');
         }
 
         // Si el usuario ya existe y su correo está verificado
