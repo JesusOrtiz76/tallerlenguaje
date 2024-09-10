@@ -29,9 +29,9 @@ class Evaluacion extends Model
         return $this->hasMany(Pregunta::class);
     }
 
-    public function resultado()
+    public function resultados()
     {
-        return $this->hasOne(Resultado::class);
+        return $this->hasMany(Resultado::class);
     }
 
     // Verifica si el usuario ya no tiene más intentos

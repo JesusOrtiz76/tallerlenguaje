@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Modulo;
 use App\Models\User;
 use App\Models\Resultado;
-use App\Models\Evaluacion;
 use App\Models\Inscripcion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -20,71 +19,17 @@ class DashboardController extends Controller
         $inscripcionesCount = Inscripcion::count();
         $resultadosCount = Resultado::count();
 
-        // Obtener las fechas de inicio y fin para el rango de datos
-        $startDate = Resultado::min('created_at');
-        $endDate = Resultado::max('created_at');
+        // Obtener el rango de fechas
+        $allDates = $this->generateDateRange(Resultado::min('created_at'), Resultado::max('created_at'));
 
-        // Generar un rango de fechas completo
-        $allDates = [];
-        $currentDate = Carbon::parse($startDate);
-        $endDate = Carbon::parse($endDate);
+        // Consulta de respuestas por módulo y fecha
+        $respuestasCountByDateAndModulo = $this->getRespuestasCountByDateAndModulo();
 
-        while ($currentDate->lte($endDate)) {
-            $allDates[] = $currentDate->format('Y-m-d');
-            $currentDate->addDay();
-        }
-        // Obtener el rango de fechas para las series de tiempo
-        $startDate = Resultado::min('created_at');
-        $endDate = Resultado::max('created_at');
+        // Agrupar los resultados por módulo y fechas
+        $timeseriesData = $this->generateTimeseriesData($allDates, $respuestasCountByDateAndModulo);
 
-        // Generar un rango de fechas completo
-        $allDates = [];
-        $currentDate = Carbon::parse($startDate);
-        $endDate = Carbon::parse($endDate);
-
-        while ($currentDate->lte($endDate)) {
-            $allDates[] = $currentDate->format('Y-m-d');
-            $currentDate->addDay();
-        }
-
-        // Timeseries: Respuestas por módulo, pasando por alto la evaluación
-        $respuestasCountByDateAndModulo = Resultado::with('evaluacion.modulo')
-            ->select(
-                DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as date"),
-                'evaluacion_id',
-                DB::raw('count(*) as count')
-            )
-            ->groupBy('date', 'evaluacion_id')
-            ->get();
-
-        // Agrupamos los resultados por módulo
-        $timeseriesData = $respuestasCountByDateAndModulo->groupBy(function ($item) {
-            return $item->evaluacion->modulo->onombre;  // Agrupamos por el nombre del módulo
-        })->map(function ($items, $modulo) use ($allDates) {
-            $data = collect($allDates)->map(function ($date) use ($items) {
-                $item = $items->firstWhere('date', $date);
-                return [
-                    'date' => $date,
-                    'count' => $item ? $item->count : 0
-                ];
-            });
-            return [
-                'modulo' => $modulo,
-                'data' => $data
-            ];
-        })->values()->all();
-
-        // Estructuramos los datos para la gráfica de FusionCharts
-        $chartData = [];
-        foreach ($timeseriesData as $moduloData) {
-            foreach ($moduloData['data'] as $dataPoint) {
-                $chartData[] = [
-                    $dataPoint['date'],  // Fecha
-                    $moduloData['modulo'],  // Nombre del módulo
-                    $dataPoint['count']  // Cantidad de resultados
-                ];
-            }
-        }
+        // Preparar los datos para la gráfica
+        $chartData = $this->prepareChartData($timeseriesData);
 
         // Definir el esquema para FusionCharts
         $chartSchema = [
@@ -93,32 +38,114 @@ class DashboardController extends Controller
             ["name" => "Cantidad", "type" => "number"]
         ];
 
-        // Obtener todos los módulos con sus evaluaciones y resultados
-        $modulos = Modulo::with('evaluaciones.resultado')->get();
+        // Datos para la gráfica de anillos
+        $donutData = $this->prepareDonutData(Modulo::with('evaluaciones.resultados')->get());
 
-        // Crear el arreglo para la gráfica de anillos anidados en el formato correcto
+        // Gráfica de calor: Concurrencia
+        $heatmapData = $this->generateHeatmapData();
+
+        return view('admin.dashboard.index', compact(
+            'userCount',
+            'verifiedUserCount',
+            'inscripcionesCount',
+            'resultadosCount',
+            'chartData',
+            'chartSchema',
+            'donutData',
+            'heatmapData'
+        ));
+    }
+
+    private function generateDateRange($startDate, $endDate)
+    {
+        $allDates = [];
+        $currentDate = Carbon::parse($startDate);
+        $endDate = Carbon::parse($endDate);
+
+        while ($currentDate->lte($endDate)) {
+            $allDates[] = $currentDate->format('Y-m-d');
+            $currentDate->addDay();
+        }
+
+        return $allDates;
+    }
+
+    private function getRespuestasCountByDateAndModulo()
+    {
+        return Resultado::select(
+            DB::raw("DATE_FORMAT(r10resultados.created_at, '%Y-%m-%d') as date"),
+            'r10modulos.onombre as modulo',
+            DB::raw('COUNT(r10resultados.id) as total')
+        )
+            ->join('r10evaluaciones', 'r10resultados.evaluacion_id', '=', 'r10evaluaciones.id')
+            ->join('r10modulos', 'r10evaluaciones.modulo_id', '=', 'r10modulos.id')
+            ->groupBy('modulo', 'date')
+            ->orderBy('date', 'asc')
+            ->get();
+    }
+
+    private function generateTimeseriesData($allDates, $respuestasCountByDateAndModulo)
+    {
+        return $respuestasCountByDateAndModulo->groupBy('modulo')->map(function ($items, $modulo) use ($allDates) {
+            $data = collect($allDates)->map(function ($date) use ($items) {
+                $item = $items->firstWhere('date', $date);
+                return [
+                    'date' => $date,
+                    'count' => $item ? $item->total : 0
+                ];
+            });
+
+            return [
+                'modulo' => $modulo,
+                'data' => $data
+            ];
+        })->values()->all();
+    }
+
+    private function prepareChartData($timeseriesData)
+    {
+        $chartData = [];
+        foreach ($timeseriesData as $moduloData) {
+            foreach ($moduloData['data'] as $dataPoint) {
+                $chartData[] = [
+                    $dataPoint['date'],
+                    $moduloData['modulo'],
+                    $dataPoint['count']
+                ];
+            }
+        }
+        return $chartData;
+    }
+
+    private function prepareDonutData($modulos)
+    {
         $donutData = [];
-        foreach ($modulos as $modulo) {
-            // Crear las subcategorías (evaluaciones) para cada módulo
-            $evaluacionesArray = [];
-            foreach ($modulo->evaluaciones as $evaluacion) {
-                $evaluationResultsCount = $evaluacion->resultado ? 1 : 0;
 
+        foreach ($modulos as $modulo) {
+            $evaluacionesArray = [];
+
+            foreach ($modulo->evaluaciones as $evaluacion) {
+                $evaluationResultsCount = $evaluacion->resultados->count();
                 $evaluacionesArray[] = [
-                    "label" => $evaluacion->onombre, // Nombre de la evaluación
+                    "label" => $evaluacion->onombre,
                     "value" => $evaluationResultsCount
                 ];
             }
 
-            // Agregar el módulo como una categoría, con sus evaluaciones anidadas
+            $totalResultsForModule = array_sum(array_column($evaluacionesArray, 'value'));
+
             $donutData[] = [
-                "label" => $modulo->onombre, // Nombre del módulo
-                "value" => array_sum(array_column($evaluacionesArray, 'value')), // Sumar los resultados de todas las evaluaciones
-                "category" => $evaluacionesArray  // Las evaluaciones como subcategorías
+                "label" => $modulo->onombre,
+                "value" => $totalResultsForModule,
+                "category" => $evaluacionesArray
             ];
         }
 
-        // Gráfica de calor: Concurrencia basada en 'updated_at' en la tabla de Resultados
+        return $donutData;
+    }
+
+    private function generateHeatmapData()
+    {
         $days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
         $data = collect();
         foreach ($days as $dayName) {
@@ -128,7 +155,6 @@ class DashboardController extends Controller
             }
         }
 
-        // Consultar la concurrencia y contar las ocurrencias en función de 'updated_at'
         $results = Resultado::selectRaw('DAYOFWEEK(updated_at) as DayOfWeek, HOUR(updated_at) as Hour, COUNT(*) as Count')
             ->groupBy('DayOfWeek', 'Hour')
             ->orderByRaw('DAYOFWEEK(updated_at), HOUR(updated_at)')
@@ -147,7 +173,7 @@ class DashboardController extends Controller
             });
         }
 
-        $heatmapData = [
+        return [
             "chart" => [
                 "xAxisName" => "Hora del Día",
                 "yAxisName" => "Día de la Semana",
@@ -164,16 +190,5 @@ class DashboardController extends Controller
             ],
             "dataset" => [["data" => $data->values()->all()]]
         ];
-
-        return view('admin.dashboard.index', compact(
-            'userCount',
-            'verifiedUserCount',
-            'inscripcionesCount',
-            'resultadosCount',
-            'chartData',
-            'chartSchema',
-            'donutData',
-            'heatmapData'
-        ));
     }
 }
