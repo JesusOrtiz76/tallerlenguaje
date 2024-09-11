@@ -24,8 +24,12 @@ class DashboardController extends Controller
         $inscripcionesCount = Inscripcion::count();
         $resultadosCount = Resultado::count();
 
-        // Obtener el rango de fechas
-        $allDates = $this->generateDateRange(Resultado::min('created_at'), Resultado::max('created_at'));
+        // Obtener la fecha mínima y máxima de la tabla de resultados
+        $minDate = Resultado::min(DB::raw("DATE(created_at)"));
+        $maxDate = Resultado::max(DB::raw("DATE(created_at)"));
+
+        // Generar el rango de fechas completo
+        $allDates = $this->generateDateRange($minDate, $maxDate);
 
         // Consulta de respuestas por módulo y fecha
         $respuestasCountByDateAndModulo = $this->getRespuestasCountByDateAndModulo();
@@ -77,15 +81,15 @@ class DashboardController extends Controller
 
     private function getRespuestasCountByDateAndModulo()
     {
-        return Resultado::select(
-            'r10modulos.onombre as modulo',
-            DB::raw("DATE(r10resultados.updated_at) as date"),
-            DB::raw('COUNT(r10resultados.id) as total')
-        )
-            ->join('r10evaluaciones', 'r10resultados.evaluacion_id', '=', 'r10evaluaciones.id')
-            ->join('r10modulos', 'r10evaluaciones.modulo_id', '=', 'r10modulos.id')
-            ->groupBy('r10modulos.onombre', DB::raw("DATE(r10resultados.updated_at)"))
-            ->orderBy('modulo', 'asc')
+        return DB::table('r10resultados as rr')
+            ->select(
+                'rm.onombre as modulo',
+                DB::raw("DATE_FORMAT(rr.created_at, '%Y-%m-%d') as date"),
+                DB::raw('COUNT(*) as total')
+            )
+            ->leftJoin('r10evaluaciones as re', 'rr.evaluacion_id', '=', 're.id')
+            ->leftJoin('r10modulos as rm', 're.modulo_id', '=', 'rm.id')
+            ->groupBy('rm.onombre', DB::raw("DATE_FORMAT(rr.created_at, '%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get();
     }
