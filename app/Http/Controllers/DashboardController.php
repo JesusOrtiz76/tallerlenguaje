@@ -42,8 +42,8 @@ class DashboardController extends Controller
 
         // Definir el esquema para FusionCharts
         $chartSchema = [
-            ["name" => "Fecha", "type" => "date", "format" => "%Y-%m-%d"],
             ["name" => "Módulo", "type" => "string"],
+            ["name" => "Fecha", "type" => "date", "format" => "%Y-%m-%d"],
             ["name" => "Cantidad", "type" => "number"]
         ];
 
@@ -118,8 +118,8 @@ class DashboardController extends Controller
         foreach ($timeseriesData as $moduloData) {
             foreach ($moduloData['data'] as $dataPoint) {
                 $chartData[] = [
-                    $dataPoint['date'],
                     $moduloData['modulo'],
+                    $dataPoint['date'],
                     $dataPoint['count']
                 ];
             }
