@@ -47,6 +47,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
+                                    <th class="text-center">Centro de Trabajo</th>
                                     <th class="text-center">Nombre</th>
                                     <th class="text-center">RFC</th>
                                     <th class="text-center">Email</th>
@@ -56,6 +57,9 @@
                                 <tbody>
                                 @foreach ($users as $user)
                                     <tr>
+                                        <td  class="text-center">
+                                            {{ $user->centroTrabajo->oclave ?? 'N/A' }}
+                                        </td>
                                         <td class="text-nowrap">
                                             {{ $user->name }}
                                         </td>
@@ -65,11 +69,12 @@
                                         <td>
                                             {{ $user->email }}
                                         </td>
-                                        <td  class="text-center">
-                                            {{ $user->created_at->format('d/m/Y') }}
+                                        <td class="text-center">
+                                            {{ $user->created_at->format('d/m/Y h:i A') }}
                                         </td>
                                     </tr>
                                 @endforeach
+
                                 </tbody>
                             </table>
                         </div>

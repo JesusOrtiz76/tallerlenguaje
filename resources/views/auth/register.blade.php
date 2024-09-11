@@ -26,7 +26,7 @@
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label for="name">{{ __('Name') }}</label>
+                                        <label for="name">Nombre completo</label>
                                         <input id="name"
                                                type="text"
                                                class="form-control @error('name') is-invalid @enderror"

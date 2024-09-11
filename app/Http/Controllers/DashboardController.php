@@ -13,9 +13,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Devuelve solo la vista
+        return view('admin.dashboard.index');
+    }
+
+    public function getDataIndex()
+    {
         // Contadores
         $userCount = User::count();
-        $verifiedUserCount = User::whereNotNull('email_verified_at')->count();
         $inscripcionesCount = Inscripcion::count();
         $resultadosCount = Resultado::count();
 
@@ -44,9 +49,9 @@ class DashboardController extends Controller
         // Gráfica de calor: Concurrencia
         $heatmapData = $this->generateHeatmapData();
 
-        return view('admin.dashboard.index', compact(
+        // Respuesta en formato JSON
+        return response()->json(compact(
             'userCount',
-            'verifiedUserCount',
             'inscripcionesCount',
             'resultadosCount',
             'chartData',
@@ -73,13 +78,14 @@ class DashboardController extends Controller
     private function getRespuestasCountByDateAndModulo()
     {
         return Resultado::select(
-            DB::raw("DATE_FORMAT(r10resultados.created_at, '%Y-%m-%d') as date"),
             'r10modulos.onombre as modulo',
+            DB::raw("DATE(r10resultados.updated_at) as date"),
             DB::raw('COUNT(r10resultados.id) as total')
         )
             ->join('r10evaluaciones', 'r10resultados.evaluacion_id', '=', 'r10evaluaciones.id')
             ->join('r10modulos', 'r10evaluaciones.modulo_id', '=', 'r10modulos.id')
-            ->groupBy('modulo', 'date')
+            ->groupBy('r10modulos.onombre', DB::raw("DATE(r10resultados.updated_at)"))
+            ->orderBy('modulo', 'asc')
             ->orderBy('date', 'asc')
             ->get();
     }

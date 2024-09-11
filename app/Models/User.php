@@ -48,6 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function centroTrabajo()
+    {
+        return $this->belongsTo(CentroTrabajo::class, 'centrotrabajo_id');
+    }
+
     public function cursos()
     {
         return $this->belongsToMany(Curso::class, 'r10inscripciones', 'user_id', 'curso_id')

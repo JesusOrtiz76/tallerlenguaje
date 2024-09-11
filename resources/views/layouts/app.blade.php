@@ -58,6 +58,8 @@
     crossorigin="anonymous">
 </script>
 
+@stack('scripts')
+
 </body>
 
 </html>

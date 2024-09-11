@@ -8,6 +8,35 @@
         </div>
         <!-- Contenido superior -->
         <div class="sidebar-content">
+            <!-- Mostrar menús adicionales si el usuario es administrador -->
+            @if(Auth::check() && Auth::user()->orol === 'admin')
+                <div class="mb-4">
+                    <div class="w-100 d-flex justify-content-center">
+                        <h5 class="text-uppercase text-primary mb-2 text-center">Administración</h5>
+                    </div>
+
+                    <!-- Botón de Dashboard -->
+                    <div class="btn-group d-flex justify-content-between my-2">
+                        <a class="btn btn-sidebar btn-text-left w-100
+                        {{ Request::is('dashboard') ? 'btn-primary' : 'btn-outline-primary' }}"
+                           href="{{ route('admin.dashboard') }}">
+                            <i class="fa-solid fa-tachometer-alt"></i> <!-- Icono de Dashboard -->
+                            Dashboard
+                        </a>
+                    </div>
+
+                    <!-- Botón de Gestionar Usuarios -->
+                    <div class="btn-group d-flex justify-content-between my-2">
+                        <a class="btn btn-sidebar btn-text-left w-100
+                        {{ Request::is('users') ? 'btn-primary' : 'btn-outline-primary' }}"
+                           href="{{ route('admin.users') }}">
+                            <i class="fa-solid fa-users"></i> <!-- Icono de Gestionar Usuarios -->
+                            Gestionar Usuarios
+                        </a>
+                    </div>
+                </div>
+            @endif
+
             @foreach ($cursos as $curso)
                 <div class="mb-4">
                     <div class="w-100 d-flex justify-content-center">

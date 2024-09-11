@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'checkUserRole:admin'])->group(function () {
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/data', [DashboardController::class, 'getDataIndex'])->name('dashboard.data');
 
     // Lista de usuarios registrados
     Route::get('users', [AdminController::class, 'index'])->name('admin.users');
