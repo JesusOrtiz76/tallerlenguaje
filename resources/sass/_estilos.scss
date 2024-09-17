@@ -48,9 +48,9 @@
 
 #mainNav {
     padding: 15px 10px;
-    background: rgba(255, 255, 255, 0.91);
-    backdrop-filter: blur(8.3px);
-    -webkit-backdrop-filter: blur(8.3px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     width:100%;
     margin-bottom: 40px;
     z-index: 1;
@@ -576,14 +576,14 @@ a {
 
 [data-bs-theme="dark"] .blur-bg {
     background: rgba($bg_dark, 0.80);
-    backdrop-filter: blur(8.3px);
-    -webkit-backdrop-filter: blur(8.3px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .blur-bg {
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(8.3px);
-    -webkit-backdrop-filter: blur(8.3px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 [data-bs-theme="dark"] .dashboard-bg {
@@ -819,3 +819,7 @@ body {
     border-bottom: 0;
 }
 
+// Estilos para la pregunta sin responder
+.unanswered-question {
+    background: rgba(255, 234, 234, 0.8);
+}

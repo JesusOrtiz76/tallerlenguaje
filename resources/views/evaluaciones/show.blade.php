@@ -18,23 +18,21 @@
                     </p>
                 @endif
 
-                <form id="formulario_evaluacion" method="POST" action="{{ route('evaluaciones.submit', ['evaluacion' => $evaluacion->id]) }}">
+                <form id="evaluation_form" method="POST" action="{{ route('evaluaciones.submit', ['evaluacion' => $evaluacion->id]) }}">
                     @csrf
 
                     @foreach ($preguntas->shuffle() as $pregunta)
-                    <div class="card mb-4 shadow-sm border-0 blur-bg">
-                        <div class="card-body px-lg-3">
-                            <h5 class="mb-3">{{ $pregunta->oenunciado }}</h5>
-                            <div class="w-100 d-flex justify-content-center row ps-4">
-                                @foreach ($pregunta->opciones->shuffle() as $opcion)
-                                <input type="radio" class="btn-check" name="respuestas[{{ $pregunta->id }}]" id="respuesta_{{ $opcion->id }}" value="{{ $opcion->id }}" @if(old('respuestas.'.$pregunta->id, '') == $opcion->id) checked @endif>
-                                <label class="btn col btn-outline-primary py-1 m-1 text-justify" for="respuesta_{{ $opcion->id }}">
-                                    {!! nl2br(e($opcion->otexto)) !!}
-                                </label>
-                                @endforeach
+                        <div class="card mb-4 shadow-sm border-0 blur-bg question-container">
+                            <div class="card-body px-lg-3">
+                                <h5 class="mb-3">{{ $pregunta->oenunciado }}</h5>
+                                <div class="w-100 d-flex justify-content-center row ps-4">
+                                    @foreach ($pregunta->opciones->shuffle() as $opcion)
+                                        <input type="radio" class="btn-check" name="respuestas[{{ $pregunta->id }}]" id="respuesta_{{ $opcion->id }}" value="{{ $opcion->id }}" @if(old('respuestas.'.$pregunta->id, '') == $opcion->id) checked @endif>
+                                        <label class="btn col btn-outline-primary py-1 m-1 text-justify" for="respuesta_{{ $opcion->id }}">{!! nl2br(e($opcion->otexto)) !!}</label>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
 
                     <div class="w-100 d-flex justify-content-center">
@@ -43,20 +41,7 @@
                 </form>
             </div>
         </div>
-        <script>
-            document.getElementById('formulario_evaluacion').addEventListener('submit', function(e) {
-                let respuestas = document.querySelectorAll('input[type=radio]:checked');
+    </div>
 
-                if (respuestas.length !== {{ count($preguntas) }}) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: 'Mensaje',
-                        text: "Completa las preguntas.",
-                        icon: 'warning',
-                        confirmButtonColor: '#FCCD00',
-                        iconColor: '#FCCD00',
-                    });
-                }
-            });
-        </script>
+    @include('scripts.evaluaciones_validation_form')
 @endsection
