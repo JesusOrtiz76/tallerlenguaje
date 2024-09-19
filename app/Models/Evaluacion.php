@@ -10,7 +10,7 @@ class Evaluacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10evaluaciones';
+    protected $table = 'r12evaluaciones';
 
     public function modulo()
     {
@@ -19,7 +19,7 @@ class Evaluacion extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'r10evaluacion_user', 'evaluacion_id', 'user_id')
+        return $this->belongsToMany(User::class, 'r12evaluacion_user', 'evaluacion_id', 'user_id')
             ->withPivot('ointentos')
             ->withTimestamps();
     }

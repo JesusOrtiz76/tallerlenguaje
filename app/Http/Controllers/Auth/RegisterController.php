@@ -30,13 +30,13 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'email_confirmation' => ['required', 'string', 'email', 'same:email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'oclave' => ['required', 'string', 'size:10', 'regex:/^15[A-Z]{3}\d{4}[A-Z]$/', 'exists:r10centrostrabajo,oclave'],
+            'oclave' => ['required', 'string', 'size:10', 'regex:/^15[A-Z]{3}\d{4}[A-Z]$/', 'exists:r12centrostrabajo,oclave'],
         ];
 
         // Validar si el RFC ya está registrado pero permitir cambiar el correo si no ha sido verificado
         $user = User::where('orfc', $data['rfc'])->first();
         if (!$user) {
-            $rules['rfc'][] = 'unique:r10users,orfc';
+            $rules['rfc'][] = 'unique:r12users,orfc';
         }
 
         return Validator::make($data, $rules, [

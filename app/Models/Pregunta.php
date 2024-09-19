@@ -9,7 +9,7 @@ class Pregunta extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10preguntas';
+    protected $table = 'r12preguntas';
 
     public function evaluacion()
     {

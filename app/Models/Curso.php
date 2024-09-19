@@ -9,11 +9,11 @@ class Curso extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10cursos';
+    protected $table = 'r12cursos';
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'r10inscripciones', 'curso_id', 'user_id')
+        return $this->belongsToMany(User::class, 'r12inscripciones', 'curso_id', 'user_id')
             ->withTimestamps();
     }
 

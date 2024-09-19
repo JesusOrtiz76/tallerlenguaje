@@ -9,7 +9,7 @@ class Resultado extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10resultados';
+    protected $table = 'r12resultados';
 
     protected $fillable = [
         'user_id',

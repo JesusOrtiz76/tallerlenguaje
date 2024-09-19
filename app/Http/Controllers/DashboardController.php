@@ -81,14 +81,14 @@ class DashboardController extends Controller
 
     private function getRespuestasCountByDateAndModulo()
     {
-        return DB::table('r10resultados as rr')
+        return DB::table('r12resultados as rr')
             ->select(
                 'rm.onombre as modulo',
                 DB::raw("DATE_FORMAT(rr.created_at, '%Y-%m-%d') as date"),
                 DB::raw('COUNT(*) as total')
             )
-            ->leftJoin('r10evaluaciones as re', 'rr.evaluacion_id', '=', 're.id')
-            ->leftJoin('r10modulos as rm', 're.modulo_id', '=', 'rm.id')
+            ->leftJoin('r12evaluaciones as re', 'rr.evaluacion_id', '=', 're.id')
+            ->leftJoin('r12modulos as rm', 're.modulo_id', '=', 'rm.id')
             ->groupBy('rm.onombre', DB::raw("DATE_FORMAT(rr.created_at, '%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get();

@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r10resultados', function (Blueprint $table) {
+        Schema::create('r12resultados', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('evaluacion_id');
             $table->json('orespuestas');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('r10users')->onDelete('cascade');
-            $table->foreign('evaluacion_id')->references('id')->on('r10evaluaciones')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('r12users')->onDelete('cascade');
+            $table->foreign('evaluacion_id')->references('id')->on('r12evaluaciones')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r10resultados');
+        Schema::dropIfExists('r12resultados');
     }
 };

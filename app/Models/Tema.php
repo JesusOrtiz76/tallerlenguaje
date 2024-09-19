@@ -9,7 +9,7 @@ class Tema extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10temas';
+    protected $table = 'r12temas';
 
     public function modulo()
     {

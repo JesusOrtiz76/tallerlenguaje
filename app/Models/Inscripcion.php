@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inscripcion extends Model
 {
-    protected $table = 'r10inscripciones';
+    protected $table = 'r12inscripciones';
 
     protected $fillable = [
         'user_id',

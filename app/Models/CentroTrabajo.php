@@ -9,7 +9,7 @@ class CentroTrabajo extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10centrostrabajo';
+    protected $table = 'r12centrostrabajo';
 
     public function users()
     {

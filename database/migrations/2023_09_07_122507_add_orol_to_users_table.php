@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('r10users', function (Blueprint $table) {
+        Schema::table('r12users', function (Blueprint $table) {
             $table->string('orol')->default('user')->after('password');
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('r10users', function (Blueprint $table) {
+        Schema::table('r12users', function (Blueprint $table) {
             $table->dropColumn('orol');
         });
     }

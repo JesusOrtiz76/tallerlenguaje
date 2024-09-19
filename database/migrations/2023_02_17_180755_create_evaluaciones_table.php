@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r10evaluaciones', function (Blueprint $table) {
+        Schema::create('r12evaluaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('modulo_id');
             $table->string('onombre');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('ointentos_max')->default(3);
             $table->timestamps();
 
-            $table->foreign('modulo_id')->references('id')->on('r10modulos')->onDelete('cascade');
+            $table->foreign('modulo_id')->references('id')->on('r12modulos')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r10evaluaciones');
+        Schema::dropIfExists('r12evaluaciones');
     }
 };

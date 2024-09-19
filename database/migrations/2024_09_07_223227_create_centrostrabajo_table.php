@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r10centrostrabajo', function (Blueprint $table) {
+        Schema::create('r12centrostrabajo', function (Blueprint $table) {
             $table->id();
             $table->string('oclave', 10)->unique();
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r10centrostrabajo');
+        Schema::dropIfExists('r12centrostrabajo');
     }
 };

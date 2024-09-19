@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r10opciones', function (Blueprint $table) {
+        Schema::create('r12opciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pregunta_id');
             $table->text('otexto');
             $table->boolean('oes_correcta')->default(false);
             $table->timestamps();
 
-            $table->foreign('pregunta_id')->references('id')->on('r10preguntas')->onDelete('cascade');
+            $table->foreign('pregunta_id')->references('id')->on('r12preguntas')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r10opciones');
+        Schema::dropIfExists('r12opciones');
     }
 };

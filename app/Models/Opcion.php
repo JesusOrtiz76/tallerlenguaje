@@ -9,7 +9,7 @@ class Opcion extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10opciones';
+    protected $table = 'r12opciones';
 
     public function Pregunta()
     {

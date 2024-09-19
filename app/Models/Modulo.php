@@ -9,7 +9,7 @@ class Modulo extends Model
 {
     use HasFactory;
 
-    protected $table = 'r10modulos';
+    protected $table = 'r12modulos';
 
     public function curso()
     {

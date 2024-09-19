@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('r10preguntas', function (Blueprint $table) {
+        Schema::create('r12preguntas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('evaluacion_id')->constrained('r10evaluaciones')->onDelete('cascade');
+            $table->foreignId('evaluacion_id')->constrained('r12evaluaciones')->onDelete('cascade');
             $table->text('oenunciado');
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('r10preguntas');
+        Schema::dropIfExists('r12preguntas');
     }
 };
