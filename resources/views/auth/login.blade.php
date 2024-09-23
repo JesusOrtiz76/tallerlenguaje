@@ -65,8 +65,8 @@
                                     <button class="btn btn-outline-primary btn-block">{{ __('Login') }}</button>
                                 </div>
                                 @if (Route::has('register'))
-                                <p class="mb-5 pt-3" style="color: #BB647A;"> {{ __("Don't have an account?") }}
-                                    <a href="{{ route('register') }}" style="color: #BB647A;">{{ __('Sign up') }}</a>
+                                <p class="mb-5 pt-3 text-primary"> {{ __("Don't have an account?") }}
+                                    <a href="{{ route('register') }}" class="text-primary">{{ __('Sign up') }}</a>
                                 </p>
                                 @endif
                             </form>

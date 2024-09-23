@@ -16,7 +16,7 @@
 
                     <div class="col-lg-6 p-5 order-1 order-lg-2">
 
-                        <p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
+                        <p class="text-uppercase">{{ __('Welcome to the writing workshop') }}:</p>
                         <h1 class="text-gradient mb-4">{{ $curso->onombre }}</h1>
                         <p class="text-muted text-justify">{{ $curso->odescripcion }}</p>
 
@@ -65,7 +65,7 @@
                 @else
                     <div class="col-lg-6 p-5 order-1">
 
-                        <p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
+                        <p class="text-uppercase">{{ __('Welcome to the writing workshop') }}:</p>
                         <h1 class="text-gradient mb-4">{{ $curso->onombre }}</h1>
                         <p class="text-muted text-justify">{{ $curso->odescripcion }}</p>
 

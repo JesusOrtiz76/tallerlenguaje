@@ -42,7 +42,7 @@
                     <div class="w-100 d-flex justify-content-center">
                         <a class="btn-sidebar" href="{{ route('modulos.index', $curso->id) }}">
                             <h5 class="text-uppercase text-primary mb-2 text-center">
-                                Módulos del curso
+                                Bloques del curso
                             </h5>
                         </a>
                     </div>

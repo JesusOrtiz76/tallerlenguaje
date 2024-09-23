@@ -28,10 +28,10 @@ class CursoController extends Controller
         // Verificar que el objeto de curso es válido
         if (!$curso) {
             return redirect()->route('home')
-                ->with('error', 'No se pudo encontrar el curso que deseas matricularte');
+                ->with('error', 'No se pudo encontrar el taller que deseas matricularte');
         }
 
-        // Usar el trait para verificar solo las fechas de acceso al curso
+        // Usar el trait para verificar solo las fechas de acceso al taller
         $resultado = $this->verificarFechasAcceso($curso);
         if ($resultado['error']) {
             return redirect()->route('home')->with('warning', $resultado['message']);

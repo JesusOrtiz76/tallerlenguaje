@@ -43,7 +43,7 @@
                 <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#modulos">M&oacute;dulos</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">{{ __('Go to course') }}</a>
+                    <a class="nav-link" href="{{ route('home') }}">{{ __('Go to workshop') }}</a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
@@ -94,11 +94,11 @@
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
-        <div class="masthead-subheading"> {{ __('Welcome to the course') }} </div>
+        <div class="masthead-subheading"> {{ __('Welcome to the writing workshop') }} </div>
         <div class="masthead-heading text-uppercase"> {{ $cursos[0]->onombre }} </div>
         <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap"
            href="{{ route('home') }}">
-            {{ __('Go to course') }}
+            {{ __('Go to workshop') }}
         </a>
 
         <!-- Animation Mousey-->
@@ -117,13 +117,35 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase text-gradient">Introducción</h2>
-            <h3 class="section-subheading text-muted text-justify">El curso tiene como propósito primordial,
-                hacer énfasis en la correcta aplicación del “{{ $cursos[0]->onombre }}”, con la finalidad de
-                que todo el personal adscrito a Servicios Educativos Integrados al Estado de México
-                (SEIEM), es decir, Autoridades Escolares (Supervisores Generales, Supervisores y
-                Directores), Docentes frente a grupo, Personal Administrativo y de Apoyo a la
-                Educación, tengan mayores herramientas para la aplicabilidad de los procedimientos
-                en los casos que se puedan presentar en los diferentes niveles educativos.</h3>
+            <h3 class="section-subheading text-muted text-justify">
+                <p class="text-muted text-justify">
+                El lenguaje es la herramienta con la cual una persona o una sociedad comparte su ideología, costumbres
+                y valores. En este sentido, el lenguaje de las sociedades con un sistema patriarcal, como es nuestro
+                país, se centra en lo masculino, dando total visibilidad al hombre e invisibilidad a las mujeres.
+                </p>
+                <p class="text-muted text-justify">
+                    Es justo el lenguaje del patriarcado, el que determina el papel del hombre y la mujer en lo
+                    personal, familiar y social: estereotipos y roles.
+                </p>
+                <p class="text-muted text-justify">
+                    Ahora bien, el lenguaje no es estático, continuamente evoluciona con base al espacio y el tiempo en
+                    el que se desarrolla. Es este dinamismo el que permite hacer cambios que hagan visible lo femenino y
+                    lo masculino por igual en la sociedad.
+                </p>
+                <p class="text-muted text-justify">
+                    En una sociedad democrática, la igualdad de género es imperante, y es por ello que los gobiernos
+                    han establecido políticas públicas con perspectiva de género, y el Estado de México no es la
+                    excepción y más específicamente Servicios Educativos Integrados al Estado de México, que desarrolla
+                    e impulsa material para desarrollar el lenguaje igualitario.
+                </p>
+                <p class="text-muted text-justify">
+                    Para lo anterior, se ha desarrollado este taller “Lenguaje incluyente y no sexista”, con el fin de
+                    que todas las personas públicas de SEIEM sean parte de la evolución del lenguaje igualitario. Para
+                    ello, vamos a comenzar con algunos conceptos esenciales que den contexto al taller, después
+                    expondremos la importancia y los fundamentos del lenguaje no sexista, seguido de la definición del
+                    “lenguaje sexista” y “no sexista”, para terminar con ejercicios que refuercen la teoría.
+                </p>
+            </h3>
         </div>
         <div class="row text-center">
             <div class="col-md-6 mb-3 px-5">
@@ -133,15 +155,55 @@
                     </span>
                 <h4 class="my-3">Objetivo</h4>
                 <p class="text-muted text-justify">
-                    Comprender los conceptos básicos necesarios que, de manera significativa, permitan a la
-                    comunidad educativa, conocer las responsabilidades
-                    y acciones inmediatas a realizar para la prevención, detección y actuación en los casos de abuso
-                    sexual infantil, acoso escolar y maltrato
-                    de los alumnos dentro de los planteles de educación básica, públicos y privados, pertenecientes
-                    al Subsistema Educativo Federalizado a cargo
-                    de Servicios Educativos Integrados al Estado de México (SEIEM), con la finalidad de salvaguardar
-                    sus derechos fundamentales, así como su integridad
-                    física, psicológica y sexual.
+                    Incorporar el uso del lenguaje incluyente y no sexista en las personas servidoras públicas de los
+                    Servicios Educativos Integrados al Estado de México, así como concientizar y sensibilizar sobre la
+                    comunicación con perspectiva de género, con el fin de hacer un uso adecuado del lenguaje y
+                    contribuir a la erradicación de la violencia.
+                </p>
+            </div>
+            <div class="col-md-6 mb-3 px-5">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa-solid fa-bullseye fa-stack-1x fa-inverse"></i>
+                    </span>
+                <h4 class="my-3">Objetivos Especificos</h4>
+                <p class="text-muted text-justify">
+                    Erradicar el uso sexista del lenguaje en la expresión oral y escrita (en las conversaciones
+                    informales y en los documentos oficiales del Organismo) ya que transmite y refuerza la desigualdad
+                    de género.
+                </p>
+                <p class="text-muted text-justify">
+                    Proporcionar las técnicas y herramientas necesarias para implementar el uso del lenguaje incluyente
+                    y no sexista en las prácticas escritas y orales dentro del Organismo.
+                </p>
+            </div>
+            <div class="col-md-6 mb-3 px-5">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa-solid fa-gavel fa-stack-1x fa-inverse"></i> <!-- Ícono de martillo de juez -->
+                    </span>
+                <h4 class="my-3">Fundamento Legal</h4>
+                <p class="text-muted text-justify">
+                    <b>Fracción XII del artículo 17, de la Ley General para la Igualdad entre Mujeres y Hombres</b>
+                    establece: “Promover que, en las prácticas de comunicación social de las dependencias de la
+                    Administración Pública Federal, así como en los medios de comunicación masiva electrónicos e
+                    impresos, se eliminen el uso de estereotipos sexistas y discriminatorios e incorporen un lenguaje
+                    incluyente”.
+                </p>
+                <p class="text-muted text-justify">
+                    Asimismo, la Convención sobre la Eliminación de Todas las Formas de Discriminación contra la Mujer
+                    (CEDAW), ratificada por México en 1981, es un instrumento internacional vinculante para el Estado
+                    mexicano.
+                </p>
+                <p class="text-muted text-justify">
+                    El Artículo 5º de la CEDAW indica lo siguiente: “Los Estados Parte tomarán todas las medidas
+                    apropiadas para:
+                </p>
+                <p class="text-muted text-justify">
+                    a)	Modificar los patrones socioculturales de conducta de hombres y mujeres, con miras a alcanzar
+                    la eliminación de los prejuicios y las prácticas consuetudinarias y de cualquier otra índole que
+                    estén basados en la idea de la inferioridad o superioridad de cualquiera de los sexos o en funciones
+                    estereotipadas de hombres y mujeres;” (CEDAW,1979)
                 </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
@@ -210,9 +272,9 @@
 <section class="page-section" id="modulos">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase text-gradient">M&oacute;dulos</h2>
+            <h2 class="section-heading text-uppercase text-gradient">Bloques</h2>
             <h3 class="section-subheading text-muted">
-                Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} módulos, que se describen a
+                Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} bloques, que se describen a
                 continuación.
             </h3>
         </div>
@@ -240,7 +302,7 @@
                         <br />
                         del
                         <br />
-                        Curso!
+                        Taller!
                     </h4>
                 </div>
             </li>

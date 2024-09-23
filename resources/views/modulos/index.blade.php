@@ -8,7 +8,7 @@
             <div class="col-md-10">
                 <div class="card blur-bg shadow-sm border-0 overflow-auto">
                     <div class="card-body p-lg-5">
-                        <h1 class="text-gradient mb-4 text-center">Módulos del curso</h1>
+                        <h1 class="text-gradient mb-4 text-center">Bloques del curso</h1>
                         <div class="table-responsive overflow-auto">
                             <table class="table table-hover">
                                 <thead>
@@ -30,7 +30,7 @@
                                         <td class="align-middle">
                                             <a href="{{ route('modulos.show', $modulo) }}"
                                                class="btn btn-primary">
-                                                Ver módulo
+                                                Ver bloque
                                             </a>
                                         </td>
                                     </tr>

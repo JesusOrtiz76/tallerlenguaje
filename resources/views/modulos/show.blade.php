@@ -26,7 +26,7 @@
 
                         <h3>Evaluación</h3>
                         <p class="text-justify">
-                            Completa la evaluación para pasar al siguiente módulo.
+                            Completa la evaluación para pasar al siguiente bloque.
                         </p>
                         @forelse ($modulo->evaluaciones as $evaluacion)
                             <div class="mb-3">

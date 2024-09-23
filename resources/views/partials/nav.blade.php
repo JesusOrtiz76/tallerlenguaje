@@ -36,7 +36,7 @@
                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">{{ __('Go to course') }}</a>
+                    <a class="nav-link" href="{{ route('home') }}">{{ __('Go to workshop') }}</a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
