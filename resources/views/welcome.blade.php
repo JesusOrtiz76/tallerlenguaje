@@ -190,21 +190,6 @@
                     impresos, se eliminen el uso de estereotipos sexistas y discriminatorios e incorporen un lenguaje
                     incluyente”.
                 </p>
-                <p class="text-muted text-justify">
-                    Asimismo, la Convención sobre la Eliminación de Todas las Formas de Discriminación contra la Mujer
-                    (CEDAW), ratificada por México en 1981, es un instrumento internacional vinculante para el Estado
-                    mexicano.
-                </p>
-                <p class="text-muted text-justify">
-                    El Artículo 5º de la CEDAW indica lo siguiente: “Los Estados Parte tomarán todas las medidas
-                    apropiadas para:
-                </p>
-                <p class="text-muted text-justify">
-                    a)	Modificar los patrones socioculturales de conducta de hombres y mujeres, con miras a alcanzar
-                    la eliminación de los prejuicios y las prácticas consuetudinarias y de cualquier otra índole que
-                    estén basados en la idea de la inferioridad o superioridad de cualquiera de los sexos o en funciones
-                    estereotipadas de hombres y mujeres;” (CEDAW,1979)
-                </p>
             </div>
             <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
@@ -238,11 +223,10 @@
                     </span>
                 <h4 class="my-3">Acreditaci&oacute;n</h4>
                 <p class="text-muted text-justify">
-                    Para poder acreditar el curso en línea “{{ $cursos[0]->onombre }}”, al final de cada uno de los
-                    Módulos deberá realizar la evaluación que se presenta, contando con 3 oportunidades para
-                    acreditar cada uno de los módulos, las preguntas contienen respuestas de opción múltiple. Al
-                    acreditar las evaluaciones de los {{ count($cursos[0]->modulos) }} módulos, estará en
-                    posibilidades de descargar la
+                    Para poder acreditar el taller en línea “{{ $cursos[0]->onombre }}”, es necesario completar todos
+                    los ejercicios del curso, así como realizar la evaluación final. Contará con 3 oportunidades para
+                    acreditar la evaluacion final. Al completar todos los ejercicios y acreditar la evaluación final de
+                    los {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la
                     <span class="text-primary">
                             <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>,
                     misma que contará con valor curricular.
