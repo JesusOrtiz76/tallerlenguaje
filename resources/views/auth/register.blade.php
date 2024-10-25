@@ -85,7 +85,8 @@
                                                value="{{ old('email') }}"
                                                oninput="toMin(this)"
                                                autocomplete="email"
-                                               autofocus>
+                                               autofocus
+                                               onpaste="return false;" oncopy="return false;">
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -101,7 +102,8 @@
                                                name="email_confirmation"
                                                value="{{ old('email_confirmation') }}"
                                                oninput="toMin(this)"
-                                               autocomplete="email_confirmation">
+                                               autocomplete="email_confirmation"
+                                               onpaste="return false;" oncopy="return false;">
                                         @error('email_confirmation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -116,7 +118,8 @@
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password"
                                                value="{{ old('password') }}"
-                                               autocomplete="new-password">
+                                               autocomplete="new-password"
+                                               onpaste="return false;" oncopy="return false;">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -130,21 +133,16 @@
                                                type="password"
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password_confirmation"
-                                               autocomplete="new-password">
+                                               autocomplete="new-password"
+                                               onpaste="return false;" oncopy="return false;">
                                     </div>
-
-                                    <small class="text-primary fst-italic fw-lighter">
-                                        <span class="fw-bold">IMPORTANTE:</span> Si no recibe el correo de verificación,
-                                        por favor revise su carpeta de correo no deseado o spam. Asegúrese también de
-                                        que su dirección de correo electrónico esté correctamente ingresada. Si aún así
-                                        no recibe el correo, puede considerar registrarse de nuevo.
-                                    </small>
 
                                     <div class="w-100 pt-1 my-3 d-flex justify-content-center">
                                         <button type="submit"
                                                 class="btn btn-outline-primary btn-block">{{ __('Register') }}
                                         </button>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

@@ -41,7 +41,7 @@
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#modulos">M&oacute;dulos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#modulos">Bloques</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">{{ __('Go to workshop') }}</a>
                 </li>
@@ -282,7 +282,7 @@
             <li class="modulo-inverted">
                 <div class="modulo-image">
                     <h4>
-                        Fin
+                        ¡Fin
                         <br />
                         del
                         <br />
