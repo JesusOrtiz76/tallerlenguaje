@@ -133,3 +133,24 @@
         </a>
     </div>
 </nav>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebar = document.getElementById('sidebar');
+
+        // Restaurar la posición del scroll al cargar la página
+        const scrollPosition = localStorage.getItem('sidebar-scroll-position');
+
+        if (scrollPosition) {
+            sidebar.scrollTop = scrollPosition;
+        }
+
+        // Guardar la posición del scroll al hacer scroll
+        sidebar.addEventListener('scroll', function () {
+
+            localStorage.setItem('sidebar-scroll-position', sidebar.scrollTop);
+        });
+
+    });
+</script>
