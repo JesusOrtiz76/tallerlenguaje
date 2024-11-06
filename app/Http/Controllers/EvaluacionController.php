@@ -10,7 +10,6 @@ use App\Traits\VerificaAccesoTrait;
 use App\Traits\VerificaEvaluacionesCompletasTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class EvaluacionController extends Controller
 {
@@ -31,19 +30,9 @@ class EvaluacionController extends Controller
             return redirect()->back()->with('warning', $mensajePendiente);
         }
 
-        $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
-        $evaluacionCacheKey = 'evaluacion_' . $id . '_user_' . $user->id;
-
-        $evaluacionData = Cache::remember($evaluacionCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($id) {
-            $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
-            return [
-                'evaluacion' => $evaluacion,
-                'preguntas' => $evaluacion->preguntas()->with('opciones')->get()
-            ];
-        });
-
-        $evaluacion = $evaluacionData['evaluacion'];
-        $preguntas = $evaluacionData['preguntas'];
+        // Obtener las preguntas y respuestas de la evaluación
+        $evaluacion = Evaluacion::where('id', $id)->with('modulo')->firstOrFail();
+        $preguntas = $evaluacion->preguntas()->with('opciones')->get();
         $modulo = $evaluacion->modulo;
         $curso = $modulo->curso;
 

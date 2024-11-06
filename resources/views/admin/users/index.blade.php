@@ -69,7 +69,7 @@
                                         <td>
                                             {{ $user->email }}
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center text-nowrap">
                                             {{ $user->created_at->format('d/m/Y h:i A') }}
                                         </td>
                                     </tr>

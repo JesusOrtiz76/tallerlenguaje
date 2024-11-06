@@ -71,6 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Resultado::class);
     }
 
+    public function scores()
+    {
+        return $this->hasMany(UserScoreView::class);
+    }
+
     /**
      * Send the email verification notification.
      *

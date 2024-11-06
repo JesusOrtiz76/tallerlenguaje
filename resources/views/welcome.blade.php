@@ -224,12 +224,11 @@
                 <h4 class="my-3">Acreditaci&oacute;n</h4>
                 <p class="text-muted text-justify">
                     Para poder acreditar el taller en línea “{{ $cursos[0]->onombre }}”, es necesario completar todos
-                    los ejercicios del curso, así como realizar la evaluación final. Contará con 3 oportunidades para
+                    los ejercicios del curso, así como realizar la evaluación final. Contará con 2 oportunidades para
                     acreditar la evaluacion final. Al completar todos los ejercicios y acreditar la evaluación final de
                     los {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la
                     <span class="text-primary">
-                            <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>,
-                    misma que contará con valor curricular.
+                            <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>
                 </p>
 
             </div>
@@ -311,6 +310,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous">
 </script>
+<!-- Bootstrap JS (con Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
 </body>
 
 </html>

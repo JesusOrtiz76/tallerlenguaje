@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\TemaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
@@ -37,6 +38,10 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])
 Route::post('register', [RegisterController::class, 'register'])
     ->middleware('checkregisterdate');
 
+// Ruta para verificar el certificado
+Route::get('certificados/verify/{encodedParams}', [CursoController::class, 'verifyCertificado'])
+    ->name('certificados.verify');
+
 // Rutas para todos los usuarios autenticados
 Route::middleware(['auth'])->group(function () {
     //Cursos
@@ -46,6 +51,11 @@ Route::middleware(['auth'])->group(function () {
     //Modulos
     Route::get('cursos/{curso}/modulos', [ModuloController::class, 'index'])
         ->name('modulos.index');
+
+    // Certificados
+    Route::get('cursos/{curso}/certificados', [CursoController::class, 'showCertificado'])
+        ->name('certificados.show')
+        ->middleware('checkNameChange');
 
     Route::get('modulos/{modulo}', [ModuloController::class, 'show'])
         ->name('modulos.show');
@@ -64,6 +74,10 @@ Route::middleware(['auth'])->group(function () {
     //Resultados
     Route::get('evaluaciones/{evaluacion}/resultado', [EvaluacionController::class, 'resultado'])
         ->name('evaluaciones.resultado');
+
+    // Ruta para actualizar el nombre
+    Route::put('/user/update-name', [UserController::class, 'updateName'])->name('user.update_name');
+
 });
 
 

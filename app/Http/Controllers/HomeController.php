@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evaluacion;
 use App\Models\Curso;
 use App\Models\Modulo;
+use App\Models\UserScoreView;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -22,7 +23,7 @@ class HomeController extends Controller
             ->whereIn('evaluacion_id', Evaluacion::whereIn('modulo_id', $totalModulos)->pluck('id'))->count();
 
         // Calcula el porcentaje
-        if($totalEvaluacionesCurso > 0) {
+        if ($totalEvaluacionesCurso > 0) {
             return floor(($totalResultadosCurso / $totalEvaluacionesCurso) * 100);
         } else {
             return 0;
@@ -34,6 +35,7 @@ class HomeController extends Controller
         // Array vacío para almacenar porcentajes y llenados
         $porcentajes = [];
         $llenados = [];
+        $scores = [];
 
         // Definiendo el radio del anillo de progreso (para el SVG).
         $radio = 16;
@@ -41,6 +43,7 @@ class HomeController extends Controller
         // Calcular la circunferencia del anillo de progreso.
         $circunferencia = 2 * pi() * $radio;
 
+        // Obtener todos los cursos
         $cursos = Curso::all();
 
         if (Auth::check()) {
@@ -49,17 +52,28 @@ class HomeController extends Controller
             $user = Auth::user();
 
             // Iterar cursos y calcular el porcentaje de progreso de cada uno.
-            foreach($cursos as $curso) {
+            foreach ($cursos as $curso) {
                 // Calcular porcentaje de progreso del usuario para el curso actual.
                 $porcentajes[$curso->id] = $this->calcularPorcentajePorCurso($user, $curso->id);
 
                 // Calcular el área llena del anillo para representar el progreso.
                 $llenados[$curso->id] = $circunferencia - ($porcentajes[$curso->id] / 100 * $circunferencia);
+
+                // Obtener la calificación (score) del usuario para el curso actual.
+                $score = UserScoreView::where('curso_id', $curso->id)->where('user_id', $user->id)->first();
+
+                // Almacenar el score si existe.
+                if ($score) {
+                    $scores[$curso->id] = $score->score_percentage;
+                } else {
+                    // Si no hay score, puedes establecer un valor por defecto
+                    $scores[$curso->id] = 0;
+                }
             }
         }
 
         return view(
-            'home', compact('cursos', 'porcentajes', 'radio', 'circunferencia', 'llenados')
+            'home', compact('cursos', 'porcentajes', 'radio', 'circunferencia', 'llenados', 'scores')
         );
     }
 }
