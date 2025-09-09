@@ -255,43 +255,40 @@
 <section class="page-section" id="modulos">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase text-gradient">Bloques</h2>
-            <h3 class="section-subheading text-muted">
-                Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} bloques, que se describen a
-                continuación.
-            </h3>
+            <h2 class="section-heading text-uppercase text-gradient mb-2">BLOQUES</h2>
+            <p class="text-muted mb-5">
+                Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} bloques, que se describen a continuación.
+            </p>
         </div>
+
         <ul class="modulo">
             @foreach($cursos[0]->modulos as $modulo)
-                <li class="{{ $loop->iteration % 2 == 0 ? 'modulo-inverted' : '' }}">
+                @php $isRight = $loop->iteration % 2 === 0; @endphp
+
+                <li class="{{ $isRight ? 'modulo-inverted' : '' }}">
                     <div class="modulo-image">
                         <img class="rounded-circle" src="{{ asset('storage/' . $modulo->oimg_path) }}"
                              alt="Imagen del {{ $modulo->onombre }}">
                     </div>
-                    <div class="modulo-panel">
-                        <div class="modulo-heading">
-                            <h4>{{ $modulo->onombre }}</h4>
-                        </div>
-                        <div class="modulo-body">
-                            <p class="text-muted text-justify">{{ $modulo->odescripcion }}</p>
-                        </div>
+
+                    <div class="modulo-panel p-3 p-lg-4 {{ $isRight ? 'text-lg-start' : 'text-lg-end' }}">
+                        <h3 class="h5 fw-bold mb-2">{{ $modulo->onombre }}</h3>
+                        <p class="text-muted mb-0 modulo-desc">
+                            {{ $modulo->odescripcion }}
+                        </p>
                     </div>
                 </li>
             @endforeach
+
             <li class="modulo-inverted">
                 <div class="modulo-image">
-                    <h4>
-                        ¡Fin
-                        <br />
-                        del
-                        <br />
-                        Taller!
-                    </h4>
+                    <h4 class="m-0 text-center">¡Fin<br>del<br>Taller!</h4>
                 </div>
             </li>
         </ul>
     </div>
 </section>
+
 
 <!-- Footer-->
 <footer class="py-lg-2 mt-5 bg-dark border-top">
