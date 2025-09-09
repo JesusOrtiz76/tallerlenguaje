@@ -17,16 +17,8 @@ class CursoController extends Controller
 
     public function inscribirse($curso_id)
     {
-        // Obtener el tiempo de caché global desde el archivo .env
-        $cacheGlobalExpiration = env('CACHE_GLOBAL_EXPIRATION', 60);
-
-        // Definir la clave de caché para el curso
-        $cursoCacheKey = 'curso_' . $curso_id;
-
-        // Obtener o almacenar en caché el objeto del curso
-        $curso = Cache::remember($cursoCacheKey, now()->addMinutes($cacheGlobalExpiration), function () use ($curso_id) {
-            return Curso::find($curso_id);
-        });
+        // Buscar el curso por su ID
+        $curso = Curso::find($curso_id);
 
         // Verificar que el objeto de curso es válido
         if (!$curso) {

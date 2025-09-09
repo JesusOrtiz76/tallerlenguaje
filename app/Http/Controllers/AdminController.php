@@ -17,10 +17,13 @@ class AdminController extends Controller
                 $query->where(function ($query) use ($search) {
                     $query->where('name', 'LIKE', "%{$search}%")
                         ->orWhere('orfc', 'LIKE', "%{$search}%")
-                        ->orWhere('email', 'LIKE', "%{$search}%");
+                        ->orWhere('email', 'LIKE', "%{$search}%")
+                        ->orWhereHas('centroTrabajo', function ($query) use ($search) {
+                            $query->where('oclave', 'LIKE', "%{$search}%");
+                        });
                 });
             })
-            ->paginate(15);
+            ->paginate(10);
 
         return view('admin.users.index', ['users' => $users]);
     }

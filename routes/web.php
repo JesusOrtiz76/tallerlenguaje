@@ -80,13 +80,19 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
 // Solo para administradores
 Route::middleware(['auth', 'checkUserRole:admin'])->group(function () {
     // Dashboard
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/dashboard/data', [DashboardController::class, 'getDataIndex'])->name('dashboard.data');
+    Route::get('dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+    Route::get('/dashboard/data', [DashboardController::class, 'getDataIndex'])
+        ->name('dashboard.data');
 
     // Lista de usuarios registrados
-    Route::get('users', [AdminController::class, 'index'])->name('admin.users');
+    Route::get('users', [AdminController::class, 'index'])
+        ->name('admin.users');
+
+    // Actualizar usuario
+    Route::put('users/{user}', [UserController::class, 'updateUser'])
+        ->name('admin.users.update');
 });

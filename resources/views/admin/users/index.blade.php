@@ -3,9 +3,9 @@
 @section('title',"Listado de usuarios")
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
                         <h1 class="text-gradient mb-4 text-center">
@@ -52,12 +52,13 @@
                                     <th class="text-center">RFC</th>
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Fecha de Creación</th>
+                                    <th class="text-center">Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td  class="text-center">
+                                        <td  class="">
                                             {{ $user->centroTrabajo->oclave ?? 'N/A' }}
                                         </td>
                                         <td class="text-nowrap">
@@ -72,19 +73,30 @@
                                         <td class="text-center text-nowrap">
                                             {{ $user->created_at->format('d/m/Y h:i A') }}
                                         </td>
+                                        <td class="text-center">
+                                            <!-- Botón para abrir el modal de edición -->
+                                            <button type="button" class="btn btn-sm btn-primary editUserBtn"
+                                                    data-id="{{ $user->id }}"
+                                                    data-name="{{ $user->name }}"
+                                                    data-email="{{ $user->email }}"
+                                                    data-rfc="{{ $user->orfc }}">
+                                                Editar
+                                            </button>
+                                        </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
                         </div>
 
                         {{ $users->appends(['search' => request('search')])->links('pagination::bootstrap-5') }}
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    @include('partials.users_modal_edit_user')
+
+    @include('scripts.users_open_modal_edit_user')
 @endsection
