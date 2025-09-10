@@ -19,6 +19,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->name = $request->name;
         $user->ochange_name = true; // Cambiar el estado para indicar que el nombre fue confirmado
+        $user->iusrmod = Auth::user()->orfc;
         $user->save();
 
         // Redirigir de nuevo a la página principal con un mensaje de éxito
@@ -36,15 +37,15 @@ class UserController extends Controller
 
         // Buscar o fallar si no existe el usuario
         $user = User::findOrFail($userId);
-        $user->name  = $validatedData['name'];
-        $user->email = $validatedData['email'];
+        $user->name    = $validatedData['name'];
+        $user->email   = $validatedData['email'];
+        $user->iusrmod = Auth::user()->orfc;
 
         // Actualizar la contraseña solo si se proporcionó una nueva
         if (!empty($validatedData['password'])) {
             $user->password = bcrypt($validatedData['password']);
         }
 
-        $user->ochange_name = false;
         $user->save();
 
         return redirect()->back()->with('success', 'Datos actualizados correctamente.');

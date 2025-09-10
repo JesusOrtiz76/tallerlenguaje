@@ -42,7 +42,7 @@
                 <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#modulos">Bloques</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ayuda">Preguntas Frecuentes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ayuda">Preguntas <F></F>recuentes</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">{{ __('Go to workshop') }}</a>
                 </li>
