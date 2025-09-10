@@ -42,6 +42,7 @@
                 <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#modulos">Bloques</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ayuda">Preguntas Frecuentes</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">{{ __('Go to workshop') }}</a>
                 </li>
@@ -228,9 +229,9 @@
                     acreditar la evaluacion final. Al completar todos los ejercicios y acreditar la evaluación final de
                     los {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la
                     <span class="text-primary">
-                            <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>
+                            <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>,
+                    misma que contará con valor curricular.
                 </p>
-
             </div>
             <div class="col-md-6 mb-3 px-5">
                     <span class="fa-stack fa-4x">
@@ -289,27 +290,176 @@
     </div>
 </section>
 
+<!-- Preguntas Frecuentes -->
+<section class="page-section" id="ayuda">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase text-gradient">Preguntas Frecuentes</h2>
+            <h3 class="section-subheading text-muted">Encuentre respuestas a las preguntas más comunes sobre el curso.
+            </h3>
+        </div>
+        <div class="accordion" id="accordionAyuda">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
+                            aria-expanded="true" aria-controls="collapse1">
+                        ¿Cómo me registro en el curso?
+                    </button>
+                </h2>
+                <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Llene el <a href="{{ route('register') }}"><strong>Formulario de Registro</strong></a> en las
+                        fechas de apertura.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        ¿Qué sucede si no me registré al curso a tiempo o en las fechas establecidas?
+                    </button>
+                </h2>
+                <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Recuerde que el registro solo estará disponible del
+                        <strong>{{ $formattedStartRegisterDate }}</strong> al
+                        <strong>{{ $formattedEndRegisterDate }}</strong>.
+                        Fuera de los periodos establecidos, lamentablemente no habrá forma de registrarse.
+                        Para dudas o aclaraciones, favor de comunicarse al teléfono <strong>(722) 279 77 00, Ext.
+                            0727.</strong>
+                        Horario de atención: Lunes a Viernes en días hábiles de 9:00 AM a 1:00 PM.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseReset" aria-expanded="false" aria-controls="collapseReset">
+                        ¿Cómo puedo restablecer mi contraseña?
+                    </button>
+                </h2>
+                <div id="collapseReset" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Puede restablecer su contraseña accediendo al siguiente enlace:
+                        <a href="{{ route('password.request') }}"><strong>Restablecer Contraseña</strong></a>.
+                        De presentar problemas con el enlace anterior consulte la siguiente sección.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        ¿Cómo puedo recuperar mi cuenta si no recuerdo el correo o la contraseña con la que me registré?
+                    </button>
+                </h2>
+                <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Para restablecer su correo o contraseña, favor de comunicarse al teléfono (722) 279 77 00,
+                        <strong> Ext. 1150 o Ext. 1142.</strong>
+                        Horario de atención: Lunes a Viernes en días hábiles de 9:00 AM a 1:00 PM.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        ¿Cómo obtengo mi constancia de acreditación?
+                    </button>
+                </h2>
+                <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Debe <strong>APROBAR TODAS</strong> las evaluaciones de los módulos.
+                        Una vez logrado, podrá descargar su constancia desde la plataforma.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                        ¿Cómo puedo cambiar mi nombre si me equivoqué al momento de registrarme?
+                    </button>
+                </h2>
+                <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Al finalizar el curso y al intentar descargar la constancia, aparecerá una ventana para
+                        verificar su nombre.
+                        Es importante asegurarse de que esté correcto, ya que será el nombre que aparecerá en la
+                        constancia.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                        ¿Por qué no me aparece la opción de descargar mi constancia si terminé mi curso al 100%?
+                    </button>
+                </h2>
+                <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Si el sistema no le muestra la opción de descargar la constancia, lamentablemente <strong>no
+                            aprobó el curso.</strong>
+                        Aunque haya concluido el curso, esto significa que no obtuvo una calificación aprobatoria.
+                        <strong>Si tiene intentos disponibles en sus evaluaciones, podría intentar mejorar su
+                            calificación.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                        ¿Habrá nuevas fechas de apertura para acreditar el curso?
+                    </button>
+                </h2>
+                <div id="collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
+                    <div class="accordion-body">
+                        Por el momento, no existen otras fechas para registros nuevos ni para intentos de acreditar el
+                        curso.
+                        Para dudas o aclaraciones, favor de comunicarse al teléfono <strong>(722) 279 77 00, Ext.
+                            0727.</strong>
+                        Horario de atención: Lunes a Viernes en días hábiles de 9:00 AM a 1:00 PM.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Footer-->
 <footer class="py-lg-2 mt-5 bg-dark border-top">
     <div class="container py-1 d-flex justify-content-center">
-            <span class="text-white px-1 me-2 text-end" style="font-size: 9pt">
-                Servicios Educativos Integrados al Estado de M&eacute;xico.<br>
-                Copyright &copy; {{ now()->year }}.
-            </span>
+        <span class="text-white px-1 me-2 text-end" style="font-size: 9pt">
+            Servicios Educativos Integrados al Estado de M&eacute;xico.<br>
+            Copyright &copy; {{ now()->year }}.
+        </span>
         <span class="text-white px-1 ps-2 separador-footer" style="font-size: 9pt">
-                Unidad de Asuntos Jurídicos e Igualdad de Género.<br>
-                Dirección de Informática y Telecomunicaciones.
-            </span>
+            Unidad de Asuntos Jurídicos e Igualdad de Género.<br>
+            Dirección de Informática y Telecomunicaciones.
+        </span>
     </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous">
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+        crossorigin="anonymous">
 </script>
 <!-- Bootstrap JS (con Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@include('partials.messages')
 
 </body>
 

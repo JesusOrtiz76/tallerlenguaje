@@ -26,9 +26,9 @@ class CheckRegisterDate
         }
 
         if ($currentDate->gt($registerEndDate)) {
-            return redirect()
-                ->route('login')
-                ->with('warning', 'El periodo de registro finalizó el ' . $formattedEndDate);
+            return redirect()->to(route('welcome') . '#ayuda')
+                ->with('warning', 'El periodo de registro finalizó el ' . $formattedEndDate .
+                    '. Consulta nuestro apartado de preguntas frecuentes.');
         }
 
         return $next($request);

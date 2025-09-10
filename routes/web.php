@@ -12,20 +12,12 @@ use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::get('/', [WelcomeController::class, 'index'])->name('/');
-
+// Mantén Auth::routes para login/logout/register, pero desactiva reset para declararlo explícito abajo
 Auth::routes(['verify' => false, 'reset' => false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -37,6 +29,25 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])
 
 Route::post('register', [RegisterController::class, 'register'])
     ->middleware('checkregisterdate');
+
+// Password reset (rutas oficiales que espera tu Blade: password.request, .email, .reset, .update)
+Route::middleware('guest')->group(function () {
+    // Mostrar formulario "olvidé mi contraseña"
+    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])
+        ->name('password.request');
+
+    // Enviar link al correo
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+        ->name('password.email');
+
+    // Mostrar formulario para definir nueva contraseña (con token)
+    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])
+        ->name('password.reset');
+
+    // Guardar nueva contraseña
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])
+        ->name('password.update');
+});
 
 // Ruta para verificar el certificado
 Route::get('certificados/verify/{encodedParams}', [CursoController::class, 'verifyCertificado'])

@@ -13,9 +13,7 @@
                 <div class="col-12 col-lg-4 mb-3 mb-lg-0">
                     <div class="form-group">
                         <label for="refresh-interval">Frecuencia de actualización:</label>
-                        <select id="refresh-interval" class="form-control">
-                            <option value="30000">30 segundos</option>
-                            <option value="60000">1 minuto</option>
+                        <select id="refresh-interval" class="form-select">
                             <option value="300000">5 minutos</option>
                             <option value="900000">15 minutos</option>
                             <option value="1800000">30 minutos</option>
