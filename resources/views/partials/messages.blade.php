@@ -5,8 +5,9 @@
             icon: 'warning',
             title: 'Mensaje',
             html: '{{ session('warning') }}',
-            confirmButtonColor: '#FCCD00',
-            iconColor: '#FCCD00',
+            confirmButtonColor: '#FFC107'
+        }).then(() => {
+            {{ session()->forget('warning') }} // Eliminar el mensaje de la sesión
         });
         @endif
 
@@ -15,8 +16,9 @@
             icon: 'error',
             title: 'Mensaje',
             html: '{{ session('error') }}',
-            confirmButtonColor: '#E1143D',
-            iconColor: '#E1143D',
+            confirmButtonColor: '#DC3545'
+        }).then(() => {
+            {{ session()->forget('error') }} // Eliminar el mensaje de la sesión
         });
         @endif
 
@@ -25,8 +27,9 @@
             icon: 'success',
             title: 'Mensaje',
             html: '{{ session('success') }}',
-            confirmButtonColor: '#9DC323',
-            iconColor: '#9DC323',
+            confirmButtonColor: '#28A745'
+        }).then(() => {
+            {{ session()->forget('success') }} // Eliminar el mensaje de la sesión
         });
         @endif
     });

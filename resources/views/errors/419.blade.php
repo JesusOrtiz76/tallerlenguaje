@@ -14,7 +14,7 @@
         <p class="error-description">
             Notamos tu ausencia y por tu seguridad cerramos la sesión.
         </p>
-        <a href="{{ route('/') }}">&larr; Volver a Iniciar sesión</a>
+        <a href="/">&larr; Volver a Iniciar sesión</a>
     </div>
 
 @endsection

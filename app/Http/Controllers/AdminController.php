@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curso;
+use App\Models\CursosUsersDetailView;
 use App\Models\User;
+use App\Models\UserScoreView;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -26,5 +29,24 @@ class AdminController extends Controller
             ->paginate(10);
 
         return view('admin.users.index', ['users' => $users]);
+    }
+
+    public function show(User $user)
+    {
+        // Verifica que el usuario tenga el rol 'user'
+        if ($user->orol !== 'user') {
+            abort(404);
+        }
+
+        $cursos = Curso::with([
+            'inscripcionDetails' => function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            },
+            'userScore' => function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            }
+        ])->get();
+
+        return view('admin.users.show', compact('user', 'cursos'));
     }
 }

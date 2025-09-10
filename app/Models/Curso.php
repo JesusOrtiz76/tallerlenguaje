@@ -17,9 +17,18 @@ class Curso extends Model
             ->withTimestamps();
     }
 
-
     public function modulos()
     {
         return $this->hasMany(Modulo::class);
+    }
+
+    public function inscripcionDetails()
+    {
+        return $this->hasMany(CursosUsersDetailView::class, 'curso_id');
+    }
+
+    public function userScore()
+    {
+        return $this->hasOne(UserScoreView::class, 'curso_id');
     }
 }

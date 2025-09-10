@@ -73,14 +73,19 @@
                                         <td class="text-center text-nowrap">
                                             {{ $user->created_at->format('d/m/Y h:i A') }}
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center text-nowrap">
+                                            <!-- Botón para ver el detalle del usuario -->
+                                            <a href="{{ route('admin.users.show', $user) }}"
+                                               class="btn btn-sm btn-golden text-white">
+                                                <i class="fas fa-eye"></i> Ver
+                                            </a>
                                             <!-- Botón para abrir el modal de edición -->
                                             <button type="button" class="btn btn-sm btn-primary editUserBtn"
                                                     data-id="{{ $user->id }}"
                                                     data-name="{{ $user->name }}"
                                                     data-email="{{ $user->email }}"
                                                     data-rfc="{{ $user->orfc }}">
-                                                Editar
+                                                <i class="fas fa-pencil-alt"></i> Editar
                                             </button>
                                         </td>
                                     </tr>

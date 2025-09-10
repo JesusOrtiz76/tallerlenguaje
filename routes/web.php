@@ -103,6 +103,10 @@ Route::middleware(['auth', 'checkUserRole:admin'])->group(function () {
     Route::get('users', [AdminController::class, 'index'])
         ->name('admin.users');
 
+    // Mostrar usuario
+    Route::get('users/{user}', [AdminController::class, 'show'])
+        ->name('admin.users.show');
+
     // Actualizar usuario
     Route::put('users/{user}', [UserController::class, 'updateUser'])
         ->name('admin.users.update');

@@ -14,7 +14,7 @@
         <p class="error-description">
             Parece que estás perdido.
         </p>
-        <a href="{{ route('/') }}">&larr; Regresar al Inicio</a>
+        <a href="/">&larr; Regresar al Inicio</a>
     </div>
 
 @endsection

@@ -14,7 +14,7 @@
         <p class="error-description">
             Ups! Algo malió sal, encontraste un fallo en la matrix.
         </p>
-        <a href="{{ route('/') }}">&larr; Regresar al Inicio</a>
+        <a href="/">&larr; Regresar al Inicio</a>
     </div>
 
 @endsection

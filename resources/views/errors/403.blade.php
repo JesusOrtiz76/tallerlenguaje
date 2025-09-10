@@ -12,9 +12,9 @@
         </div>
         <p class="error-message">{{ __('Forbidden') }}</p>
         <p class="error-description">
-            Lo sentimos, no tienes permiso para acceder a esta página.
+            Lo sentimos, no tienes permiso para acceder a esta sección.
         </p>
-        <a href="{{ route('/') }}">Regresar al Inicio</a>
+        <a href="/">&larr; Regresar al Inicio</a>
     </div>
 
 @endsection

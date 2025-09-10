@@ -14,7 +14,6 @@
         <p class="error-description">
             Actualmente estamos realizando mantenimiento programado. Por favor, vuelve más tarde.
         </p>
-        <a href="{{ route('/') }}">Regresar al Inicio</a>
     </div>
 
 @endsection
