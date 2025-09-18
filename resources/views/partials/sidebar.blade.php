@@ -42,7 +42,7 @@
                     <div class="w-100 d-flex justify-content-center">
                         <a class="btn-sidebar" href="{{ route('modulos.index', $curso->id) }}">
                             <h5 class="text-uppercase text-primary mb-2 text-center">
-                                Bloques del curso
+                                Módulos del curso
                             </h5>
                         </a>
                     </div>
@@ -63,11 +63,11 @@
                         @endphp
 
                         <div class="btn-group d-flex justify-content-between my-2">
-                            <a class="btn btn-sidebar btn-text-left w-100
+                            <a class="btn btn-sidebar btn-text-left text-truncate w-100
                                {{ $activoModulo || $activo ? 'btn-primary' : 'btn-outline-primary' }}"
                                href="{{ route('modulos.show', $modulo->id) }}">
                                 <i class="fa-regular fa-folder-closed"></i>
-                                {{ Str::limit($modulo->onombre, 23, '...') }}
+                                {{ $modulo->onombre }}
                             </a>
                             <button class="btn {{ $activoModulo || $activo ? 'btn-primary' : 'btn-outline-primary' }} dropdown-toggle"
                                     data-bs-toggle="collapse"
@@ -82,11 +82,11 @@
                             @if (count($modulo->temas))
                                 <div class="btn-group-vertical w-100">
                                     @foreach ($modulo->temas as $tema)
-                                        <a class="btn btn-sidebar btn-text-left
+                                        <a class="btn btn-sidebar btn-text-left text-truncate
                                            {{ Request::is('temas/'.$tema->id) ? 'btn-golden' : 'btn-outline-golden' }}"
                                            href="{{ route('temas.show', $tema->id) }}">
                                             <i class="fa-solid fa-chalkboard-user"></i>
-                                            {{ Str::limit($tema->otitulo, 24, '...') }}
+                                            {{ $tema->otitulo }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -109,11 +109,11 @@
                                                 }
                                             }
                                         @endphp
-                                        <a class="btn btn-sidebar btn-text-left
+                                        <a class="btn btn-sidebar btn-text-left text-truncate
                                            {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado') ? 'btn-golden' : 'btn-outline-golden' }}"
                                            href="{{ $link }}">
                                             <i class="fa-solid {{ $completado ? 'fa-check-circle' : 'fa-hourglass-half' }}"></i>
-                                            {{ $completado ? 'Ver Resultados: ' . Str::limit($evaluacion->onombre, 24, '...') : 'Pendiente: ' . Str::limit($evaluacion->onombre, 24, '...') }}
+                                            {{ $completado ? 'Ver Resultados: ' . $evaluacion->onombre : 'Pendiente: ' . $evaluacion->onombre }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -133,24 +133,3 @@
         </a>
     </div>
 </nav>
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const sidebar = document.getElementById('sidebar');
-
-        // Restaurar la posición del scroll al cargar la página
-        const scrollPosition = localStorage.getItem('sidebar-scroll-position');
-
-        if (scrollPosition) {
-            sidebar.scrollTop = scrollPosition;
-        }
-
-        // Guardar la posición del scroll al hacer scroll
-        sidebar.addEventListener('scroll', function () {
-
-            localStorage.setItem('sidebar-scroll-position', sidebar.scrollTop);
-        });
-
-    });
-</script>

@@ -9,8 +9,17 @@
 
         <form id="dateFilterForm">
             <div class="row mb-4">
-                <!-- Columna 1: Frecuencia de actualización -->
-                <div class="col-12 col-lg-4 mb-3 mb-lg-0">
+                <!-- Columna 1: Curso -->
+                <div class="col-12 col-lg-3 mb-3 mb-lg-0">
+                    <div class="form-group">
+                        <label for="curso">Curso:</label>
+                        <select id="curso" class="form-select text-truncate">
+                            <!-- Se cargarán las opciones dinámicamente -->
+                        </select>
+                    </div>
+                </div>
+                <!-- Columna 2: Frecuencia de actualización -->
+                <div class="col-12 col-lg-3 mb-3 mb-lg-0">
                     <div class="form-group">
                         <label for="refresh-interval">Frecuencia de actualización:</label>
                         <select id="refresh-interval" class="form-select">
@@ -21,9 +30,8 @@
                         </select>
                     </div>
                 </div>
-
-                <!-- Columna 2: Campos de periodo y botón -->
-                <div class="col-12 col-lg-8">
+                <!-- Columna 3 y 4: Fechas y botón -->
+                <div class="col-12 col-lg-6">
                     <div class="d-lg-flex">
                         <div class="form-group me-2 mb-3 flex-fill">
                             <label for="fechainicial">Fecha Inicial</label>
@@ -34,7 +42,6 @@
                             <input type="date" id="fechafinal" name="fechafinal" class="form-control" value="">
                         </div>
                         <div class="form-group">
-                            <!-- Se usa un label oculto en lg para alinear el botón con los campos -->
                             <label class="d-none d-lg-block">&nbsp;</label>
                             <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
                         </div>
@@ -46,17 +53,17 @@
         <!-- Contadores -->
         <div class="row mb-4">
             <div class="col-xl-4 mb-4">
-                <div class="card border-left-success shadow-sm h-100 py-2">
+                <div class="card border-left-info shadow-sm h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     Usuarios Registrados
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-muted" id="userCount">0</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-users fa-2x text-success"></i>
+                                <i class="fas fa-users fa-2x text-info"></i>
                             </div>
                         </div>
                     </div>
@@ -64,17 +71,17 @@
             </div>
 
             <div class="col-xl-4 mb-4">
-                <div class="card border-left-info shadow-sm h-100 py-2">
+                <div class="card border-left-success shadow-sm h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Inscripciones
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-muted" id="inscripcionesCount">0</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-file-signature fa-2x text-info"></i>
+                                <i class="fas fa-person-circle-check fa-2x text-success"></i>
                             </div>
                         </div>
                     </div>
@@ -92,7 +99,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-muted" id="resultadosCount">0</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-poll fa-2x text-warning"></i>
+                                <i class="fas fa-rectangle-list fa-2x text-warning"></i>
                             </div>
                         </div>
                     </div>
@@ -127,7 +134,7 @@
             <div class="col-xl-4 col-lg-5 mb-4">
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <h4 class="text-primary">Resultados por Módulo y Evaluación</h4>
+                        <h4 class="text-primary">Resultados por módulo y evaluación</h4>
                         <div id="donut-chart-container" style="height: 400px;">Gráfica aparecerá aquí.</div>
                     </div>
                 </div>

@@ -823,3 +823,10 @@ body {
 .unanswered-question {
     background: rgba(255, 234, 234, 0.8);
 }
+
+// Truncar texto
+.text-truncate {
+    white-space: nowrap;      /* Impide que el texto se envuelva en varias líneas */
+    overflow: hidden;         /* Oculta el desbordamiento del contenedor */
+    text-overflow: ellipsis;  /* Muestra "..." al final si el texto es demasiado largo */
+}

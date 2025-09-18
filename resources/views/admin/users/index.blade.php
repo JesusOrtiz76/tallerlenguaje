@@ -58,7 +58,7 @@
                                 <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td  class="">
+                                        <td>
                                             {{ $user->centroTrabajo->oclave ?? 'N/A' }}
                                         </td>
                                         <td class="text-nowrap">
