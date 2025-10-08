@@ -13,11 +13,15 @@ class CheckRegisterDate
         Carbon::setLocale('es');
 
         $currentDate = Carbon::now();
-        $registerStartDate = Carbon::createFromFormat('Y/m/d', env('REGISTER_START_DATE'));
-        $registerEndDate = Carbon::createFromFormat('Y/m/d', env('REGISTER_END_DATE'));
+
+        // Parseamos fechas y ajustamos extremos
+        $registerStartDate = Carbon::createFromFormat('Y/m/d', env('REGISTER_START_DATE'))
+            ->startOfDay();
+        $registerEndDate   = Carbon::createFromFormat('Y/m/d', env('REGISTER_END_DATE'))
+            ->endOfDay();
 
         $formattedStartDate = $registerStartDate->isoFormat('dddd D [de] MMMM [de] Y');
-        $formattedEndDate = $registerEndDate->isoFormat('dddd D [de] MMMM [de] Y');
+        $formattedEndDate   = $registerEndDate->isoFormat('dddd D [de] MMMM [de] Y');
 
         if ($currentDate->lt($registerStartDate)) {
             return redirect()

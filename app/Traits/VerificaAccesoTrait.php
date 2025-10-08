@@ -11,17 +11,19 @@ trait VerificaAccesoTrait
      */
     public function verificarFechasAcceso($curso)
     {
-        $currentDate = Carbon::now();
-        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio);
-        $accessEndDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin);
-
         // Configurar la localización a español
         Carbon::setLocale('es');
+
+        $currentDate     = Carbon::now();
+        $accessStartDate = Carbon::createFromFormat('Y-m-d', $curso->ofecha_inicio)
+            ->startOfDay();
+        $accessEndDate   = Carbon::createFromFormat('Y-m-d', $curso->ofecha_fin)
+            ->endOfDay();
 
         if ($currentDate->lt($accessStartDate)) {
             $formattedStartDate = $accessStartDate->isoFormat('dddd D [de] MMMM [de] Y');
             return [
-                'error' => true,
+                'error'   => true,
                 'message' => 'El periodo para el acceso a este curso inicia el ' . $formattedStartDate
             ];
         }
@@ -29,7 +31,7 @@ trait VerificaAccesoTrait
         if ($currentDate->gt($accessEndDate)) {
             $formattedEndDate = $accessEndDate->isoFormat('dddd D [de] MMMM [de] Y');
             return [
-                'error' => true,
+                'error'   => true,
                 'message' => 'El periodo para el acceso a este curso finalizó el ' . $formattedEndDate
             ];
         }
