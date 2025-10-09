@@ -97,19 +97,23 @@
     <div class="container">
         <div class="masthead-subheading"> {{ __('Welcome to the writing workshop') }} </div>
         <div class="masthead-heading text-uppercase"> {{ $cursos[0]->onombre }} </div>
-        <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap"
+        <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap btn-hero"
            href="{{ route('home') }}">
             {{ __('Go to workshop') }}
         </a>
 
         <!-- Animation Mousey-->
-        <a href="#objetivos">
-            <div class="scroll-downs">
-                <div class="mousey">
-                    <div class="scroller"></div>
+        <!-- Mouse + caption fijados al fondo del masthead -->
+        <div class="mouse-block">
+            <a href="#objetivos" class="mouse-link" aria-label="Ir a objetivos">
+                <div class="scroll-downs">
+                    <div class="mousey">
+                        <div class="scroller"></div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+            <p class="mouse-caption">DESCRIPCIÓN DEL TALLER</p>
+        </div>
     </div>
 </header>
 

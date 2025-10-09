@@ -1,5 +1,5 @@
 <!-- Detalles del curso -->
-<p class="text-uppercase">{{ __('Welcome to the course') }}:</p>
+<p class="text-uppercase">{{ __('Bienvenido al taller de redacción') }}:</p>
 <h1 class="text-gradient mb-4">{{ $curso->onombre }}</h1>
 <p class="text-muted text-justify">{{ $curso->odescripcion }}</p>
 
