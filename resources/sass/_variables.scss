@@ -1,7 +1,7 @@
 // Typography
 $font-family-sans-serif: 'Albert Sans', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-size-base: 1.0rem;
+$line-height-base: 1.7;
 $enable-responsive-font-sizes: true;
 $enable-gradients: false;
 
@@ -9,8 +9,8 @@ $enable-gradients: false;
 $primary: #623DB0;
 $primary_: #7B5EC1;
 
-$golden: #34D399;
-$golden_hover: #28b07e;
+$golden: #EC4899;
+$golden_hover: #DB2777;
 
 $bg_dark: #222529;
 $hover_color: rgba($primary, 0.1);
@@ -30,3 +30,9 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+// --- HEADINGS GLOBALES ---
+$headings-font-weight: 800;   // más negrita para h1–h6
+$h2-font-size: 2.25rem;       // títulos de sección más grandes
+$h3-font-size: 1.6rem;        // subtítulos más grandes
+$headings-line-height: 1.2;   // compacidad agradable

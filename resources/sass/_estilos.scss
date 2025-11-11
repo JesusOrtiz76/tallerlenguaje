@@ -915,3 +915,124 @@ header.masthead .masthead-subheading{
     background-color: #fff;
     border-color: #fff;
 }
+/* ========== HEADINGS GLOBALES (afinados) ========== */
+h2, .h2 {
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: .2px;
+    margin-top: 1rem;
+    margin-bottom: .75rem;
+}
+
+h3, .h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+/* Subrayado/acento opcional en h3 */
+.h3-accent, .h3.h3-accent {
+    position: relative;
+    &::after {
+        content: "";
+        display: block;
+        width: 64px;
+        height: 3px;
+        margin-top: .35rem;
+        border-radius: 999px;
+        background: $primary;
+        opacity: .9;
+    }
+}
+
+/* ========== CITAS GLOBALES ========== */
+blockquote, .blockquote {
+    position: relative;
+    font-size: 1rem;           /* Bootstrap: 1.25rem */
+    line-height: 1.65;
+    padding: .85rem 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    background: rgba($primary, .06);
+    border-left: 4px solid $primary;
+    border-radius: .5rem;
+
+    p { margin-bottom: .5rem; }
+
+    &::before {
+        content: "“";
+        position: absolute;
+        top: -6px;
+        left: 8px;
+        font-size: 2.2rem;
+        line-height: 1;
+        color: $primary;
+        opacity: .18;
+    }
+
+    /* Pie/autor cuando va DENTRO del blockquote (footer/figcaption) */
+    .blockquote-footer, footer, figcaption {
+        display: block;
+        font-size: .9rem;
+        font-style: normal;
+        font-weight: 600;
+        text-align: right;
+        opacity: .9;
+    }
+
+    /* Variante legal */
+    &.blockquote-legal {
+        background: rgba($golden, .06);
+        border-left-color: $golden_hover;
+    }
+
+    /* Variante compacta con pie dentro */
+    &.blockquote-tight {
+        margin: 0;
+        padding: .8rem 1rem .6rem 1rem;
+        &::before { top: .25rem; }
+        .blockquote-footer, footer, figcaption { margin-top: .45rem; }
+    }
+}
+
+/* ====== Cita alineada a la derecha a todo ancho ====== */
+.quote-right {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+
+    .blockquote {
+        width: 100%;
+        text-align: right;
+        border-left: 0;
+        border-right: 4px solid $primary;
+        padding-right: 1rem;
+        padding-left: 1rem;
+
+        &::before {
+            content: "”";
+            left: auto;
+            right: 8px;
+        }
+    }
+}
+
+/* ====== Pie de figura GLOBAL ====== */
+figcaption {               /* todos los figcaption del sitio */
+    text-align: right;
+    font-style: normal;
+    font-weight: 600;
+    opacity: .9;
+}
+
+/* Cuando el pie va FUERA del blockquote y usa .blockquote-footer */
+figure > .blockquote-footer {
+    padding-right: 1rem;     /* alinea con el padding del blockquote */
+    margin-top: .65rem;      /* más aire respecto al recuadro */
+    font-size: .9rem;
+}
+
+/* Utilidad: texto justificado */
+.text-justify { text-align: justify; text-justify: inter-word; }
+
