@@ -82,38 +82,84 @@
                             @if (count($modulo->temas))
                                 <div class="btn-group-vertical w-100">
                                     @foreach ($modulo->temas as $tema)
+                                        {{-- Tema --}}
                                         <a class="btn btn-sidebar btn-text-left text-truncate
-                                           {{ Request::is('temas/'.$tema->id) ? 'btn-golden' : 'btn-outline-golden' }}"
+                   {{ Request::is('temas/'.$tema->id) ? 'btn-golden' : 'btn-outline-golden' }}"
                                            href="{{ route('temas.show', $tema->id) }}">
                                             <i class="fa-solid fa-chalkboard-user"></i>
                                             {{ $tema->otitulo }}
                                         </a>
+
+                                        {{-- Evaluaciones ligadas a este tema --}}
+                                        @php
+                                            $evaluacionesTema = $modulo->evaluaciones->where('tema_id', $tema->id);
+                                        @endphp
+
+                                        @if($evaluacionesTema->count())
+                                            @foreach ($evaluacionesTema as $evaluacion)
+                                                @php
+                                                    $completado = false;
+                                                    $link = route('evaluaciones.show', $evaluacion->id);
+
+                                                    if (Auth::check()) {
+                                                        $pivot = Auth::user()->evaluaciones()
+                                                            ->where('evaluacion_id', $evaluacion->id)
+                                                            ->first();
+
+                                                        $completado = $pivot && $pivot->pivot->ointentos >= 1;
+
+                                                        if ($completado) {
+                                                            $link = route('evaluaciones.resultado', [$evaluacion->id]);
+                                                        }
+                                                    }
+                                                @endphp
+
+                                                <a class="btn btn-sidebar btn-text-left text-truncate ps-4
+                           {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado')
+                               ? 'btn-golden'
+                               : 'btn-outline-golden' }}"
+                                                   href="{{ $link }}">
+                                                    <i class="fa-solid {{ $completado ? 'fa-check-circle' : 'fa-hourglass-half' }}"></i>
+                                                    {{ $completado ? $evaluacion->onombre : 'Pendiente: ' . $evaluacion->onombre }}
+                                                </a>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 </div>
                             @endif
 
-                            @if (count($modulo->evaluaciones))
+                            {{-- Evaluaciones no ligadas a ningún tema --}}
+                            @php
+                                $evaluacionesSueltas = $modulo->evaluaciones->whereNull('tema_id');
+                            @endphp
+
+                            @if($evaluacionesSueltas->count())
                                 <div class="btn-group-vertical w-100 mt-2">
-                                    @foreach ($modulo->evaluaciones as $evaluacion)
+                                    @foreach ($evaluacionesSueltas as $evaluacion)
                                         @php
                                             $completado = false;
-                                            $link = route('evaluaciones.show', $evaluacion->id); // Enlace por defecto a la evaluación
+                                            $link = route('evaluaciones.show', $evaluacion->id);
+
                                             if (Auth::check()) {
-                                                // Obtenemos el pivote de la evaluación del usuario
-                                                $pivot = Auth::user()->evaluaciones()->where('evaluacion_id', $evaluacion->id)->first();
+                                                $pivot = Auth::user()->evaluaciones()
+                                                    ->where('evaluacion_id', $evaluacion->id)
+                                                    ->first();
+
                                                 $completado = $pivot && $pivot->pivot->ointentos >= 1;
 
-                                                // Si la evaluación está completada, generar el enlace de resultados con el ID correcto
                                                 if ($completado) {
                                                     $link = route('evaluaciones.resultado', [$evaluacion->id]);
                                                 }
                                             }
                                         @endphp
+
                                         <a class="btn btn-sidebar btn-text-left text-truncate
-                                           {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado') ? 'btn-golden' : 'btn-outline-golden' }}"
+                   {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado')
+                       ? 'btn-golden'
+                       : 'btn-outline-golden' }}"
                                            href="{{ $link }}">
                                             <i class="fa-solid {{ $completado ? 'fa-check-circle' : 'fa-hourglass-half' }}"></i>
-                                            {{ $completado ? 'Ver Resultados: ' . $evaluacion->onombre : 'Pendiente: ' . $evaluacion->onombre }}
+                                            {{ $completado ? $evaluacion->onombre : 'Pendiente: ' . $evaluacion->onombre }}
                                         </a>
                                     @endforeach
                                 </div>

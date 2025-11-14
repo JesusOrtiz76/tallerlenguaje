@@ -72,4 +72,9 @@ class Evaluacion extends Model
 
         return $this->ointentos_max; // Si no ha hecho intentos, le quedan todos los intentos
     }
+
+    public function tema()
+    {
+        return $this->belongsTo(Tema::class, 'tema_id');
+    }
 }

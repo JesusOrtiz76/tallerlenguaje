@@ -15,5 +15,8 @@ class Tema extends Model
     {
         return $this->belongsTo(Modulo::class);
     }
-
+    public function evaluaciones()
+    {
+        return $this->hasMany(Evaluacion::class, 'tema_id');
+    }
 }

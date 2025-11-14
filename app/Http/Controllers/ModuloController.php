@@ -67,5 +67,29 @@ class ModuloController extends Controller
 
         // Retornar la vista con el curso original, no el derivado del módulo
         return view('modulos.show', compact('curso', 'modulo', 'temas', 'evaluaciones', 'user'));
+
+        // Definir la clave de caché para los temas y evaluaciones del módulo
+        $moduloCacheKey = 'modulo_' . $modulo->id . '_temas_evaluaciones';
+
+// Obtener o almacenar en caché los temas y evaluaciones del módulo
+        $moduloData = Cache::remember(
+            $moduloCacheKey,
+            now()->addMinutes($cacheGlobalExpiration),
+            function () use ($modulo) {
+                return [
+                    // Traer temas con sus evaluaciones ligadas
+                    'temas'        => $modulo->temas()->with('evaluaciones')->get(),
+                    // Todas las evaluaciones del módulo (con o sin tema)
+                    'evaluaciones' => $modulo->evaluaciones,
+                ];
+            }
+        );
+
+// Extraer temas y evaluaciones del array almacenado en caché
+        $temas = $moduloData['temas'];
+        $evaluaciones = $moduloData['evaluaciones'];
+
+// Retornar la vista con el curso original, no el derivado del módulo
+        return view('modulos.show', compact('curso', 'modulo', 'temas', 'evaluaciones', 'user'));
     }
 }
