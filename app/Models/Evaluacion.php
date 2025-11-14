@@ -77,4 +77,43 @@ class Evaluacion extends Model
     {
         return $this->belongsTo(Tema::class, 'tema_id');
     }
+
+    /**
+     * Id de la evaluación "formal".
+     */
+    public const EVALUACION_FORMAL_ID = 15;
+
+    /**
+     * ¿Es la evaluación formal?
+     */
+    public function esEvaluacionFormal(): bool
+    {
+        return $this->id === self::EVALUACION_FORMAL_ID;
+    }
+
+    /**
+     * Texto de tipo (singular) según si es evaluación o ejercicio.
+     */
+    public function etiquetaTipoSingular(): string
+    {
+        return $this->esEvaluacionFormal() ? 'Evaluación' : 'Ejercicio';
+    }
+
+    public function tituloConTipo(): string
+    {
+        $tipo = $this->etiquetaTipoSingular(); // Evaluación / Ejercicio
+        $nombre = $this->onombre ?? '';
+
+        // Quitamos espacios al inicio
+        $nombreTrim = ltrim($nombre);
+
+        // Si el nombre YA empieza con "Ejercicio" o "Evaluación", lo dejamos tal cual
+        if (stripos($nombreTrim, $tipo) === 0) {
+            return $nombreTrim;
+        }
+
+        // Si no, le anteponemos "Ejercicio: " o "Evaluación: "
+        return $tipo . ': ' . $nombreTrim;
+    }
+
 }
