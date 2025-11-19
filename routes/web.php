@@ -59,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])
         ->name('cursos.inscribirse');
 
+    Route::post('cursos/{curso}/reiniciar', [CursoController::class, 'reiniciar'])
+        ->name('cursos.reiniciar');
+
     //Modulos
     Route::get('cursos/{curso}/modulos', [ModuloController::class, 'index'])
         ->name('modulos.index');

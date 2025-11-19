@@ -8,7 +8,9 @@
         <div class="col-12 col-md-auto mb-3 mb-md-0">
             @if(Auth::user()->cursos->contains($curso))
                 @if(isset($scores[$curso->id]) && $scores[$curso->id] > 0)
+                    {{-- Ya tiene un score calculado --}}
                     @if($scores[$curso->id] >= 80)
+                        {{-- Aprobado: puede descargar constancia --}}
                         @if(!Auth::user()->ochange_name)
                             <button class="btn btn-primary w-100 w-md-auto"
                                     data-bs-toggle="modal"
@@ -22,16 +24,24 @@
                             </a>
                         @endif
                     @else
-                        <button class="btn btn-outline-secondary w-100 w-md-auto" disabled>
-                            Gracias por participar
-                        </button>
+                        {{-- No aprobó (< 8). Permitir reiniciar el curso --}}
+                        <form method="POST"
+                              action="{{ route('cursos.reiniciar', $curso->id) }}"
+                              onsubmit="return confirm('No alcanzaste la calificación mínima para aprobar el taller.\nSe borrarán tus respuestas para que puedas reiniciar el curso.\n\n¿Deseas continuar?');">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-primary w-100 w-md-auto">
+                                Reiniciar el curso
+                            </button>
+                        </form>
                     @endif
                 @else
+                    {{-- Aún no tiene score (no ha contestado todo) --}}
                     <a href="{{ route('modulos.index', $curso->id) }}" class="btn btn-primary w-100 w-md-auto">
                         Continuar
                     </a>
                 @endif
             @else
+                {{-- No inscrito --}}
                 <form class="form" method="POST" action="{{ route('cursos.inscribirse', $curso->id) }}">
                     @csrf
                     <button type="submit" class="btn btn-primary w-100 w-md-auto">Inscribirse</button>

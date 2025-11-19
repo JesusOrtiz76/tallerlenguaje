@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Curso;
 use App\Models\Inscripcion;
 use App\Traits\VerificaAccesoTrait;
+use App\Models\Evaluacion;
+use App\Models\Resultado;
+use Illuminate\Support\Facades\DB;
 
 class CursoController extends Controller
 {
@@ -107,5 +110,39 @@ class CursoController extends Controller
             return redirect()->route('home')
                 ->with('error', 'Los parámetros proporcionados no son válidos.');
         }
+    }
+
+    public function reiniciar(Curso $curso)
+    {
+        $user = Auth::user();
+
+        // Seguridad básica: que esté inscrito en el curso
+        if (!$user->cursos->contains($curso->id)) {
+            return redirect()
+                ->route('home')
+                ->with('error', 'No estás inscrito en este taller.');
+        }
+
+        DB::transaction(function () use ($user, $curso) {
+            // 1. Obtener las evaluaciones del curso (ejercicios + evaluación final)
+            $evaluacionIds = Evaluacion::whereHas('modulo', function ($q) use ($curso) {
+                $q->where('curso_id', $curso->id);
+            })->pluck('id');
+
+            // 2. Borrar resultados por pregunta (r12resultados)
+            Resultado::where('user_id', $user->id)
+                ->whereIn('evaluacion_id', $evaluacionIds)
+                ->delete();
+
+            // 3. Borrar registros de intentos en r12evaluacion_user
+            DB::table('r12evaluacion_user')
+                ->where('user_id', $user->id)
+                ->whereIn('evaluacion_id', $evaluacionIds)
+                ->delete();
+        });
+
+        return redirect()
+            ->route('home')
+            ->with('success', 'Se reinició el curso. Puedes volver a responder los ejercicios y la evaluación.');
     }
 }
