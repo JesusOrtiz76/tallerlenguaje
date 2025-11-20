@@ -81,7 +81,7 @@ class Evaluacion extends Model
     /**
      * Id de la evaluación "formal".
      */
-    public const EVALUACION_FORMAL_ID = 15;
+    public const EVALUACION_FORMAL_ID = 17;
 
     /**
      * ¿Es la evaluación formal?

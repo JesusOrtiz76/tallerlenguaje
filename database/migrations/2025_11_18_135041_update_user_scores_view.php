@@ -15,8 +15,8 @@ return new class extends Migration
                 SELECT
                     c.id AS curso_id,
                     COUNT(p.id) AS total_answers,
-                    SUM(CASE WHEN e.id <> 15 THEN 1 ELSE 0 END) AS total_answers_exercises,
-                    SUM(CASE WHEN e.id  = 15 THEN 1 ELSE 0 END) AS total_answers_final
+                    SUM(CASE WHEN e.id <> 17 THEN 1 ELSE 0 END) AS total_answers_exercises,
+                    SUM(CASE WHEN e.id  = 17 THEN 1 ELSE 0 END) AS total_answers_final
                 FROM r12preguntas p
                 INNER JOIN r12evaluaciones e ON p.evaluacion_id = e.id
                 INNER JOIN r12modulos     m ON e.modulo_id      = m.id
@@ -28,8 +28,8 @@ return new class extends Migration
                     c.id AS curso_id,
                     r.user_id,
                     COUNT(DISTINCT p.id) AS answer_count,
-                    SUM(CASE WHEN e.id <> 15 THEN op.oes_correcta ELSE 0 END) AS correct_exercises,
-                    SUM(CASE WHEN e.id  = 15 THEN op.oes_correcta ELSE 0 END) AS correct_final
+                    SUM(CASE WHEN e.id <> 17 THEN op.oes_correcta ELSE 0 END) AS correct_exercises,
+                    SUM(CASE WHEN e.id  = 17 THEN op.oes_correcta ELSE 0 END) AS correct_final
                 FROM r12resultados r
                 JOIN JSON_TABLE(
                         IFNULL(r.orespuestas, '[]'),

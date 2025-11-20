@@ -117,7 +117,7 @@ class EvaluacionController extends Controller
 
         // Redirigir al usuario
         return redirect()->route('modulos.show', $modulo->id)
-            ->with('success', 'Evaluación completada.');
+            ->with('success', 'Respuestas enviadas correctamente.');
     }
 
     // Ver resultados
