@@ -25,6 +25,7 @@
                                         <h1 class="text-gradient mb-4"> {{ __('Register') }} </h1>
                                     </div>
 
+                                    {{-- Nombre --}}
                                     <div class="form-outline mb-4">
                                         <label for="name">Nombre completo</label>
                                         <input id="name"
@@ -42,6 +43,7 @@
                                         @enderror
                                     </div>
 
+                                    {{-- RFC --}}
                                     <div class="form-outline mb-4">
                                         <label for="rfc">{{ __('RFC') }}</label>
                                         <input id="rfc"
@@ -50,8 +52,7 @@
                                                name="rfc"
                                                value="{{ old('rfc') }}"
                                                oninput="toMay(this)"
-                                               autocomplete="rfc"
-                                               autofocus>
+                                               autocomplete="rfc">
                                         @error('rfc')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -59,6 +60,24 @@
                                         @enderror
                                     </div>
 
+                                    {{-- Sexo --}}
+                                    <div class="form-outline mb-4">
+                                        <label for="sexo">Sexo</label>
+                                        <select id="sexo"
+                                                name="sexo"
+                                                class="form-select @error('sexo') is-invalid @enderror">
+                                            <option value="">Seleccione una opción</option>
+                                            <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Masculino</option>
+                                            <option value="F" {{ old('sexo') == 'F' ? 'selected' : '' }}>Femenino</option>
+                                        </select>
+                                        @error('sexo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    {{-- Clave centro de trabajo --}}
                                     <div class="form-outline mb-4">
                                         <label for="oclave">{{ __('Clave del centro de trabajo') }}</label>
                                         <input id="oclave"
@@ -67,8 +86,7 @@
                                                name="oclave"
                                                value="{{ old('oclave') }}"
                                                oninput="toMay(this)"
-                                               autocomplete="oclave"
-                                               autofocus>
+                                               autocomplete="oclave">
                                         @error('oclave')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -76,6 +94,28 @@
                                         @enderror
                                     </div>
 
+                                    {{-- Unidad administrativa --}}
+                                    <div class="form-outline mb-4">
+                                        <label for="unidadadministrativa_id">Unidad administrativa</label>
+                                        <select id="unidadadministrativa_id"
+                                                name="unidadadministrativa_id"
+                                                class="form-select @error('unidadadministrativa_id') is-invalid @enderror">
+                                            <option value="">Seleccione una opción</option>
+                                            @foreach($unidades as $unidad)
+                                                <option value="{{ $unidad->id }}"
+                                                    {{ old('unidadadministrativa_id') == $unidad->id ? 'selected' : '' }}>
+                                                    {{ $unidad->onombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('unidadadministrativa_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    {{-- Email --}}
                                     <div class="form-outline mb-4">
                                         <label for="email">{{ __('Email Address') }}</label>
                                         <input id="email"
@@ -85,7 +125,6 @@
                                                value="{{ old('email') }}"
                                                oninput="toMin(this)"
                                                autocomplete="email"
-                                               autofocus
                                                onpaste="return false;" oncopy="return false;">
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -94,6 +133,7 @@
                                         @enderror
                                     </div>
 
+                                    {{-- Confirmación Email --}}
                                     <div class="form-outline mb-4">
                                         <label for="email-confirm">{{ __('Confirm Email Address') }}</label>
                                         <input id="email-confirm"
@@ -111,13 +151,13 @@
                                         @enderror
                                     </div>
 
+                                    {{-- Password --}}
                                     <div class="form-outline mb-4">
                                         <label for="password">{{ __('Password') }}</label>
                                         <input id="password"
                                                type="password"
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password"
-                                               value="{{ old('password') }}"
                                                autocomplete="new-password"
                                                onpaste="return false;" oncopy="return false;">
                                         @error('password')
@@ -127,11 +167,12 @@
                                         @enderror
                                     </div>
 
+                                    {{-- Confirm Password --}}
                                     <div class="form-outline mb-4">
                                         <label for="password-confirm">{{ __('Confirm Password') }}</label>
                                         <input id="password-confirm"
                                                type="password"
-                                               class="form-control @error('password') is-invalid @enderror"
+                                               class="form-control"
                                                name="password_confirmation"
                                                autocomplete="new-password"
                                                onpaste="return false;" oncopy="return false;">
@@ -139,7 +180,8 @@
 
                                     <div class="w-100 pt-1 my-3 d-flex justify-content-center">
                                         <button type="submit"
-                                                class="btn btn-outline-primary btn-block">{{ __('Register') }}
+                                                class="btn btn-outline-primary btn-block">
+                                            {{ __('Register') }}
                                         </button>
                                     </div>
 

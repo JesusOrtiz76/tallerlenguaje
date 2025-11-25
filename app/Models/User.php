@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
@@ -23,8 +22,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'centrotrabajo_id',
+        'unidadadministrativa_id',
         'name',
         'orfc',
+        'sexo',
         'email',
         'password',
     ];
@@ -51,6 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function centroTrabajo()
     {
         return $this->belongsTo(CentroTrabajo::class, 'centrotrabajo_id');
+    }
+
+    public function unidadAdministrativa()
+    {
+        return $this->belongsTo(UnidadAdministrativa::class, 'unidadadministrativa_id');
     }
 
     public function cursos()
@@ -96,5 +102,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new \App\Notifications\ResetPassword($token));
     }
-
 }
