@@ -42,26 +42,27 @@
                 <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#modulos">Bloques</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ayuda">Preguntas <F></F>recuentes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ayuda">Preguntas frecuentes</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">{{ __('Go to workshop') }}</a>
                 </li>
+
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link  text-uppercase" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-uppercase" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link  text-uppercase" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link text-uppercase" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle  text-uppercase"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase"
                            href="#"
                            role="button"
                            data-bs-toggle="dropdown"
@@ -77,8 +78,7 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form class="form"
-                                  id="logout-form"
+                            <form id="logout-form"
                                   action="{{ route('logout') }}"
                                   method="POST"
                                   class="d-none">
@@ -95,14 +95,14 @@
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
-        <div class="masthead-subheading"> {{ __('Welcome to the writing workshop') }} </div>
-        <div class="masthead-heading text-uppercase"> {{ $cursos[0]->onombre }} </div>
+        <div class="masthead-subheading">{{ __('Welcome to the writing workshop') }}</div>
+        <div class="masthead-heading text-uppercase">{{ $cursos[0]->onombre }}</div>
+
         <a class="btn btn-lg btn-outline-light text-uppercase fst-italic rounded-pill text-nowrap btn-hero"
            href="{{ route('home') }}">
             {{ __('Go to workshop') }}
         </a>
 
-        <!-- Animation Mousey-->
         <!-- Mouse + caption fijados al fondo del masthead -->
         <div class="mouse-block">
             <a href="#objetivos" class="mouse-link" aria-label="Ir a objetivos">
@@ -124,9 +124,9 @@
             <h2 class="section-heading text-uppercase text-gradient">Introducción</h2>
             <h3 class="section-subheading text-muted text-justify">
                 <p class="text-muted text-justify">
-                El lenguaje es la herramienta con la cual una persona o una sociedad comparte su ideología, costumbres
-                y valores. En este sentido, el lenguaje de las sociedades con un sistema patriarcal, como es nuestro
-                país, se centra en lo masculino, dando total visibilidad al hombre e invisibilidad a las mujeres.
+                    El lenguaje es la herramienta con la cual una persona o una sociedad comparte su ideología, costumbres
+                    y valores. En este sentido, el lenguaje de las sociedades con un sistema patriarcal, como es nuestro
+                    país, se centra en lo masculino, dando total visibilidad al hombre e invisibilidad a las mujeres.
                 </p>
                 <p class="text-muted text-justify">
                     Es justo el lenguaje del patriarcado, el que determina el papel del hombre y la mujer en lo
@@ -152,12 +152,13 @@
                 </p>
             </h3>
         </div>
+
         <div class="row text-center">
             <div class="col-md-6 mb-3 px-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
-                    </span>
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
+                </span>
                 <h4 class="my-3">Objetivo</h4>
                 <p class="text-muted text-justify">
                     Incorporar el uso del lenguaje incluyente y no sexista en las personas servidoras públicas de los
@@ -166,12 +167,13 @@
                     contribuir a la erradicación de la violencia.
                 </p>
             </div>
+
             <div class="col-md-6 mb-3 px-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa-solid fa-bullseye fa-stack-1x fa-inverse"></i>
-                    </span>
-                <h4 class="my-3">Objetivos Especificos</h4>
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa-solid fa-bullseye fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="my-3">Objetivos Específicos</h4>
                 <p class="text-muted text-justify">
                     Erradicar el uso sexista del lenguaje en la expresión oral y escrita (en las conversaciones
                     informales y en los documentos oficiales del Organismo) ya que transmite y refuerza la desigualdad
@@ -182,11 +184,12 @@
                     y no sexista en las prácticas escritas y orales dentro del Organismo.
                 </p>
             </div>
+
             <div class="col-md-6 mb-3 px-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa-solid fa-gavel fa-stack-1x fa-inverse"></i> <!-- Ícono de martillo de juez -->
-                    </span>
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa-solid fa-gavel fa-stack-1x fa-inverse"></i>
+                </span>
                 <h4 class="my-3">Fundamento Legal</h4>
                 <p class="text-muted text-justify">
                     <b>Fracción XII del artículo 17, de la Ley General para la Igualdad entre Mujeres y Hombres</b>
@@ -196,17 +199,18 @@
                     incluyente”.
                 </p>
             </div>
+
             <div class="col-md-6 mb-3 px-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
-                    </span>
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-person-chalkboard fa-stack-1x fa-inverse"></i>
+                </span>
                 <h4 class="my-3">Instrucciones</h4>
                 <p class="text-muted text-justify">
                     Para realizar su registro, deberá ser servidor público activo adscrito a Servicios Educativos
                     Integrados al Estado de México (SEIEM), deberá llenar el
-                    <a href="{{ route('register') }}"><i class="fa fa-address-card"></i> <strong>Formulario de
-                            Registro</strong></a>, ingresando su
+                    <a href="{{ route('register') }}"><i class="fa fa-address-card"></i>
+                        <strong>Formulario de Registro</strong></a>, ingresando su
                     nombre, RFC, clave del centro de trabajo y correo electrónico, posteriormente, podrá crear una
                     contraseña
                     de 8 caracteres,
@@ -221,27 +225,31 @@
                     </a> para más información.
                 </p>
             </div>
+
             <div class="col-md-6 mb-3 px-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-file-contract fa-stack-1x fa-inverse"></i>
-                    </span>
-                <h4 class="my-3">Acreditaci&oacute;n</h4>
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-file-contract fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="my-3">Acreditación</h4>
                 <p class="text-muted text-justify">
                     Para poder acreditar el taller en línea “{{ $cursos[0]->onombre }}”, es necesario completar todos
                     los ejercicios del curso, así como realizar la evaluación final. Contará con 2 oportunidades para
-                    acreditar la evaluacion final. Al completar todos los ejercicios y acreditar la evaluación final de
+                    acreditar la evaluación final. Al completar todos los ejercicios y acreditar la evaluación final de
                     los {{ count($cursos[0]->modulos) }} módulos, estará en posibilidades de descargar la
                     <span class="text-primary">
-                            <i class="fa fa-file-contract"></i> <strong>Constancia de Acreditación</strong></span>,
+                        <i class="fa fa-file-contract"></i>
+                        <strong>Constancia de Acreditación</strong>
+                    </span>,
                     misma que contará con valor curricular.
                 </p>
             </div>
+
             <div class="col-md-6 mb-3 px-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
-                    </span>
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-stopwatch fa-stack-1x fa-inverse"></i>
+                </span>
                 <h4 class="my-3">Duración</h4>
                 <p class="text-muted text-justify">
                     El registro para el curso "{{ $cursos[0]->onombre }}" estará disponible del
@@ -256,41 +264,72 @@
     </div>
 </section>
 
-<!-- Modulos -->
+<!-- Bloques / Módulos -->
 <section class="page-section" id="modulos">
     <div class="container">
-        <div class="text-center">
+        <div class="text-center mb-5">
             <h2 class="section-heading text-uppercase text-gradient mb-2">BLOQUES</h2>
-            <p class="text-muted mb-5">
+            <p class="text-muted mb-0">
                 Este curso cuenta con un total de {{ count($cursos[0]->modulos) }} bloques, que se describen a continuación.
             </p>
         </div>
 
-        <ul class="modulo">
+        <div class="row g-4 bloques-grid">
             @foreach($cursos[0]->modulos as $modulo)
-                @php $isRight = $loop->iteration % 2 === 0; @endphp
+                <div class="col-12 col-md-6 col-lg-4">
+                    <article class="bloque-card h-100">
+                        <div class="bloque-card-header d-flex align-items-center justify-content-between mb-3">
+                            <span class="bloque-badge">
+                                Bloque {{ $loop->iteration }}
+                            </span>
+                            <span class="bloque-pill">
+                                Taller en línea
+                            </span>
+                        </div>
 
-                <li class="{{ $isRight ? 'modulo-inverted' : '' }}">
-                    <div class="modulo-image">
-                        <img class="rounded-circle" src="{{ asset('storage/' . $modulo->oimg_path) }}"
-                             alt="Imagen del {{ $modulo->onombre }}">
-                    </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bloque-icon me-3">
+                                <img src="{{ asset('storage/' . $modulo->oimg_path) }}"
+                                     alt="Imagen del {{ $modulo->onombre }}"
+                                     class="img-fluid rounded-circle">
+                            </div>
+                            <div>
+                                <h3 class="bloque-title mb-0">
+                                    {{ $modulo->onombre }}
+                                </h3>
+                            </div>
+                        </div>
 
-                    <div class="modulo-panel p-3 p-lg-4 {{ $isRight ? 'text-lg-start' : 'text-lg-end' }}">
-                        <h3 class="h5 fw-bold mb-2">{{ $modulo->onombre }}</h3>
-                        <p class="text-muted mb-0 modulo-desc">
+                        <p class="bloque-desc text-muted mb-0">
                             {{ $modulo->odescripcion }}
                         </p>
-                    </div>
-                </li>
+                    </article>
+                </div>
             @endforeach
 
-            <li class="modulo-inverted">
-                <div class="modulo-image">
-                    <h4 class="m-0 text-center">¡Fin<br>del<br>Taller!</h4>
-                </div>
-            </li>
-        </ul>
+            {{-- Tarjeta final --}}
+            <div class="col-12 col-md-6 col-lg-4">
+                <article class="bloque-card h-100 bloque-card-final">
+                    <div class="bloque-card-header d-flex align-items-center justify-content-between mb-3">
+                        <span class="bloque-badge">
+                            Cierre
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bloque-icon me-3">
+                            <i class="fa fa-award"></i>
+                        </div>
+                        <div>
+                            <h3 class="bloque-title mb-0">¡Fin del taller!</h3>
+                        </div>
+                    </div>
+                    <p class="bloque-desc mb-0">
+                        Al concluir todos los bloques y aprobar la evaluación final, podrás descargar tu
+                        <strong>Constancia de Acreditación</strong> con valor curricular.
+                    </p>
+                </article>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -299,15 +338,21 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase text-gradient">Preguntas Frecuentes</h2>
-            <h3 class="section-subheading text-muted">Encuentre respuestas a las preguntas más comunes sobre el curso.
+            <h3 class="section-subheading text-muted">
+                Encuentre respuestas a las preguntas más comunes sobre el curso.
             </h3>
         </div>
+
         <div class="accordion" id="accordionAyuda">
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
-                            aria-expanded="true" aria-controls="collapse1">
+                    <button class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse1"
+                            aria-expanded="true"
+                            aria-controls="collapse1">
                         ¿Cómo me registro en el curso?
                     </button>
                 </h2>
@@ -321,8 +366,12 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse2"
+                            aria-expanded="false"
+                            aria-controls="collapse2">
                         ¿Qué sucede si no me registré al curso a tiempo o en las fechas establecidas?
                     </button>
                 </h2>
@@ -332,8 +381,8 @@
                         <strong>{{ $formattedStartRegisterDate }}</strong> al
                         <strong>{{ $formattedEndRegisterDate }}</strong>.
                         Fuera de los periodos establecidos, lamentablemente no habrá forma de registrarse.
-                        Para dudas o aclaraciones, favor de comunicarse al teléfono <strong>(722) 279 77 00, Ext.
-                            0727.</strong>
+                        Para dudas o aclaraciones, favor de comunicarse al teléfono
+                        <strong>(722) 279 77 00, Ext. 0727.</strong>
                         Horario de atención: Lunes a Viernes en días hábiles de 9:00 AM a 1:00 PM.
                     </div>
                 </div>
@@ -341,12 +390,16 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseReset" aria-expanded="false" aria-controls="collapseReset">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseReset"
+                            aria-expanded="false"
+                            aria-controls="collapseReset">
                         ¿Cómo puedo restablecer mi contraseña?
                     </button>
                 </h2>
-                <div id="collapseReset" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapseReset" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
                     <div class="accordion-body">
                         Puede restablecer su contraseña accediendo al siguiente enlace:
                         <a href="{{ route('password.request') }}"><strong>Restablecer Contraseña</strong></a>.
@@ -357,15 +410,19 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse3"
+                            aria-expanded="false"
+                            aria-controls="collapse3">
                         ¿Cómo puedo recuperar mi cuenta si no recuerdo el correo o la contraseña con la que me registré?
                     </button>
                 </h2>
                 <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
                     <div class="accordion-body">
                         Para restablecer su correo o contraseña, favor de comunicarse al teléfono (722) 279 77 00,
-                        <strong> Ext. 1150 o Ext. 1142.</strong>
+                        <strong>Ext. 1150 o Ext. 1142.</strong>
                         Horario de atención: Lunes a Viernes en días hábiles de 9:00 AM a 1:00 PM.
                     </div>
                 </div>
@@ -373,8 +430,12 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse4"
+                            aria-expanded="false"
+                            aria-controls="collapse4">
                         ¿Cómo obtengo mi constancia de acreditación?
                     </button>
                 </h2>
@@ -388,8 +449,12 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse5"
+                            aria-expanded="false"
+                            aria-controls="collapse5">
                         ¿Cómo puedo cambiar mi nombre si me equivoqué al momento de registrarme?
                     </button>
                 </h2>
@@ -405,15 +470,19 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse6"
+                            aria-expanded="false"
+                            aria-controls="collapse6">
                         ¿Por qué no me aparece la opción de descargar mi constancia si terminé mi curso al 100%?
                     </button>
                 </h2>
                 <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionAyuda">
                     <div class="accordion-body">
-                        Si el sistema no le muestra la opción de descargar la constancia, lamentablemente <strong>no
-                            aprobó el curso.</strong>
+                        Si el sistema no le muestra la opción de descargar la constancia, lamentablemente
+                        <strong>no aprobó el curso.</strong>
                         Aunque haya concluido el curso, esto significa que no obtuvo una calificación aprobatoria.
                         <strong>Si tiene intentos disponibles en sus evaluaciones, podría intentar mejorar su
                             calificación.</strong>
@@ -423,8 +492,12 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse7"
+                            aria-expanded="false"
+                            aria-controls="collapse7">
                         ¿Habrá nuevas fechas de apertura para acreditar el curso?
                     </button>
                 </h2>
@@ -432,8 +505,8 @@
                     <div class="accordion-body">
                         Por el momento, no existen otras fechas para registros nuevos ni para intentos de acreditar el
                         curso.
-                        Para dudas o aclaraciones, favor de comunicarse al teléfono <strong>(722) 279 77 00, Ext.
-                            0727.</strong>
+                        Para dudas o aclaraciones, favor de comunicarse al teléfono
+                        <strong>(722) 279 77 00, Ext. 0727.</strong>
                         Horario de atención: Lunes a Viernes en días hábiles de 9:00 AM a 1:00 PM.
                     </div>
                 </div>
@@ -466,5 +539,4 @@
 @include('partials.messages')
 
 </body>
-
 </html>

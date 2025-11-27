@@ -16,6 +16,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    /* Corrige el “salto” cuando haces clic en la navbar */
+    scroll-margin-top: 110px; // ajusta según la altura real de tu navbar
 }
 
 .page-section h2.section-heading,
@@ -53,14 +56,15 @@
     -webkit-backdrop-filter: blur(20px);
     width:100%;
     margin-bottom: 40px;
-    z-index: 1;
+    z-index: 1055; // antes 1
 }
 
 .navbar-btn {
     -webkit-box-shadow: none;
     box-shadow: none;
     outline: none !important;
-    border: none; }
+    border: none;
+}
 
 #mainNav .navbar-toggler {
     padding: 0.75rem;
@@ -120,6 +124,7 @@ header.masthead .masthead-heading {
     line-height: 2rem;
     margin-bottom: 1.75rem;
 }
+
 @media (min-width: 768px) {
     header.masthead {
         display: flex;
@@ -206,225 +211,185 @@ header.masthead .masthead-heading {
 }
 
 // Estilos para la sección de módulos de la pantalla de bienvenida
-
-.modulo {
-    position: relative;
-    padding: 0;
-    list-style: none;
+// Estilos para la sección de módulos de la pantalla de bienvenida
+#modulos.page-section {
+    display: block;          // quita el flex de .page-section
+    min-height: auto;        // que no obligue a 100vh
+    padding-top: 7rem;       // un poco más de aire bajo la navbar
+    padding-bottom: 6rem;
 }
 
-.modulo:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 40px;
-    width: 2px;
-    margin-left: -1.5px;
-    content: "";
-    background-color: #e9ecef;
-}
-
-.modulo>li {
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 50px;
-}
-
-.modulo>li:after,
-.modulo>li:before {
-    display: table;
-    content: " ";
-}
-
-.modulo>li:after {
-    clear: both;
-}
-
-.modulo>li .modulo-panel {
-    position: relative;
-    float: right;
+#modulos {
     width: 100%;
-    padding: 0 20px 0 100px;
-    text-align: left;
+    background: #f8fafc;
 }
 
-.modulo>li .modulo-panel:before {
-    right: auto;
-    left: -15px;
-    border-right-width: 15px;
-    border-left-width: 0;
+[data-bs-theme="dark"] #modulos {
+    background: radial-gradient(circle at top, rgba($bg_dark, .9), rgba($bg_dark, .98));
 }
 
-.modulo>li .modulo-panel:after {
-    right: auto;
-    left: -14px;
-    border-right-width: 14px;
-    border-left-width: 0;
+/* Grid de tarjetas */
+.bloques-grid {
+    margin-top: 1rem;
 }
 
-.modulo>li .modulo-image {
-    position: absolute;
-    z-index: 0;
-    left: 0;
-    width: 80px;
-    height: 80px;
-    margin-left: 0;
-    text-align: center;
-    color: white;
-    border: 7px solid #e9ecef;
-    background-color: $primary;
-    border-radius: 50%;
+/* Tarjeta base del bloque */
+.bloque-card {
+    position: relative;
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.6rem;
+    background: radial-gradient(circle at top left, #f5f3ff, #eef2ff);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
     overflow: hidden;
-}
+    border: 1px solid rgba(129, 140, 248, 0.25);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 
-.modulo>li .modulo-image h4,
-.modulo>li .modulo-image .h4 {
-    font-size: 10px;
-    line-height: 14px;
-    margin-top: 12px;
-}
-
-.modulo>li.modulo-inverted>.modulo-panel {
-    float: right;
-    padding: 0 20px 0 100px;
-    text-align: left;
-}
-
-.modulo>li.modulo-inverted>.modulo-panel:before {
-    right: auto;
-    left: -15px;
-    border-right-width: 15px;
-    border-left-width: 0;
-}
-
-.modulo>li.modulo-inverted>.modulo-panel:after {
-    right: auto;
-    left: -14px;
-    border-right-width: 14px;
-    border-left-width: 0;
-}
-
-.modulo>li:last-child {
-    margin-bottom: 0;
-}
-
-.modulo .modulo-heading h4,
-.modulo .modulo-heading .h4 {
-    margin-top: 0;
-    color: inherit;
-}
-
-.modulo .modulo-heading h4.subheading,
-.modulo .modulo-heading .subheading.h4 {
-    text-transform: none;
-}
-
-.modulo .modulo-body>ul,
-.modulo .modulo-body>p {
-    margin-bottom: 0;
-}
-
-@media (min-width: 768px) {
-    .modulo:before {
-        left: 50%;
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+        border-color: rgba(129, 140, 248, 0.6);
     }
 
-    .modulo>li {
-        min-height: 100px;
-        margin-bottom: 100px;
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(129, 140, 248, 0.18), transparent 60%);
+        opacity: .9;
+        pointer-events: none;
     }
 
-    .modulo>li .modulo-panel {
-        float: left;
-        width: 41%;
-        padding: 0 20px 20px 30px;
-        text-align: right;
+    > * {
+        position: relative;
+        z-index: 1;
     }
+}
 
-    .modulo>li .modulo-image {
-        left: 50%;
-        width: 100px;
-        height: 100px;
-        margin-left: -50px;
+/* Header de la tarjeta (badge + pill) */
+.bloque-card-header {
+    font-size: .75rem;
+}
+
+/* Badge “Bloque 1, Bloque 2…” */
+.bloque-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .15rem .75rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    background: #ede9fe;
+    color: #6d28d9;
+
+    &::before {
+        content: '';
+        width: .55rem;
+        height: .55rem;
         border-radius: 50%;
-        overflow: hidden;
-    }
-
-    .modulo>li .modulo-image h4,
-    .modulo>li .modulo-image .h4 {
-        font-size: 13px;
-        line-height: 18px;
-        margin-top: 16px;
-    }
-
-    .modulo>li.modulo-inverted>.modulo-panel {
-        float: right;
-        padding: 0 30px 20px 20px;
-        text-align: left;
+        background: #8b5cf6;
+        box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.4);
     }
 }
 
-@media (min-width: 992px) {
-    .modulo>li {
-        min-height: 150px;
-    }
+/* Etiqueta pequeña del lado derecho */
+.bloque-pill {
+    padding: .2rem .8rem;
+    border-radius: 999px;
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #4b5563;
+    background: rgba(255, 255, 255, 0.8);
+}
 
-    .modulo>li .modulo-panel {
-        padding: 0 20px 20px;
-    }
+/* Ícono / imagen circular del bloque */
+.bloque-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.15);
 
-    .modulo>li .modulo-image {
-        width: 170px;
-        height: 170px;
-        margin-left: -85px;
+    img {
+        width: 56px;
+        height: 56px;
+        object-fit: cover;
         border-radius: 50%;
-        overflow: hidden;
     }
 
-    .modulo>li .modulo-image h4,
-    .modulo>li .modulo-image .h4 {
-        font-size: 18px;
-        line-height: 26px;
-        margin-top: 30px;
-    }
-
-    .modulo>li.modulo-inverted>.modulo-panel {
-        padding: 0 20px 20px;
+    i {
+        font-size: 1.7rem;
+        color: #4c1d95;
     }
 }
 
-@media (min-width: 1200px) {
-    .modulo>li {
-        min-height: 170px;
+/* Título y descripción dentro de la tarjeta */
+.bloque-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.bloque-desc {
+    font-size: .9rem;
+    line-height: 1.5;
+}
+
+/* Tarjeta final (Fin del taller) con diseño distinto */
+.bloque-card-final {
+    background: linear-gradient(135deg, #4c1d95, #7c3aed);
+    color: #f9fafb;
+    border-color: transparent;
+
+    .bloque-badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #e5e7eb;
+
+        &::before {
+            background: #fbbf24;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.4);
+        }
     }
 
-    .modulo>li .modulo-panel {
-        padding: 0 20px 20px 100px;
+    .bloque-title {
+        color: #f9fafb;
     }
 
-    .modulo>li .modulo-image {
-        width: 170px;
-        height: 170px;
-        margin-left: -85px;
-        border-radius: 50%;
-        overflow: hidden;
+    .bloque-desc {
+        color: #e5e7eb;
     }
 
-    .modulo>li .modulo-image h4,
-    .modulo>li .modulo-image .h4 {
-        margin-top: 40px;
-    }
+    .bloque-icon {
+        background: rgba(15, 23, 42, 0.1);
+        box-shadow: none;
 
-    .modulo>li.modulo-inverted>.modulo-panel {
-        padding: 0 100px 20px 20px;
+        i {
+            color: #fbbf24;
+        }
     }
 }
 
-.modulo>li .modulo-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
+/* Ajustes responsive para móviles */
+@media (max-width: 575.98px) {
+    .bloque-card {
+        padding: 1.25rem 1.2rem;
+    }
+
+    .bloque-icon {
+        width: 56px;
+        height: 56px;
+
+        img {
+            width: 48px;
+            height: 48px;
+        }
+    }
 }
 
 .img-brand {
@@ -448,7 +413,8 @@ header.masthead .masthead-heading {
     width: 100%;
     height: 1px;
     border-bottom: 1px dashed #ddd;
-    margin: 40px 0; }
+    margin: 40px 0;
+}
 
 .wrapper {
     width: 100%;
@@ -915,6 +881,7 @@ header.masthead .masthead-subheading{
     background-color: #fff;
     border-color: #fff;
 }
+
 /* ========== HEADINGS GLOBALES (afinados) ========== */
 h2, .h2 {
     font-weight: 800;
@@ -1034,5 +1001,7 @@ figure > .blockquote-footer {
 }
 
 /* Utilidad: texto justificado */
-.text-justify { text-align: justify; text-justify: inter-word; }
-
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
