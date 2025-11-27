@@ -1,3 +1,4 @@
+{{-- resources/views/partials/sidebar.blade.php --}}
 <nav id="sidebar" class="vh-100 shadow d-flex flex-column justify-content-between blur-bg">
     <div class="col">
         <div class="w-100 d-flex justify-content-end p-3">
@@ -6,9 +7,11 @@
                 <span class="sr-only">Close Sidebar</span>
             </button>
         </div>
+
         <!-- Contenido superior -->
         <div class="sidebar-content">
-            <!-- Mostrar menús adicionales si el usuario es administrador -->
+
+            <!-- Administración: solo admin -->
             @if(Auth::check() && Auth::user()->orol === 'admin')
                 <div class="mb-4">
                     <div class="w-100 d-flex justify-content-center">
@@ -18,9 +21,9 @@
                     <!-- Botón de Dashboard -->
                     <div class="btn-group d-flex justify-content-between my-2">
                         <a class="btn btn-sidebar btn-text-left w-100
-                        {{ Request::is('dashboard') ? 'btn-primary' : 'btn-outline-primary' }}"
+                           {{ Request::is('dashboard') ? 'btn-primary' : 'btn-outline-primary' }}"
                            href="{{ route('admin.dashboard') }}">
-                            <i class="fa-solid fa-tachometer-alt"></i> <!-- Icono de Dashboard -->
+                            <i class="fa-solid fa-tachometer-alt"></i>
                             Dashboard
                         </a>
                     </div>
@@ -28,10 +31,28 @@
                     <!-- Botón de Gestionar Usuarios -->
                     <div class="btn-group d-flex justify-content-between my-2">
                         <a class="btn btn-sidebar btn-text-left w-100
-                        {{ Request::is('users') ? 'btn-primary' : 'btn-outline-primary' }}"
+                           {{ Request::is('users') ? 'btn-primary' : 'btn-outline-primary' }}"
                            href="{{ route('admin.users') }}">
-                            <i class="fa-solid fa-users"></i> <!-- Icono de Gestionar Usuarios -->
+                            <i class="fa-solid fa-users"></i>
                             Gestionar Usuarios
+                        </a>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Sección de Reportes: admin y reportes --}}
+            @if(Auth::check() && in_array(Auth::user()->orol, ['admin', 'reportes']))
+                <div class="mb-4">
+                    <div class="w-100 d-flex justify-content-center">
+                        <h5 class="text-uppercase text-primary mb-2 text-center">Reportes</h5>
+                    </div>
+
+                    <div class="btn-group d-flex justify-content-between my-2">
+                        <a class="btn btn-sidebar btn-text-left w-100
+                           {{ Request::is('reportes*') ? 'btn-primary' : 'btn-outline-primary' }}"
+                           href="{{ route('reportes.index') }}">
+                            <i class="fa-solid fa-file-excel"></i>
+                            Reportes
                         </a>
                     </div>
                 </div>
@@ -46,6 +67,7 @@
                             </h5>
                         </a>
                     </div>
+
                     @foreach ($curso->modulos as $modulo)
                         @php
                             // Verificar si el tema, evaluación o módulo está activo
@@ -53,6 +75,7 @@
                             $activo = false;
                             $temas_ids = collect($modulo->temas)->pluck('id');
                             $evaluaciones_ids = collect($modulo->evaluaciones)->pluck('id');
+
                             if (
                                 (Request::is('temas/*') && $temas_ids->contains(Request::segment(2))) ||
                                 (Request::is('evaluaciones/*') && $evaluaciones_ids->contains(Request::segment(2))) ||
@@ -84,7 +107,7 @@
                                     @foreach ($modulo->temas as $tema)
                                         {{-- Tema --}}
                                         <a class="btn btn-sidebar btn-text-left text-truncate
-                   {{ Request::is('temas/'.$tema->id) ? 'btn-golden' : 'btn-outline-golden' }}"
+                                           {{ Request::is('temas/'.$tema->id) ? 'btn-golden' : 'btn-outline-golden' }}"
                                            href="{{ route('temas.show', $tema->id) }}">
                                             <i class="fa-solid fa-chalkboard-user"></i>
                                             {{ $tema->otitulo }}
@@ -115,9 +138,9 @@
                                                 @endphp
 
                                                 <a class="btn btn-sidebar btn-text-left text-truncate ps-4
-                           {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado')
-                               ? 'btn-golden'
-                               : 'btn-outline-golden' }}"
+                                                   {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado')
+                                                       ? 'btn-golden'
+                                                       : 'btn-outline-golden' }}"
                                                    href="{{ $link }}">
                                                     <i class="fa-solid {{ $completado ? 'fa-check-circle' : 'fa-hourglass-half' }}"></i>
                                                     {{ $completado ? $evaluacion->onombre : 'Pendiente: ' . $evaluacion->onombre }}
@@ -154,9 +177,9 @@
                                         @endphp
 
                                         <a class="btn btn-sidebar btn-text-left text-truncate
-                   {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado')
-                       ? 'btn-golden'
-                       : 'btn-outline-golden' }}"
+                                           {{ Request::is('evaluaciones/'.$evaluacion->id) || Request::is('evaluaciones/'.$evaluacion->id.'/resultado')
+                                               ? 'btn-golden'
+                                               : 'btn-outline-golden' }}"
                                            href="{{ $link }}">
                                             <i class="fa-solid {{ $completado ? 'fa-check-circle' : 'fa-hourglass-half' }}"></i>
                                             {{ $completado ? $evaluacion->onombre : 'Pendiente: ' . $evaluacion->onombre }}

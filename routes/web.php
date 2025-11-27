@@ -14,6 +14,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -114,3 +115,13 @@ Route::middleware(['auth', 'checkUserRole:admin'])->group(function () {
     Route::put('users/{user}', [UserController::class, 'updateUser'])
         ->name('admin.users.update');
 });
+
+// Reportes: disponible para admin y reportes
+Route::middleware(['auth', 'checkUserRole:admin,reportes'])->group(function () {
+    Route::get('reportes', [ReportController::class, 'index'])
+        ->name('reportes.index');
+
+    Route::get('reportes/export', [ReportController::class, 'export'])
+        ->name('reportes.export');
+});
+

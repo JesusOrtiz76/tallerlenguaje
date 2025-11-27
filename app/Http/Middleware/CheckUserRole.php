@@ -14,14 +14,15 @@ class CheckUserRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next, $rol)
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!Auth::check())
+        if (!Auth::check()) {
             return redirect('login');
+        }
 
-        $user = Auth::user();
-        if ($user->orol != $rol) {
-            // Redireccionar al usuario si no tiene el rol necesario
+        $userRole = Auth::user()->orol;
+
+        if (! in_array($userRole, $roles)) {
             return redirect('home')->with('warning', 'No tienes permiso para acceder a esta área');
         }
 
