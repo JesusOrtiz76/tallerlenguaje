@@ -14,8 +14,8 @@ class AdminController extends Controller
     {
         $search = $request->input('search');
 
-        $users = User::where('orol', '!=', 'admin')
-            ->with('centroTrabajo:oclave,id')
+        $users = User::where('orol', 'user')   // 👈 Solo usuarios finales
+        ->with('centroTrabajo:oclave,id')
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('name', 'LIKE', "%{$search}%")
