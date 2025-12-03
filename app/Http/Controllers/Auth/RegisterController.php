@@ -28,7 +28,6 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        // Solo necesitamos el catálogo de unidades administrativas de momento
         $unidades = UnidadAdministrativa::orderBy('onombre')->get();
 
         return view('auth.register', compact('unidades'));
@@ -39,99 +38,147 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $rules = [
-            'name'                   => ['required', 'string', 'max:255'],
-            'rfc'                    => ['required', 'string', 'size:13'],
-            'sexo'                   => ['required', 'in:M,F'],
-            'email'                  => ['required', 'string', 'email', 'max:255'],
-            'email_confirmation'     => ['required', 'string', 'email', 'same:email'],
-            'password'               => ['required', 'string', 'min:8', 'confirmed'],
-            'oclave'                 => ['required', 'string', 'size:10', 'regex:/^15[A-Z]{3}\d{4}[A-Z]$/', 'exists:r12centrostrabajo,oclave'],
-            'unidadadministrativa_id'=> ['required', 'exists:r12unidadadministrativa,id'],
-        ];
+        // Normalizamos aquí también
+        $data['name'] = mb_strtoupper($data['name'] ?? '', 'UTF-8');
+        $data['rfc']  = mb_strtoupper($data['rfc'] ?? '', 'UTF-8');
 
-        // Validar si el RFC ya está registrado pero permitir cambiar el correo si no ha sido verificado
-        $user = User::where('orfc', $data['rfc'])->first();
-        if (!$user) {
-            $rules['rfc'][] = 'unique:r12users,orfc';
-        }
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
 
-        return Validator::make($data, $rules, [
-            'name.required'                    => 'El nombre es obligatorio.',
-            'rfc.required'                     => 'El RFC es requerido.',
-            'rfc.size'                         => 'El RFC debe tener exactamente 13 caracteres.',
-            'email.required'                   => 'El correo electrónico es obligatorio.',
-            'email.unique'                     => 'El correo electrónico ya está en uso.',
-            'email_confirmation.same'          => 'La confirmación del correo electrónico debe coincidir.',
-            'password.required'                => 'La contraseña es obligatoria.',
-            'password.min'                     => 'La contraseña debe tener al menos 8 caracteres.',
-            'oclave.required'                  => 'La clave del centro de trabajo es obligatoria.',
-            'oclave.size'                      => 'La clave del centro de trabajo debe tener exactamente 10 caracteres.',
-            'oclave.regex'                     => 'El formato de la clave del centro de trabajo no es válido.',
-            'oclave.exists'                    => 'La clave del centro de trabajo no existe en nuestros registros.',
-            'sexo.required'                    => 'El sexo es obligatorio.',
-            'sexo.in'                          => 'El sexo seleccionado no es válido.',
+            'rfc'  => [
+                'required',
+                'string',
+                'size:13',
+                // 4 letras + 6 dígitos + 3 alfanuméricos
+                'regex:/^[A-ZÑ&]{4}\d{6}[A-Z0-9]{3}$/',
+                // RFC completo siempre único
+                'unique:r12users,orfc',
+                // Validador extra para RFC "maquillados"
+                function ($attribute, $value, $fail) use ($data) {
+                    $rfc    = mb_strtoupper($value, 'UTF-8');
+                    $prefix = substr($rfc, 0, 10); // 4 letras + fecha AAMMDD
+
+                    $query = User::where('orfc', 'like', $prefix.'%')
+                        ->where('orfc', '!=', $rfc); // excluir el mismo RFC
+
+                    if (!empty($data['name'])) {
+                        $query->where('name', mb_strtoupper($data['name'], 'UTF-8'));
+                    }
+
+                    if ($query->exists()) {
+                        $fail('Ya existe una cuenta con tu mismo nombre y un RFC muy similar. '
+                            .'Si ya te habías registrado, utiliza "Olvidé mi contraseña" o contacta al soporte.');
+                    }
+                },
+            ],
+
+            'sexo' => ['required', 'in:M,F'],
+
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                // correo también único
+                'unique:r12users,email',
+            ],
+
+            'email_confirmation' => [
+                'required',
+                'string',
+                'email',
+                'same:email',
+            ],
+
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+            ],
+
+            'oclave' => [
+                'required',
+                'string',
+                'size:10',
+                'regex:/^15[A-Z]{3}\d{4}[A-Z]$/',
+                'exists:r12centrostrabajo,oclave',
+            ],
+
+            'unidadadministrativa_id' => [
+                'required',
+                'exists:r12unidadadministrativa,id',
+            ],
+        ], [
+            'name.required'   => 'El nombre es obligatorio.',
+
+            'rfc.required'    => 'El RFC es requerido.',
+            'rfc.size'        => 'El RFC debe tener exactamente 13 caracteres.',
+            'rfc.regex'       => 'El formato del RFC no es válido.',
+            'rfc.unique'      => 'Ya existe una cuenta registrada con este RFC.',
+
+            'email.required'  => 'El correo electrónico es obligatorio.',
+            'email.email'     => 'El correo electrónico no tiene un formato válido.',
+            'email.max'       => 'El correo electrónico no debe exceder 255 caracteres.',
+            'email.unique'    => 'Ya existe una cuenta registrada con este correo electrónico.',
+
+            'email_confirmation.required' => 'La confirmación del correo electrónico es obligatoria.',
+            'email_confirmation.same'     => 'La confirmación del correo electrónico debe coincidir.',
+
+            'password.required'  => 'La contraseña es obligatoria.',
+            'password.min'       => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed' => 'La confirmación de la contraseña no coincide.',
+
+            'oclave.required' => 'La clave del centro de trabajo es obligatoria.',
+            'oclave.size'     => 'La clave del centro de trabajo debe tener exactamente 10 caracteres.',
+            'oclave.regex'    => 'El formato de la clave del centro de trabajo no es válido.',
+            'oclave.exists'   => 'La clave del centro de trabajo no existe en nuestros registros.',
+
+            'sexo.required' => 'El sexo es obligatorio.',
+            'sexo.in'       => 'El sexo seleccionado no es válido.',
+
             'unidadadministrativa_id.required' => 'La unidad administrativa es obligatoria.',
             'unidadadministrativa_id.exists'   => 'La unidad administrativa seleccionada no existe.',
         ]);
     }
 
     /**
-     * Lógica de registro (manteniendo tu flujo de RFC + email)
+     * Lógica de registro (AHORA solo crea si todo es nuevo)
      */
     public function register(Request $request)
     {
-        // Validar los datos
+        // Normalizar entradas (no confiamos solo en JS)
+        $request->merge([
+            'name'               => mb_strtoupper($request->input('name', ''), 'UTF-8'),
+            'rfc'                => mb_strtoupper($request->input('rfc', ''), 'UTF-8'),
+            'oclave'             => mb_strtoupper($request->input('oclave', ''), 'UTF-8'),
+            'email'              => mb_strtolower($request->input('email', ''), 'UTF-8'),
+            'email_confirmation' => mb_strtolower($request->input('email_confirmation', ''), 'UTF-8'),
+        ]);
+
+        // Validar los datos → si RFC o email ya existen, aquí truena y regresa al form
         $this->validator($request->all())->validate();
 
-        // Buscar usuario con el RFC ingresado
-        $userWithRfc   = User::where('orfc', $request->rfc)->first();
-        $userWithEmail = User::where('email', $request->email)->first();
-
-        // Localizar centro de trabajo (puede ser null si algo raro pasa)
+        // Localizar centro de trabajo
         $centro = CentroTrabajo::where('oclave', $request->oclave)->first();
 
-        // Si el correo ya está en uso por otro usuario, se rechaza el registro
-        if ($userWithEmail && (!$userWithRfc || $userWithEmail->id != $userWithRfc->id)) {
-            return redirect()->back()->withInput($request->all())->withErrors([
-                'email' => 'El correo electrónico ya está en uso.',
-            ]);
-        }
-
-        // Si el usuario existe pero no ha verificado su correo, permitimos cambiar el correo
-        if ($userWithRfc && !$userWithRfc->hasVerifiedEmail()) {
-            $userWithRfc->email                  = $request->email;
-            $userWithRfc->password               = Hash::make($request->password);
-            $userWithRfc->sexo                   = $request->sexo;
-            $userWithRfc->centrotrabajo_id       = $centro ? $centro->id : null;
-            $userWithRfc->unidadadministrativa_id= $request->unidadadministrativa_id;
-            $userWithRfc->save();
-
-            // $userWithRfc->sendEmailVerificationNotification();
-
-            return redirect()->route('login')->with('success', '¡Registro exitoso!');
-        }
-
-        // Si el usuario no existe, creamos uno nuevo
-        if (!$userWithRfc) {
-            $newUser = User::create([
-                'name'                    => $request->name,
-                'orfc'                    => $request->rfc,
-                'sexo'                    => $request->sexo,
-                'email'                   => $request->email,
-                'password'                => Hash::make($request->password),
-                'centrotrabajo_id'        => $centro ? $centro->id : null,
-                'unidadadministrativa_id' => $request->unidadadministrativa_id,
-            ]);
-
-            // $newUser->sendEmailVerificationNotification();
-
-            return redirect()->route('login')->with('success', '¡Registro exitoso!');
-        }
-
-        // Si el usuario ya existe y su correo está verificado
-        return redirect()->back()->withInput($request->all())->withErrors([
-            'rfc' => 'El usuario con este RFC ya existe y su correo ha sido verificado.',
+        // Crear usuario NUEVO (ya no actualizamos uno existente)
+        $user = User::create([
+            'name'                    => $request->name,
+            'orfc'                    => $request->rfc,
+            'sexo'                    => $request->sexo,
+            'email'                   => $request->email,
+            'password'                => Hash::make($request->password),
+            'centrotrabajo_id'        => $centro ? $centro->id : null,
+            'unidadadministrativa_id' => $request->unidadadministrativa_id,
         ]);
+
+        // Si luego activas verificación de correo, descomentas esto:
+        // $user->sendEmailVerificationNotification();
+
+        // Aquí NO decimos "actualizamos datos", solo registro nuevo
+        return redirect()
+            ->route('login')
+            ->with('success', '¡Registro exitoso! Ahora puedes iniciar sesión con tu RFC y contraseña.');
     }
 }

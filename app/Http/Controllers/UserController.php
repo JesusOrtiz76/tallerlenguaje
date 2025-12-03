@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -28,20 +29,25 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $userId)
     {
-        // Validar los datos
+        $user = User::findOrFail($userId);
+
         $validatedData = $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255',
-            'password' => 'nullable|string|min:8|confirmed',
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                // único en r12users, ignorando al propio usuario
+                Rule::unique('r12users', 'email')->ignore($user->id),
+            ],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // Buscar o fallar si no existe el usuario
-        $user = User::findOrFail($userId);
         $user->name    = $validatedData['name'];
         $user->email   = $validatedData['email'];
         $user->iusrmod = Auth::user()->orfc;
 
-        // Actualizar la contraseña solo si se proporcionó una nueva
         if (!empty($validatedData['password'])) {
             $user->password = bcrypt($validatedData['password']);
         }
