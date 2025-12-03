@@ -218,12 +218,6 @@
                     electrónico de verificación para validar sus datos y así poder acceder al contenido del curso y
                     evaluaciones.
                 </p>
-                <p class="text-muted text-justify">
-                    Descargue el
-                    <a href="{{ asset('storage/assets/docs/Manual de Usuario Curso Protocolo.pdf') }}" download>
-                        <i class="fa fa-book"></i> <strong>Manual de Usuario</strong>
-                    </a> para más información.
-                </p>
             </div>
 
             <div class="col-md-6 mb-3 px-5">
@@ -278,15 +272,6 @@
             @foreach($cursos[0]->modulos as $modulo)
                 <div class="col-12 col-md-6 col-lg-4">
                     <article class="bloque-card h-100">
-                        <div class="bloque-card-header d-flex align-items-center justify-content-between mb-3">
-                            <span class="bloque-badge">
-                                Bloque {{ $loop->iteration }}
-                            </span>
-                            <span class="bloque-pill">
-                                Taller en línea
-                            </span>
-                        </div>
-
                         <div class="d-flex align-items-center mb-3">
                             <div class="bloque-icon me-3">
                                 <img src="{{ asset('storage/' . $modulo->oimg_path) }}"
@@ -310,11 +295,6 @@
             {{-- Tarjeta final --}}
             <div class="col-12 col-md-6 col-lg-4">
                 <article class="bloque-card h-100 bloque-card-final">
-                    <div class="bloque-card-header d-flex align-items-center justify-content-between mb-3">
-                        <span class="bloque-badge">
-                            Cierre
-                        </span>
-                    </div>
                     <div class="d-flex align-items-center mb-3">
                         <div class="bloque-icon me-3">
                             <i class="fa fa-award"></i>
@@ -408,6 +388,7 @@
                 </div>
             </div>
 
+            <!-- Habilitar cuando tenga extension
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed"
@@ -427,6 +408,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
