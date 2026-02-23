@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
-@section('title',"Resultado de la $evaluacion->onombre del $modulo->onombre")
+@php
+    $nombreEval = trim($evaluacion->onombre ?? '');
+    $nombreMod  = trim($modulo->onombre ?? '');
+
+    // Solo mostramos "del módulo ..." si es distinto al nombre de la evaluación
+    $mostrarModulo = $nombreMod !== '' &&
+        mb_strtolower($nombreEval, 'UTF-8') !== mb_strtolower($nombreMod, 'UTF-8');
+
+    $titulo = $mostrarModulo
+        ? "Resultado de {$nombreEval} del {$nombreMod}"
+        : "Resultado de {$nombreEval}";
+@endphp
+
+@section('title', $titulo)
 
 @section('content')
     <div class="container">
@@ -9,7 +22,10 @@
                 <div class="card blur-bg shadow-sm border-0">
                     <div class="card-body p-lg-5">
                         <h1 class="text-gradient mb-4 text-center">
-                            Resultado de {{ $evaluacion->onombre }} del {{ $modulo->onombre }}
+                            Resultado de {{ $nombreEval }}
+                            @if($mostrarModulo)
+                                del {{ $nombreMod }}
+                            @endif
                         </h1>
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
